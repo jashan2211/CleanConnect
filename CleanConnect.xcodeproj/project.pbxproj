@@ -1,0 +1,560 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F0001001 /* CleanConnectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002001 /* CleanConnectApp.swift */; };
+		F0001002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002002 /* ContentView.swift */; };
+		F0001003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0002003 /* Assets.xcassets */; };
+		F0001004 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002004 /* User.swift */; };
+		F0001005 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002005 /* Post.swift */; };
+		F0001006 /* Gathering.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002006 /* Gathering.swift */; };
+		F0001007 /* CleaningCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002007 /* CleaningCompany.swift */; };
+		F0001008 /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002008 /* Leaderboard.swift */; };
+		F0001009 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002009 /* AuthManager.swift */; };
+		F0001010 /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002010 /* UserState.swift */; };
+		F0001011 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002011 /* UserService.swift */; };
+		F0001012 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002012 /* PostService.swift */; };
+		F0001013 /* GatheringService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002013 /* GatheringService.swift */; };
+		F0001014 /* BookingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002014 /* BookingService.swift */; };
+		F0001015 /* PaymentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002015 /* PaymentService.swift */; };
+		F0001016 /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002016 /* LocalDataManager.swift */; };
+		F0001017 /* ViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002017 /* ViewModels.swift */; };
+		F0001018 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002018 /* Constants.swift */; };
+		F0001019 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002019 /* LocationManager.swift */; };
+		F0001020 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002020 /* Extensions.swift */; };
+		F0001021 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002021 /* AuthView.swift */; };
+		F0001022 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002022 /* FeedView.swift */; };
+		F0001023 /* PostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002023 /* PostCard.swift */; };
+		F0001024 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002024 /* PostDetailView.swift */; };
+		F0001025 /* CreatePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002025 /* CreatePostView.swift */; };
+		F0001026 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002026 /* LeaderboardView.swift */; };
+		F0001027 /* TipSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002027 /* TipSheet.swift */; };
+		F0001028 /* GatheringsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002028 /* GatheringsView.swift */; };
+		F0001029 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002029 /* EventDetailView.swift */; };
+		F0001030 /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002030 /* CreateEventView.swift */; };
+		F0001031 /* CompaniesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002031 /* CompaniesView.swift */; };
+		F0001032 /* CompanyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002032 /* CompanyDetailView.swift */; };
+		F0001033 /* BookingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002033 /* BookingSheet.swift */; };
+		F0001034 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002034 /* ProfileView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F0002000 /* CleanConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0002001 /* CleanConnectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanConnectApp.swift; sourceTree = "<group>"; };
+		F0002002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F0002003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F0002004 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F0002005 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		F0002006 /* Gathering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gathering.swift; sourceTree = "<group>"; };
+		F0002007 /* CleaningCompany.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleaningCompany.swift; sourceTree = "<group>"; };
+		F0002008 /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
+		F0002009 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		F0002010 /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
+		F0002011 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		F0002012 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		F0002013 /* GatheringService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatheringService.swift; sourceTree = "<group>"; };
+		F0002014 /* BookingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingService.swift; sourceTree = "<group>"; };
+		F0002015 /* PaymentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentService.swift; sourceTree = "<group>"; };
+		F0002016 /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
+		F0002017 /* ViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModels.swift; sourceTree = "<group>"; };
+		F0002018 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F0002019 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		F0002020 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F0002021 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		F0002022 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		F0002023 /* PostCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCard.swift; sourceTree = "<group>"; };
+		F0002024 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
+		F0002025 /* CreatePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostView.swift; sourceTree = "<group>"; };
+		F0002026 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
+		F0002027 /* TipSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipSheet.swift; sourceTree = "<group>"; };
+		F0002028 /* GatheringsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatheringsView.swift; sourceTree = "<group>"; };
+		F0002029 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		F0002030 /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
+		F0002031 /* CompaniesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesView.swift; sourceTree = "<group>"; };
+		F0002032 /* CompanyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailView.swift; sourceTree = "<group>"; };
+		F0002033 /* BookingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingSheet.swift; sourceTree = "<group>"; };
+		F0002034 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		F0002035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F0003001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F0004000 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				F0004001 /* CleanConnect */,
+				F0004002 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F0004001 /* CleanConnect */ = {
+			isa = PBXGroup;
+			children = (
+				F0004003 /* App */,
+				F0004004 /* Models */,
+				F0004005 /* Views */,
+				F0004006 /* Services */,
+				F0004007 /* Utils */,
+				F0004008 /* Extensions */,
+				F0002003 /* Assets.xcassets */,
+				F0002035 /* Info.plist */,
+			);
+			path = CleanConnect;
+			sourceTree = "<group>";
+		};
+		F0004002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F0002000 /* CleanConnect.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F0004003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F0002001 /* CleanConnectApp.swift */,
+				F0002002 /* ContentView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F0004004 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F0002004 /* User.swift */,
+				F0002005 /* Post.swift */,
+				F0002006 /* Gathering.swift */,
+				F0002007 /* CleaningCompany.swift */,
+				F0002008 /* Leaderboard.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F0004005 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F0004009 /* Auth */,
+				F0004010 /* Feed */,
+				F0004011 /* Gatherings */,
+				F0004012 /* Companies */,
+				F0004013 /* Profile */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F0004006 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F0002009 /* AuthManager.swift */,
+				F0002010 /* UserState.swift */,
+				F0002011 /* UserService.swift */,
+				F0002012 /* PostService.swift */,
+				F0002013 /* GatheringService.swift */,
+				F0002014 /* BookingService.swift */,
+				F0002015 /* PaymentService.swift */,
+				F0002016 /* LocalDataManager.swift */,
+				F0002017 /* ViewModels.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F0004007 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F0002018 /* Constants.swift */,
+				F0002019 /* LocationManager.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		F0004008 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F0002020 /* Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F0004009 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				F0002021 /* AuthView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		F0004010 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				F0002022 /* FeedView.swift */,
+				F0002023 /* PostCard.swift */,
+				F0002024 /* PostDetailView.swift */,
+				F0002025 /* CreatePostView.swift */,
+				F0002026 /* LeaderboardView.swift */,
+				F0002027 /* TipSheet.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		F0004011 /* Gatherings */ = {
+			isa = PBXGroup;
+			children = (
+				F0002028 /* GatheringsView.swift */,
+				F0002029 /* EventDetailView.swift */,
+				F0002030 /* CreateEventView.swift */,
+			);
+			path = Gatherings;
+			sourceTree = "<group>";
+		};
+		F0004012 /* Companies */ = {
+			isa = PBXGroup;
+			children = (
+				F0002031 /* CompaniesView.swift */,
+				F0002032 /* CompanyDetailView.swift */,
+				F0002033 /* BookingSheet.swift */,
+			);
+			path = Companies;
+			sourceTree = "<group>";
+		};
+		F0004013 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				F0002034 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F0005000 /* CleanConnect */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F0006002 /* Build configuration list for PBXNativeTarget "CleanConnect" */;
+			buildPhases = (
+				F0003000 /* Sources */,
+				F0003001 /* Frameworks */,
+				F0003002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CleanConnect;
+			productName = CleanConnect;
+			productReference = F0002000 /* CleanConnect.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F0007000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					F0005000 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = F0006001 /* Build configuration list for PBXProject "CleanConnect" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F0004000 /* Root */;
+			productRefGroup = F0004002 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F0005000 /* CleanConnect */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F0003002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0001003 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F0003000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0001001 /* CleanConnectApp.swift in Sources */,
+				F0001002 /* ContentView.swift in Sources */,
+				F0001004 /* User.swift in Sources */,
+				F0001005 /* Post.swift in Sources */,
+				F0001006 /* Gathering.swift in Sources */,
+				F0001007 /* CleaningCompany.swift in Sources */,
+				F0001008 /* Leaderboard.swift in Sources */,
+				F0001009 /* AuthManager.swift in Sources */,
+				F0001010 /* UserState.swift in Sources */,
+				F0001011 /* UserService.swift in Sources */,
+				F0001012 /* PostService.swift in Sources */,
+				F0001013 /* GatheringService.swift in Sources */,
+				F0001014 /* BookingService.swift in Sources */,
+				F0001015 /* PaymentService.swift in Sources */,
+				F0001016 /* LocalDataManager.swift in Sources */,
+				F0001017 /* ViewModels.swift in Sources */,
+				F0001018 /* Constants.swift in Sources */,
+				F0001019 /* LocationManager.swift in Sources */,
+				F0001020 /* Extensions.swift in Sources */,
+				F0001021 /* AuthView.swift in Sources */,
+				F0001022 /* FeedView.swift in Sources */,
+				F0001023 /* PostCard.swift in Sources */,
+				F0001024 /* PostDetailView.swift in Sources */,
+				F0001025 /* CreatePostView.swift in Sources */,
+				F0001026 /* LeaderboardView.swift in Sources */,
+				F0001027 /* TipSheet.swift in Sources */,
+				F0001028 /* GatheringsView.swift in Sources */,
+				F0001029 /* EventDetailView.swift in Sources */,
+				F0001030 /* CreateEventView.swift in Sources */,
+				F0001031 /* CompaniesView.swift in Sources */,
+				F0001032 /* CompanyDetailView.swift in Sources */,
+				F0001033 /* BookingSheet.swift in Sources */,
+				F0001034 /* ProfileView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F0008001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F0008002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F0008003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CleanConnect/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CleanConnect;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cleanconnect.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F0008004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CleanConnect/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CleanConnect;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cleanconnect.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F0006001 /* Build configuration list for PBXProject "CleanConnect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F0008001 /* Debug */,
+				F0008002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F0006002 /* Build configuration list for PBXNativeTarget "CleanConnect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F0008003 /* Debug */,
+				F0008004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = F0007000 /* Project object */;
+}
