@@ -18,7 +18,7 @@ class LocalDataManager {
     }
 
     private func createDirectoriesIfNeeded() {
-        let directories = ["posts", "gatherings", "users"]
+        let directories = ["posts", "gatherings", "users", "bookings", "images", "comments"]
         for dir in directories {
             let path = documentsDirectory.appendingPathComponent(dir)
             if !fileManager.fileExists(atPath: path.path) {
