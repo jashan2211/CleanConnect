@@ -285,8 +285,8 @@ class PostService {
     }
 
     func getComments(postId: String) async throws -> [Comment] {
-        // Return empty for now - comments stored per post
-        return []
+        let allComments = (try? dataManager.loadAll(Comment.self, from: "comments")) ?? []
+        return allComments.filter { $0.postId == postId }.sorted { $0.createdAt > $1.createdAt }
     }
 
     func addComment(postId: String, userId: String, userName: String, userPhotoURL: String?, text: String) async throws -> Comment {
@@ -300,6 +300,16 @@ class PostService {
             likes: 0,
             createdAt: Date()
         )
+
+        // Persist the comment
+        try dataManager.save(comment, to: "\(comment.id).json", in: "comments")
+
+        // Update post comment count
+        if var post = try? dataManager.load(Post.self, from: "\(postId).json", in: "posts") {
+            post.comments += 1
+            try? dataManager.save(post, to: "\(postId).json", in: "posts")
+        }
+
         return comment
     }
 }
