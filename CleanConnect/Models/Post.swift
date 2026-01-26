@@ -9,11 +9,19 @@ struct Post: Codable, Identifiable {
     let userName: String
     let userPhotoURL: String?
 
+    // Post type
+    var postType: PostType
+
     // Content
     var description: String
     var beforeImageURL: String?
     var afterImageURL: String?
     var videoProofURL: String?         // YouTube/Instagram link for video proof
+
+    // Job-related (for job proof posts)
+    var jobId: String?                 // Link to the cleanup job
+    var jobTitle: String?              // Job title for display
+    var jobCategory: String?           // Job category
 
     // Stats
     var wasteCollectedKg: Double
@@ -51,9 +59,16 @@ struct Post: Codable, Identifiable {
     var hashtags: [String]?
     var campaignId: String?
 
+    enum PostType: String, Codable {
+        case cleanup = "cleanup"        // Regular cleanup post
+        case jobProof = "job_proof"     // Proof for a job from the map
+        case event = "event"            // Event-related post
+    }
+
     enum CodingKeys: String, CodingKey {
-        case id, userId, userName, userPhotoURL
+        case id, userId, userName, userPhotoURL, postType
         case description, beforeImageURL, afterImageURL, videoProofURL
+        case jobId, jobTitle, jobCategory
         case wasteCollectedKg, durationMinutes, pointsEarned
         case state, district, pincode, latitude, longitude, address
         case likes, comments, shares, tipsReceived
@@ -139,10 +154,14 @@ extension Post {
         userId: "user-1",
         userName: "Test User",
         userPhotoURL: nil,
+        postType: .cleanup,
         description: "Cleaned up the local beach today! Found a lot of plastic waste. Let's keep our beaches clean!",
         beforeImageURL: nil,
         afterImageURL: nil,
         videoProofURL: "https://youtube.com/shorts/example",
+        jobId: nil,
+        jobTitle: nil,
+        jobCategory: nil,
         wasteCollectedKg: 5.5,
         durationMinutes: 45,
         pointsEarned: 75,
@@ -166,6 +185,45 @@ extension Post {
         createdAt: Date().addingTimeInterval(-3600),
         updatedAt: nil,
         hashtags: ["BeachCleanup", "CleanMumbai"],
+        campaignId: nil
+    )
+
+    static let jobProofPreview = Post(
+        id: "job-proof-post",
+        userId: "user-2",
+        userName: "Priya Sharma",
+        userPhotoURL: nil,
+        postType: .jobProof,
+        description: "Completed the litter cleanup job near Andheri station! Collected about 3kg of plastic waste.",
+        beforeImageURL: nil,
+        afterImageURL: nil,
+        videoProofURL: "https://youtube.com/watch?v=example123",
+        jobId: "job-1",
+        jobTitle: "Litter near bus stop",
+        jobCategory: "Litter Pickup",
+        wasteCollectedKg: 3.0,
+        durationMinutes: 25,
+        pointsEarned: 50,
+        state: "Maharashtra",
+        district: "Mumbai",
+        pincode: "400058",
+        latitude: 19.1196,
+        longitude: 72.8464,
+        address: "Near Andheri West Bus Stop",
+        likes: 18,
+        comments: 3,
+        shares: 1,
+        tipsReceived: 50,
+        verified: true,
+        verificationScore: 0.92,
+        communityVotes: 8,
+        communityDownvotes: 0,
+        hasVideoProof: true,
+        aiVerificationStatus: .likely_genuine,
+        isLiked: false,
+        createdAt: Date().addingTimeInterval(-7200),
+        updatedAt: nil,
+        hashtags: ["JobComplete", "CleanupDone"],
         campaignId: nil
     )
 }

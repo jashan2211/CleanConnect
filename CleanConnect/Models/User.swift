@@ -2,6 +2,7 @@
 // User model and related types
 
 import Foundation
+import SwiftUI
 
 struct User: Codable, Identifiable {
     let id: String
@@ -22,6 +23,19 @@ struct User: Codable, Identifiable {
     var tipsReceived: Int
     var tipsGiven: Int
 
+    // Enhanced Stats
+    var totalVolunteerHours: Double      // Total hours spent volunteering
+    var totalSuppliesContributed: Int    // Number of supply contributions
+    var totalDonationsAmount: Int        // Total ₹ donated to events
+    var totalCO2Saved: Double            // Estimated CO2 saved (kg)
+    var longestStreak: Int               // Longest activity streak (days)
+    var currentStreak: Int               // Current activity streak
+    var totalAreasImpacted: Int          // Unique locations cleaned
+    var videosVerified: Int              // Posts with video proof
+
+    // Social Media Links
+    var socialLinks: SocialLinks?
+
     // Level system
     var level: Int
     var levelName: String
@@ -40,14 +54,23 @@ struct User: Codable, Identifiable {
     var isAnonymous: Bool
     var verified: Bool
 
+    // Stripe Connect (for receiving tips)
+    var stripeAccountId: String?
+    var stripeOnboardingComplete: Bool?
+
     enum CodingKeys: String, CodingKey {
         case id, displayName, email, photoURL, bio, state, district, pincode
         case totalPoints, totalPosts, totalWasteKg
         case totalEventsOrganized, totalEventsAttended
         case tipsReceived, tipsGiven
+        case totalVolunteerHours, totalSuppliesContributed, totalDonationsAmount
+        case totalCO2Saved, longestStreak, currentStreak
+        case totalAreasImpacted, videosVerified
+        case socialLinks
         case level, levelName
         case karmaScore, followersCount, followingCount
         case badges, createdAt, lastActive, isAnonymous, verified
+        case stripeAccountId, stripeOnboardingComplete
     }
 
     static let preview = User(
@@ -66,6 +89,15 @@ struct User: Codable, Identifiable {
         totalEventsAttended: 10,
         tipsReceived: 500,
         tipsGiven: 200,
+        totalVolunteerHours: 48.5,
+        totalSuppliesContributed: 15,
+        totalDonationsAmount: 2500,
+        totalCO2Saved: 312.5,
+        longestStreak: 14,
+        currentStreak: 5,
+        totalAreasImpacted: 8,
+        videosVerified: 18,
+        socialLinks: SocialLinks.preview,
         level: 3,
         levelName: "Green Guardian",
         karmaScore: 45,
@@ -75,8 +107,91 @@ struct User: Codable, Identifiable {
         createdAt: Date(),
         lastActive: Date(),
         isAnonymous: false,
-        verified: false
+        verified: false,
+        stripeAccountId: nil,
+        stripeOnboardingComplete: nil
     )
+}
+
+// MARK: - Social Media Links
+
+struct SocialLinks: Codable {
+    var instagram: String?
+    var twitter: String?      // X (formerly Twitter)
+    var linkedin: String?
+    var youtube: String?
+    var website: String?
+
+    var hasAnyLink: Bool {
+        instagram != nil || twitter != nil || linkedin != nil || youtube != nil || website != nil
+    }
+
+    static let preview = SocialLinks(
+        instagram: "eco_warrior_india",
+        twitter: "ecowarrior",
+        linkedin: nil,
+        youtube: "EcoWarriorChannel",
+        website: nil
+    )
+}
+
+// MARK: - Social Platform Info
+
+enum SocialPlatform: String, CaseIterable {
+    case instagram
+    case twitter
+    case linkedin
+    case youtube
+    case website
+
+    var displayName: String {
+        switch self {
+        case .instagram: return "Instagram"
+        case .twitter: return "X (Twitter)"
+        case .linkedin: return "LinkedIn"
+        case .youtube: return "YouTube"
+        case .website: return "Website"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .instagram: return "camera.fill"
+        case .twitter: return "at"
+        case .linkedin: return "link"
+        case .youtube: return "play.rectangle.fill"
+        case .website: return "globe"
+        }
+    }
+
+    var color: Color {
+        switch self {
+        case .instagram: return Color(red: 0.88, green: 0.19, blue: 0.42) // Instagram pink
+        case .twitter: return .primary
+        case .linkedin: return Color(red: 0.0, green: 0.47, blue: 0.71)
+        case .youtube: return .red
+        case .website: return .blue
+        }
+    }
+
+    func url(for username: String) -> URL? {
+        switch self {
+        case .instagram:
+            return URL(string: "https://instagram.com/\(username)")
+        case .twitter:
+            return URL(string: "https://x.com/\(username)")
+        case .linkedin:
+            return URL(string: "https://linkedin.com/in/\(username)")
+        case .youtube:
+            return URL(string: "https://youtube.com/@\(username)")
+        case .website:
+            // Website should be full URL
+            if username.hasPrefix("http") {
+                return URL(string: username)
+            }
+            return URL(string: "https://\(username)")
+        }
+    }
 }
 
 // Experience levels matching web app
@@ -167,8 +282,6 @@ struct UserActivity: Identifiable {
         case levelUp
     }
 }
-
-import SwiftUI
 
 extension UserActivity {
     static let preview = UserActivity(

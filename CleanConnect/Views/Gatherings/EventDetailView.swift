@@ -7,6 +7,9 @@ struct EventDetailView: View {
     let gathering: Gathering
     @StateObject private var viewModel: EventDetailViewModel
     @State private var showRSVP = false
+    @State private var showDonationSheet = false
+    @State private var showOrganizerVideo = false
+    @State private var showLiveStream = false
 
     init(gathering: Gathering) {
         self.gathering = gathering
@@ -25,6 +28,16 @@ struct EventDetailView: View {
 
                     // Title and organizer
                     titleSection
+
+                    // Live Stream (for ongoing events)
+                    if gathering.status == "ongoing", let liveURL = gathering.liveStreamURL, !liveURL.isEmpty {
+                        liveStreamSection(liveURL: liveURL)
+                    }
+
+                    // Organizer video message (if available)
+                    if let videoURL = gathering.videoMessageURL, !videoURL.isEmpty {
+                        organizerVideoSection(videoURL: videoURL)
+                    }
 
                     // Quick stats
                     statsSection
@@ -45,10 +58,8 @@ struct EventDetailView: View {
                         fundraisingSection(goal: goal)
                     }
 
-                    // Supply requests
-                    if !viewModel.supplyRequests.isEmpty {
-                        supplyRequestsSection
-                    }
+                    // Quick Action Tabs - Forum, Tasks, Supplies
+                    eventActionTabs
 
                     // Attendees
                     attendeesSection
@@ -82,6 +93,9 @@ struct EventDetailView: View {
         }
         .sheet(isPresented: $showRSVP) {
             RSVPSheet(gathering: gathering)
+        }
+        .sheet(isPresented: $showDonationSheet) {
+            DonationSheet(gathering: gathering)
         }
     }
 
@@ -256,6 +270,212 @@ struct EventDetailView: View {
         }
     }
 
+    // MARK: - Event Action Tabs (Forum, Tasks, Supplies)
+
+    private var eventActionTabs: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Get Involved")
+                .font(.headline)
+
+            HStack(spacing: 12) {
+                // Discussion Forum
+                NavigationLink {
+                    EventForumView(event: gathering)
+                } label: {
+                    ActionTab(
+                        icon: "bubble.left.and.bubble.right.fill",
+                        title: "Discussion",
+                        subtitle: "Chat & Plan",
+                        color: .blue
+                    )
+                }
+
+                // Tasks
+                NavigationLink {
+                    EventTasksView(event: gathering, isOrganizer: isOrganizer)
+                } label: {
+                    ActionTab(
+                        icon: "checklist",
+                        title: "Tasks",
+                        subtitle: "Volunteer",
+                        color: .orange
+                    )
+                }
+
+                // Supplies
+                NavigationLink {
+                    EventSuppliesView(event: gathering, isOrganizer: isOrganizer)
+                } label: {
+                    ActionTab(
+                        icon: "shippingbox.fill",
+                        title: "Supplies",
+                        subtitle: "Contribute",
+                        color: .purple
+                    )
+                }
+            }
+        }
+    }
+
+    private var isOrganizer: Bool {
+        gathering.organizerId == UserState.shared.currentUser?.id
+    }
+
+    // MARK: - Live Stream Section (Ongoing Events)
+
+    private func liveStreamSection(liveURL: String) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 8) {
+                HStack(spacing: 6) {
+                    Circle()
+                        .fill(Color.red)
+                        .frame(width: 8, height: 8)
+                    Text("LIVE")
+                        .font(.caption.bold())
+                        .foregroundColor(.red)
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(Color.red.opacity(0.15))
+                .cornerRadius(4)
+
+                Text("Event is happening now!")
+                    .font(.subheadline.weight(.medium))
+
+                Spacer()
+            }
+
+            // Live stream preview card
+            Button {
+                showLiveStream = true
+            } label: {
+                ZStack {
+                    // Thumbnail
+                    if let videoId = extractYouTubeId(from: liveURL) {
+                        AsyncImage(url: URL(string: "https://img.youtube.com/vi/\(videoId)/hqdefault.jpg")) { image in
+                            image.resizable().scaledToFill()
+                        } placeholder: {
+                            Rectangle()
+                                .fill(Color.red.opacity(0.1))
+                        }
+                    } else {
+                        Rectangle()
+                            .fill(LinearGradient(
+                                colors: [Color.red.opacity(0.3), Color.orange.opacity(0.3)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ))
+                    }
+
+                    // Overlay
+                    Color.black.opacity(0.3)
+
+                    // Live indicator and play button
+                    VStack(spacing: 12) {
+                        HStack(spacing: 6) {
+                            Circle()
+                                .fill(Color.red)
+                                .frame(width: 8, height: 8)
+                            Text("LIVE NOW")
+                                .font(.caption.bold())
+                                .foregroundColor(.white)
+                        }
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(Color.red)
+                        .cornerRadius(4)
+
+                        Circle()
+                            .fill(Color.white)
+                            .frame(width: 60, height: 60)
+                            .overlay(
+                                Image(systemName: "play.fill")
+                                    .font(.title2)
+                                    .foregroundColor(.red)
+                                    .offset(x: 2)
+                            )
+                            .shadow(radius: 8)
+
+                        Text("Watch Live Stream")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundColor(.white)
+                    }
+                }
+                .frame(height: 200)
+                .cornerRadius(16)
+                .clipped()
+            }
+            .buttonStyle(.plain)
+
+            // Quick info
+            HStack(spacing: 16) {
+                HStack(spacing: 4) {
+                    Image(systemName: "eye.fill")
+                        .font(.caption)
+                    Text("Watch the event as it happens")
+                        .font(.caption)
+                }
+                .foregroundColor(.secondary)
+
+                Spacer()
+
+                Image(systemName: "play.rectangle.fill")
+                    .foregroundColor(.red)
+                Text("YouTube")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .padding()
+        .background(Color.red.opacity(0.05))
+        .cornerRadius(16)
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.red.opacity(0.2), lineWidth: 1)
+        )
+        .sheet(isPresented: $showLiveStream) {
+            LiveStreamPlayerSheet(streamURL: liveURL, eventTitle: gathering.title)
+        }
+    }
+
+    private func extractYouTubeId(from url: String) -> String? {
+        let patterns = [
+            "(?:youtube\\.com\\/watch\\?v=)([a-zA-Z0-9_-]{11})",
+            "(?:youtu\\.be\\/)([a-zA-Z0-9_-]{11})",
+            "(?:youtube\\.com\\/embed\\/)([a-zA-Z0-9_-]{11})",
+            "(?:youtube\\.com\\/live\\/)([a-zA-Z0-9_-]{11})"
+        ]
+
+        for pattern in patterns {
+            if let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive),
+               let match = regex.firstMatch(in: url, options: [], range: NSRange(url.startIndex..., in: url)),
+               let range = Range(match.range(at: 1), in: url) {
+                return String(url[range])
+            }
+        }
+        return nil
+    }
+
+    // MARK: - Organizer Video Message
+
+    private func organizerVideoSection(videoURL: String) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Image(systemName: "video.circle.fill")
+                    .foregroundColor(.blue)
+                Text("Message from Organizer")
+                    .font(.headline)
+            }
+
+            OrganizerVideoCard(videoURL: videoURL, showPlayer: $showOrganizerVideo)
+        }
+        .sheet(isPresented: $showOrganizerVideo) {
+            OrganizerVideoPlayerSheet(videoURL: videoURL)
+        }
+    }
+
+    // MARK: - Fundraising with 5% Service Fee
+
     private func fundraisingSection(goal: Int) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Fundraising")
@@ -274,7 +494,16 @@ struct EventDetailView: View {
                 ProgressView(value: Double(gathering.fundraisingRaised ?? 0), total: Double(goal))
                     .tint(.green)
 
-                Button(action: {}) {
+                // Service fee info
+                HStack(spacing: 4) {
+                    Image(systemName: "info.circle.fill")
+                        .foregroundColor(.secondary)
+                    Text("5% service fee applies to donations")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+
+                Button(action: { showDonationSheet = true }) {
                     Text("Contribute")
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -428,6 +657,35 @@ struct StatBadge: View {
     }
 }
 
+struct ActionTab: View {
+    let icon: String
+    let title: String
+    let subtitle: String
+    let color: Color
+
+    var body: some View {
+        VStack(spacing: 8) {
+            Image(systemName: icon)
+                .font(.title2)
+                .foregroundColor(color)
+
+            VStack(spacing: 2) {
+                Text(title)
+                    .font(.caption.weight(.semibold))
+                    .foregroundColor(.primary)
+
+                Text(subtitle)
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 16)
+        .background(color.opacity(0.1))
+        .cornerRadius(12)
+    }
+}
+
 struct SafetyTip: View {
     let icon: String
     let text: String
@@ -532,6 +790,644 @@ struct RSVPSheet: View {
     private func submitRSVP() {
         // Submit RSVP logic
         dismiss()
+    }
+}
+
+// MARK: - Donation Sheet with 5% Service Fee
+
+struct DonationSheet: View {
+    let gathering: Gathering
+    @Environment(\.dismiss) private var dismiss
+    @State private var donationAmount = ""
+    @State private var selectedPreset: Int?
+    @State private var isSubmitting = false
+    @State private var showSuccess = false
+
+    private let presetAmounts = [100, 250, 500, 1000, 2500, 5000]
+
+    private var amount: Int {
+        Int(donationAmount) ?? selectedPreset ?? 0
+    }
+
+    private var serviceFee: Int {
+        Int(Double(amount) * 0.05)
+    }
+
+    private var totalAmount: Int {
+        amount + serviceFee
+    }
+
+    private var organizerReceives: Int {
+        amount
+    }
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 24) {
+                    // Event info
+                    HStack(spacing: 12) {
+                        Image(systemName: "leaf.circle.fill")
+                            .font(.title)
+                            .foregroundColor(.green)
+
+                        VStack(alignment: .leading) {
+                            Text("Donate to")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            Text(gathering.title)
+                                .font(.subheadline.weight(.semibold))
+                                .lineLimit(2)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Color.green.opacity(0.05))
+                    .cornerRadius(12)
+
+                    // Progress
+                    if let goal = gathering.fundraisingGoal {
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack {
+                                Text("₹\(gathering.fundraisingRaised ?? 0)")
+                                    .font(.headline)
+                                    .foregroundColor(.green)
+                                Text("of ₹\(goal) raised")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            }
+
+                            ProgressView(value: Double(gathering.fundraisingRaised ?? 0), total: Double(goal))
+                                .tint(.green)
+                        }
+                    }
+
+                    // Preset amounts
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Select Amount")
+                            .font(.headline)
+
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                            ForEach(presetAmounts, id: \.self) { preset in
+                                Button {
+                                    selectedPreset = preset
+                                    donationAmount = ""
+                                } label: {
+                                    Text("₹\(preset)")
+                                        .font(.subheadline.weight(.medium))
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical, 12)
+                                        .background(selectedPreset == preset ? Color.green : Color.gray.opacity(0.1))
+                                        .foregroundColor(selectedPreset == preset ? .white : .primary)
+                                        .cornerRadius(10)
+                                }
+                            }
+                        }
+
+                        // Custom amount
+                        HStack {
+                            Text("₹")
+                                .font(.headline)
+                                .foregroundColor(.secondary)
+                            TextField("Enter custom amount", text: $donationAmount)
+                                .keyboardType(.numberPad)
+                                .onChange(of: donationAmount) { _, _ in
+                                    selectedPreset = nil
+                                }
+                        }
+                        .padding()
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(10)
+                    }
+
+                    // Fee breakdown
+                    if amount > 0 {
+                        VStack(spacing: 12) {
+                            HStack {
+                                Text("Your donation")
+                                Spacer()
+                                Text("₹\(amount)")
+                            }
+
+                            HStack {
+                                HStack(spacing: 4) {
+                                    Text("Service fee (5%)")
+                                    Image(systemName: "info.circle")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                Spacer()
+                                Text("₹\(serviceFee)")
+                                    .foregroundColor(.secondary)
+                            }
+
+                            Divider()
+
+                            HStack {
+                                Text("Total")
+                                    .font(.headline)
+                                Spacer()
+                                Text("₹\(totalAmount)")
+                                    .font(.headline)
+                                    .foregroundColor(.green)
+                            }
+
+                            HStack {
+                                Text("Organizer receives")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                                Text("₹\(organizerReceives)")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        .padding()
+                        .background(Color(.systemBackground))
+                        .cornerRadius(12)
+                        .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
+                    }
+
+                    // Service fee explanation
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack(spacing: 6) {
+                            Image(systemName: "info.circle.fill")
+                                .foregroundColor(.blue)
+                            Text("About Service Fee")
+                                .font(.subheadline.weight(.medium))
+                        }
+
+                        Text("A 5% service fee helps us maintain the platform, verify events, and ensure secure transactions. This fee covers payment processing and platform operations.")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding()
+                    .background(Color.blue.opacity(0.05))
+                    .cornerRadius(12)
+
+                    Spacer(minLength: 20)
+                }
+                .padding()
+            }
+            .navigationTitle("Donate")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                }
+            }
+            .safeAreaInset(edge: .bottom) {
+                Button {
+                    submitDonation()
+                } label: {
+                    HStack {
+                        if isSubmitting {
+                            ProgressView()
+                                .tint(.white)
+                        } else {
+                            Text("Donate ₹\(totalAmount)")
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(amount > 0 ? Color.green : Color.gray)
+                    .foregroundColor(.white)
+                    .cornerRadius(12)
+                    .fontWeight(.semibold)
+                }
+                .disabled(amount <= 0 || isSubmitting)
+                .padding()
+                .background(.ultraThinMaterial)
+            }
+            .alert("Thank You!", isPresented: $showSuccess) {
+                Button("Done") { dismiss() }
+            } message: {
+                Text("Your donation of ₹\(organizerReceives) has been sent to the organizer. Thank you for supporting this event!")
+            }
+        }
+    }
+
+    private func submitDonation() {
+        isSubmitting = true
+        // Simulate donation processing
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            isSubmitting = false
+            showSuccess = true
+        }
+    }
+}
+
+// MARK: - Organizer Video Card
+
+struct OrganizerVideoCard: View {
+    let videoURL: String
+    @Binding var showPlayer: Bool
+
+    private var isYouTube: Bool {
+        videoURL.contains("youtube.com") || videoURL.contains("youtu.be")
+    }
+
+    private var thumbnailURL: URL? {
+        guard isYouTube, let videoId = extractYouTubeId() else { return nil }
+        return URL(string: "https://img.youtube.com/vi/\(videoId)/hqdefault.jpg")
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Image(systemName: "checkmark.seal.fill")
+                    .foregroundColor(.blue)
+                Text("Video Message")
+                    .font(.caption.weight(.semibold))
+                Spacer()
+                if isYouTube {
+                    Text("YouTube")
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                }
+            }
+
+            Button {
+                if isYouTube {
+                    showPlayer = true
+                } else if let url = URL(string: videoURL) {
+                    UIApplication.shared.open(url)
+                }
+            } label: {
+                ZStack {
+                    if let url = thumbnailURL {
+                        AsyncImage(url: url) { image in
+                            image.resizable().scaledToFill()
+                        } placeholder: {
+                            Rectangle()
+                                .fill(Color.gray.opacity(0.2))
+                        }
+                    } else {
+                        Rectangle()
+                            .fill(Color.blue.opacity(0.1))
+                            .overlay(
+                                Image(systemName: "play.rectangle.fill")
+                                    .font(.largeTitle)
+                                    .foregroundColor(.blue)
+                            )
+                    }
+
+                    // Play button
+                    Circle()
+                        .fill(Color.blue)
+                        .frame(width: 50, height: 50)
+                        .overlay(
+                            Image(systemName: "play.fill")
+                                .font(.title3)
+                                .foregroundColor(.white)
+                                .offset(x: 2)
+                        )
+                        .shadow(radius: 4)
+                }
+            }
+            .frame(height: 160)
+            .cornerRadius(10)
+            .clipped()
+            .buttonStyle(.plain)
+        }
+        .padding(12)
+        .background(Color.blue.opacity(0.05))
+        .cornerRadius(12)
+    }
+
+    private func extractYouTubeId() -> String? {
+        let patterns = [
+            "(?:youtube\\.com\\/watch\\?v=)([a-zA-Z0-9_-]{11})",
+            "(?:youtu\\.be\\/)([a-zA-Z0-9_-]{11})",
+            "(?:youtube\\.com\\/embed\\/)([a-zA-Z0-9_-]{11})",
+            "(?:youtube\\.com\\/shorts\\/)([a-zA-Z0-9_-]{11})"
+        ]
+
+        for pattern in patterns {
+            if let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive),
+               let match = regex.firstMatch(in: videoURL, options: [], range: NSRange(videoURL.startIndex..., in: videoURL)),
+               let range = Range(match.range(at: 1), in: videoURL) {
+                return String(videoURL[range])
+            }
+        }
+        return nil
+    }
+}
+
+// MARK: - Organizer Video Player Sheet
+
+import WebKit
+
+struct OrganizerVideoPlayerSheet: View {
+    let videoURL: String
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            OrganizerYouTubePlayer(videoURL: videoURL)
+                .ignoresSafeArea()
+                .navigationTitle("Video Message")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Done") { dismiss() }
+                    }
+                }
+        }
+    }
+}
+
+struct OrganizerYouTubePlayer: UIViewRepresentable {
+    let videoURL: String
+
+    func makeUIView(context: Context) -> WKWebView {
+        let configuration = WKWebViewConfiguration()
+        configuration.allowsInlineMediaPlayback = true
+        configuration.mediaTypesRequiringUserActionForPlayback = []
+
+        let webView = WKWebView(frame: .zero, configuration: configuration)
+        webView.scrollView.isScrollEnabled = false
+        webView.isOpaque = false
+        webView.backgroundColor = .clear
+        return webView
+    }
+
+    func updateUIView(_ webView: WKWebView, context: Context) {
+        guard let videoId = extractYouTubeId() else { return }
+
+        let embedHTML = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+            <style>
+                * { margin: 0; padding: 0; }
+                html, body { width: 100%; height: 100%; background: #000; }
+                iframe { width: 100%; height: 100%; border: 0; }
+            </style>
+        </head>
+        <body>
+            <iframe
+                src="https://www.youtube.com/embed/\(videoId)?playsinline=1&rel=0&modestbranding=1&autoplay=1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </body>
+        </html>
+        """
+
+        webView.loadHTMLString(embedHTML, baseURL: nil)
+    }
+
+    private func extractYouTubeId() -> String? {
+        let patterns = [
+            "(?:youtube\\.com\\/watch\\?v=)([a-zA-Z0-9_-]{11})",
+            "(?:youtu\\.be\\/)([a-zA-Z0-9_-]{11})",
+            "(?:youtube\\.com\\/embed\\/)([a-zA-Z0-9_-]{11})",
+            "(?:youtube\\.com\\/shorts\\/)([a-zA-Z0-9_-]{11})"
+        ]
+
+        for pattern in patterns {
+            if let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive),
+               let match = regex.firstMatch(in: videoURL, options: [], range: NSRange(videoURL.startIndex..., in: videoURL)),
+               let range = Range(match.range(at: 1), in: videoURL) {
+                return String(videoURL[range])
+            }
+        }
+        return nil
+    }
+}
+
+// MARK: - Live Stream Player Sheet
+
+struct LiveStreamPlayerSheet: View {
+    let streamURL: String
+    let eventTitle: String
+    @Environment(\.dismiss) private var dismiss
+    @State private var showChat = true
+
+    var body: some View {
+        NavigationStack {
+            GeometryReader { geometry in
+                VStack(spacing: 0) {
+                    // Video player
+                    LiveStreamYouTubeEmbed(streamURL: streamURL)
+                        .frame(height: geometry.size.height * (showChat ? 0.45 : 0.7))
+
+                    if showChat {
+                        // Live chat area
+                        VStack(spacing: 0) {
+                            // Chat header
+                            HStack {
+                                HStack(spacing: 6) {
+                                    Circle()
+                                        .fill(Color.red)
+                                        .frame(width: 6, height: 6)
+                                    Text("Live Chat")
+                                        .font(.subheadline.weight(.semibold))
+                                }
+
+                                Spacer()
+
+                                Button {
+                                    withAnimation { showChat = false }
+                                } label: {
+                                    Image(systemName: "chevron.down")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            .padding(.horizontal)
+                            .padding(.vertical, 10)
+                            .background(Color(.systemBackground))
+
+                            Divider()
+
+                            // Chat messages placeholder
+                            ScrollView {
+                                VStack(alignment: .leading, spacing: 12) {
+                                    ForEach(0..<5) { i in
+                                        EventLiveChatMessageView(
+                                            username: ["Rahul", "Priya", "Amit", "Sneha", "Vikram"][i],
+                                            message: [
+                                                "Great turnout today! 🌱",
+                                                "Can we see the beach area?",
+                                                "How many volunteers are there?",
+                                                "Amazing work everyone!",
+                                                "Joining from Mumbai 👋"
+                                            ][i],
+                                            isOrganizer: i == 0
+                                        )
+                                    }
+                                }
+                                .padding()
+                            }
+
+                            Divider()
+
+                            // Chat input
+                            HStack(spacing: 12) {
+                                TextField("Send a message...", text: .constant(""))
+                                    .textFieldStyle(.roundedBorder)
+
+                                Button {
+                                    // Send message
+                                } label: {
+                                    Image(systemName: "paperplane.fill")
+                                        .foregroundColor(.green)
+                                }
+                            }
+                            .padding()
+                            .background(Color(.systemBackground))
+                        }
+                        .transition(.move(edge: .bottom))
+                    } else {
+                        // Collapsed chat bar
+                        Button {
+                            withAnimation { showChat = true }
+                        } label: {
+                            HStack {
+                                HStack(spacing: 6) {
+                                    Circle()
+                                        .fill(Color.red)
+                                        .frame(width: 6, height: 6)
+                                    Text("Show Live Chat")
+                                        .font(.subheadline)
+                                }
+                                Spacer()
+                                Image(systemName: "chevron.up")
+                                    .font(.caption)
+                            }
+                            .padding()
+                            .background(Color(.secondarySystemBackground))
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+            .navigationTitle(eventTitle)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    HStack(spacing: 6) {
+                        Circle()
+                            .fill(Color.red)
+                            .frame(width: 8, height: 8)
+                        Text("LIVE")
+                            .font(.caption.bold())
+                            .foregroundColor(.red)
+                    }
+                }
+
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") { dismiss() }
+                }
+            }
+        }
+    }
+}
+
+struct EventLiveChatMessageView: View {
+    let username: String
+    let message: String
+    let isOrganizer: Bool
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 8) {
+            Circle()
+                .fill(isOrganizer ? Color.green : Color.gray.opacity(0.3))
+                .frame(width: 28, height: 28)
+                .overlay(
+                    Text(String(username.prefix(1)))
+                        .font(.caption.bold())
+                        .foregroundColor(isOrganizer ? .white : .primary)
+                )
+
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 4) {
+                    Text(username)
+                        .font(.caption.bold())
+                        .foregroundColor(isOrganizer ? .green : .primary)
+
+                    if isOrganizer {
+                        Text("ORGANIZER")
+                            .font(.system(size: 8, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 4)
+                            .padding(.vertical, 2)
+                            .background(Color.green)
+                            .cornerRadius(2)
+                    }
+                }
+
+                Text(message)
+                    .font(.subheadline)
+                    .foregroundColor(.primary)
+            }
+
+            Spacer()
+        }
+    }
+}
+
+struct LiveStreamYouTubeEmbed: UIViewRepresentable {
+    let streamURL: String
+
+    func makeUIView(context: Context) -> WKWebView {
+        let configuration = WKWebViewConfiguration()
+        configuration.allowsInlineMediaPlayback = true
+        configuration.mediaTypesRequiringUserActionForPlayback = []
+
+        let webView = WKWebView(frame: .zero, configuration: configuration)
+        webView.scrollView.isScrollEnabled = false
+        webView.isOpaque = false
+        webView.backgroundColor = .black
+        return webView
+    }
+
+    func updateUIView(_ webView: WKWebView, context: Context) {
+        guard let videoId = extractYouTubeId() else { return }
+
+        let embedHTML = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+            <style>
+                * { margin: 0; padding: 0; }
+                html, body { width: 100%; height: 100%; background: #000; overflow: hidden; }
+                iframe { width: 100%; height: 100%; border: 0; }
+            </style>
+        </head>
+        <body>
+            <iframe
+                src="https://www.youtube.com/embed/\(videoId)?playsinline=1&rel=0&modestbranding=1&autoplay=1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </body>
+        </html>
+        """
+
+        webView.loadHTMLString(embedHTML, baseURL: nil)
+    }
+
+    private func extractYouTubeId() -> String? {
+        let patterns = [
+            "(?:youtube\\.com\\/watch\\?v=)([a-zA-Z0-9_-]{11})",
+            "(?:youtu\\.be\\/)([a-zA-Z0-9_-]{11})",
+            "(?:youtube\\.com\\/embed\\/)([a-zA-Z0-9_-]{11})",
+            "(?:youtube\\.com\\/live\\/)([a-zA-Z0-9_-]{11})"
+        ]
+
+        for pattern in patterns {
+            if let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive),
+               let match = regex.firstMatch(in: streamURL, options: [], range: NSRange(streamURL.startIndex..., in: streamURL)),
+               let range = Range(match.range(at: 1), in: streamURL) {
+                return String(streamURL[range])
+            }
+        }
+        return nil
     }
 }
 

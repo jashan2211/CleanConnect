@@ -18,10 +18,27 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.931497082770-r3v1nd8nm5iq7fichpnrf2d9nghscpc3</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>CleanConnect needs camera access to take before and after photos of your cleanup activities.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>CleanConnect needs your location to show nearby cleanup events and to tag your cleanup posts with location.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>CleanConnect needs photo library access to select images for your cleanup posts.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -49,11 +66,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>CleanConnect needs your location to show nearby cleanup events and to tag your cleanup posts with location.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>CleanConnect needs camera access to take before and after photos of your cleanup activities.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>CleanConnect needs photo library access to select images for your cleanup posts.</string>
 </dict>
 </plist>

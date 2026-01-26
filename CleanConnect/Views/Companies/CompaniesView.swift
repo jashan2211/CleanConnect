@@ -148,6 +148,7 @@ enum ServiceCategory: String, CaseIterable {
 
 struct CompanyCard: View {
     let company: CleaningCompany
+    @State private var showBookingSheet = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -228,19 +229,26 @@ struct CompanyCard: View {
 
                 Spacer()
 
-                Button("Book Now") {}
-                    .font(.caption.weight(.semibold))
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
+                Button {
+                    showBookingSheet = true
+                } label: {
+                    Text("Book Now")
+                        .font(.caption.weight(.semibold))
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
             }
         }
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(16)
         .shadow(color: .black.opacity(0.08), radius: 8, x: 0, y: 4)
+        .sheet(isPresented: $showBookingSheet) {
+            BookingSheet(company: company)
+        }
     }
 }
 

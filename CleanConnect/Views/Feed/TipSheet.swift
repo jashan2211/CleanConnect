@@ -84,10 +84,10 @@ struct TipSheet: View {
 
                     // Platform fee note
                     VStack(spacing: 4) {
-                        Text("5% platform fee applies")
+                        Text("10% platform fee applies")
                             .font(.caption)
                             .foregroundColor(.secondary)
-                        Text("Payment via UPI, Cards, Net Banking")
+                        Text("Secure payment via Stripe (UPI, Cards, Net Banking)")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -268,7 +268,10 @@ struct TipSheet: View {
     }
 
     private func paymentBreakdown(amount: Int) -> some View {
-        VStack(spacing: 8) {
+        let platformFee = Int(Double(amount) * 0.10)
+        let creatorReceives = amount - platformFee
+
+        return VStack(spacing: 8) {
             HStack {
                 Text("Tip Amount")
                 Spacer()
@@ -277,17 +280,9 @@ struct TipSheet: View {
             .font(.subheadline)
 
             HStack {
-                Text("Platform Fee (5%)")
+                Text("Platform Fee (10%)")
                 Spacer()
-                Text("₹\(Int(Double(amount) * 0.05))")
-            }
-            .font(.caption)
-            .foregroundColor(.secondary)
-
-            HStack {
-                Text("GST (18%)")
-                Spacer()
-                Text("₹\(Int(Double(amount) * 0.05 * 0.18))")
+                Text("-₹\(platformFee)")
             }
             .font(.caption)
             .foregroundColor(.secondary)
@@ -298,7 +293,7 @@ struct TipSheet: View {
                 Text("Creator Receives")
                     .fontWeight(.semibold)
                 Spacer()
-                Text("₹\(Int(Double(amount) * 0.90))")
+                Text("₹\(creatorReceives)")
                     .fontWeight(.semibold)
                     .foregroundColor(.green)
             }

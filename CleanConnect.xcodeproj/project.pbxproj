@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7878D3822F2759BF00E33A0E /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7878D3812F2759BF00E33A0E /* GoogleSignIn */; };
+		7878D3842F2759BF00E33A0E /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7878D3832F2759BF00E33A0E /* GoogleSignInSwift */; };
+		7878D3872F275ED800E33A0E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7878D3862F275ED800E33A0E /* FirebaseAuth */; };
+		7878D3892F275EE000E33A0E /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7878D3882F275EE000E33A0E /* FirebaseCore */; };
+		7878D38C2F27607000E33A0E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7878D38B2F27607000E33A0E /* GoogleService-Info.plist */; };
+		78BC7D5B2F277F8200649813 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 78BC7D5A2F277F8200649813 /* FirebaseFunctions */; };
+		78BC7D5D2F277F8B00649813 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 78BC7D5C2F277F8B00649813 /* FirebaseFirestore */; };
+		78BC7D5F2F277F9700649813 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 78BC7D5E2F277F9700649813 /* FirebaseStorage */; };
 		F0001001 /* CleanConnectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002001 /* CleanConnectApp.swift */; };
 		F0001002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002002 /* ContentView.swift */; };
 		F0001003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0002003 /* Assets.xcassets */; };
@@ -56,9 +64,30 @@
 		F0001063 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002063 /* OnboardingView.swift */; };
 		F0001064 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002064 /* SkeletonView.swift */; };
 		F0001065 /* AccessibilityHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002065 /* AccessibilityHelpers.swift */; };
+		F0001070 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002070 /* KeychainManager.swift */; };
+		F0001071 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002071 /* AuthenticationService.swift */; };
+		F0001072 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002072 /* SignInView.swift */; };
+		F0001073 /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002073 /* AccountSettingsView.swift */; };
+		F0001074 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002074 /* AppConfiguration.swift */; };
+		F0001080 /* EventForumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002080 /* EventForumView.swift */; };
+		F0001081 /* EventTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002081 /* EventTasksView.swift */; };
+		F0001082 /* EventSuppliesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002082 /* EventSuppliesView.swift */; };
+		F0001090 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002090 /* DiscoverView.swift */; };
+		F0001091 /* LeaderboardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002091 /* LeaderboardsView.swift */; };
+		F0001092 /* PollutionMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002092 /* PollutionMapView.swift */; };
+		F0001093 /* BadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002093 /* BadgesView.swift */; };
+		F0001094 /* LiveStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002094 /* LiveStreamView.swift */; };
+		F0001095 /* CleanupJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002095 /* CleanupJob.swift */; };
+		F0001096 /* JobsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002096 /* JobsMapView.swift */; };
+		F0001097 /* ImpactDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002097 /* ImpactDashboardView.swift */; };
+		F0001098 /* WidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002098 /* WidgetViews.swift */; };
+		F0001099 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002099 /* LocalizationManager.swift */; };
+		F0001100 /* WatchSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002100 /* WatchSyncService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7878D38A2F275FA500E33A0E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7878D38B2F27607000E33A0E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F0002000 /* CleanConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0002001 /* CleanConnectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanConnectApp.swift; sourceTree = "<group>"; };
 		F0002002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,6 +139,25 @@
 		F0002063 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		F0002064 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		F0002065 /* AccessibilityHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityHelpers.swift; sourceTree = "<group>"; };
+		F0002070 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		F0002071 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		F0002072 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		F0002073 /* AccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
+		F0002074 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		F0002080 /* EventForumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventForumView.swift; sourceTree = "<group>"; };
+		F0002081 /* EventTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTasksView.swift; sourceTree = "<group>"; };
+		F0002082 /* EventSuppliesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSuppliesView.swift; sourceTree = "<group>"; };
+		F0002090 /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
+		F0002091 /* LeaderboardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardsView.swift; sourceTree = "<group>"; };
+		F0002092 /* PollutionMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionMapView.swift; sourceTree = "<group>"; };
+		F0002093 /* BadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesView.swift; sourceTree = "<group>"; };
+		F0002094 /* LiveStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamView.swift; sourceTree = "<group>"; };
+		F0002095 /* CleanupJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupJob.swift; sourceTree = "<group>"; };
+		F0002096 /* JobsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsMapView.swift; sourceTree = "<group>"; };
+		F0002097 /* ImpactDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactDashboardView.swift; sourceTree = "<group>"; };
+		F0002098 /* WidgetViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetViews.swift; sourceTree = "<group>"; };
+		F0002099 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
+		F0002100 /* WatchSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSyncService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,16 +165,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7878D3822F2759BF00E33A0E /* GoogleSignIn in Frameworks */,
+				7878D3872F275ED800E33A0E /* FirebaseAuth in Frameworks */,
+				78BC7D5B2F277F8200649813 /* FirebaseFunctions in Frameworks */,
+				7878D3892F275EE000E33A0E /* FirebaseCore in Frameworks */,
+				78BC7D5F2F277F9700649813 /* FirebaseStorage in Frameworks */,
+				7878D3842F2759BF00E33A0E /* GoogleSignInSwift in Frameworks */,
+				78BC7D5D2F277F8B00649813 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F0004000 /* Root */ = {
+		7878D3852F275ED800E33A0E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F0004000 = {
+			isa = PBXGroup;
+			children = (
+				7878D38A2F275FA500E33A0E /* GoogleService-Info.plist */,
 				F0004001 /* CleanConnect */,
+				7878D3852F275ED800E33A0E /* Frameworks */,
 				F0004002 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -134,6 +198,7 @@
 		F0004001 /* CleanConnect */ = {
 			isa = PBXGroup;
 			children = (
+				7878D38B2F27607000E33A0E /* GoogleService-Info.plist */,
 				F0004003 /* App */,
 				F0004004 /* Models */,
 				F0004005 /* Views */,
@@ -161,6 +226,7 @@
 			children = (
 				F0002001 /* CleanConnectApp.swift */,
 				F0002002 /* ContentView.swift */,
+				F0002074 /* AppConfiguration.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -173,6 +239,7 @@
 				F0002006 /* Gathering.swift */,
 				F0002007 /* CleaningCompany.swift */,
 				F0002008 /* Leaderboard.swift */,
+				F0002095 /* CleanupJob.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -185,6 +252,13 @@
 				F0004011 /* Gatherings */,
 				F0004012 /* Companies */,
 				F0004013 /* Profile */,
+				F0004016 /* Discover */,
+				F0004017 /* Leaderboards */,
+				F0004018 /* Map */,
+				F0004019 /* Badges */,
+				F0004020 /* Jobs */,
+				F0004021 /* Impact */,
+				F0004022 /* Widgets */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -200,6 +274,9 @@
 				F0002014 /* BookingService.swift */,
 				F0002015 /* PaymentService.swift */,
 				F0002016 /* LocalDataManager.swift */,
+				F0002070 /* KeychainManager.swift */,
+				F0002071 /* AuthenticationService.swift */,
+				F0002100 /* WatchSyncService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -209,6 +286,7 @@
 			children = (
 				F0002018 /* Constants.swift */,
 				F0002019 /* LocationManager.swift */,
+				F0002099 /* LocalizationManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -225,6 +303,8 @@
 			isa = PBXGroup;
 			children = (
 				F0002021 /* AuthView.swift */,
+				F0002072 /* SignInView.swift */,
+				F0002073 /* AccountSettingsView.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -248,6 +328,10 @@
 				F0002028 /* GatheringsView.swift */,
 				F0002029 /* EventDetailView.swift */,
 				F0002030 /* CreateEventView.swift */,
+				F0002080 /* EventForumView.swift */,
+				F0002081 /* EventTasksView.swift */,
+				F0002082 /* EventSuppliesView.swift */,
+				F0002094 /* LiveStreamView.swift */,
 			);
 			path = Gatherings;
 			sourceTree = "<group>";
@@ -300,6 +384,62 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		F0004016 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				F0002090 /* DiscoverView.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		F0004017 /* Leaderboards */ = {
+			isa = PBXGroup;
+			children = (
+				F0002091 /* LeaderboardsView.swift */,
+			);
+			path = Leaderboards;
+			sourceTree = "<group>";
+		};
+		F0004018 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				F0002092 /* PollutionMapView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		F0004019 /* Badges */ = {
+			isa = PBXGroup;
+			children = (
+				F0002093 /* BadgesView.swift */,
+			);
+			path = Badges;
+			sourceTree = "<group>";
+		};
+		F0004020 /* Jobs */ = {
+			isa = PBXGroup;
+			children = (
+				F0002096 /* JobsMapView.swift */,
+			);
+			path = Jobs;
+			sourceTree = "<group>";
+		};
+		F0004021 /* Impact */ = {
+			isa = PBXGroup;
+			children = (
+				F0002097 /* ImpactDashboardView.swift */,
+			);
+			path = Impact;
+			sourceTree = "<group>";
+		};
+		F0004022 /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				F0002098 /* WidgetViews.swift */,
+			);
+			path = Widgets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -343,7 +483,12 @@
 				en,
 				Base,
 			);
-			mainGroup = F0004000 /* Root */;
+			mainGroup = F0004000;
+			packageReferences = (
+				7878D37F2F27537D00E33A0E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7878D3802F2759BF00E33A0E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				7878D38D2F27724700E33A0E /* XCRemoteSwiftPackageReference "stripe-ios" */,
+			);
 			productRefGroup = F0004002 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -359,6 +504,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0001003 /* Assets.xcassets in Resources */,
+				7878D38C2F27607000E33A0E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +563,25 @@
 				F0001063 /* OnboardingView.swift in Sources */,
 				F0001064 /* SkeletonView.swift in Sources */,
 				F0001065 /* AccessibilityHelpers.swift in Sources */,
+				F0001070 /* KeychainManager.swift in Sources */,
+				F0001071 /* AuthenticationService.swift in Sources */,
+				F0001072 /* SignInView.swift in Sources */,
+				F0001073 /* AccountSettingsView.swift in Sources */,
+				F0001074 /* AppConfiguration.swift in Sources */,
+				F0001080 /* EventForumView.swift in Sources */,
+				F0001081 /* EventTasksView.swift in Sources */,
+				F0001082 /* EventSuppliesView.swift in Sources */,
+				F0001090 /* DiscoverView.swift in Sources */,
+				F0001091 /* LeaderboardsView.swift in Sources */,
+				F0001092 /* PollutionMapView.swift in Sources */,
+				F0001093 /* BadgesView.swift in Sources */,
+				F0001094 /* LiveStreamView.swift in Sources */,
+				F0001095 /* CleanupJob.swift in Sources */,
+				F0001096 /* JobsMapView.swift in Sources */,
+				F0001097 /* ImpactDashboardView.swift in Sources */,
+				F0001098 /* WidgetViews.swift in Sources */,
+				F0001099 /* LocalizationManager.swift in Sources */,
+				F0001100 /* WatchSyncService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,9 +712,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = F385ZL83XQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = CleanConnect/Info.plist;
@@ -565,8 +731,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cleanconnect.app;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.thebighead.cleanconnect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -580,9 +747,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = F385ZL83XQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = CleanConnect/Info.plist;
@@ -598,8 +766,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cleanconnect.app;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.thebighead.cleanconnect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -631,6 +800,70 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		7878D37F2F27537D00E33A0E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.8.0;
+			};
+		};
+		7878D3802F2759BF00E33A0E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.0;
+			};
+		};
+		7878D38D2F27724700E33A0E /* XCRemoteSwiftPackageReference "stripe-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stripe/stripe-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 25.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7878D3812F2759BF00E33A0E /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7878D3802F2759BF00E33A0E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		7878D3832F2759BF00E33A0E /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7878D3802F2759BF00E33A0E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		7878D3862F275ED800E33A0E /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7878D37F2F27537D00E33A0E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		7878D3882F275EE000E33A0E /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7878D37F2F27537D00E33A0E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		78BC7D5A2F277F8200649813 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7878D37F2F27537D00E33A0E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		78BC7D5C2F277F8B00649813 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7878D37F2F27537D00E33A0E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		78BC7D5E2F277F9700649813 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7878D37F2F27537D00E33A0E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F0007000 /* Project object */;
 }

@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users can read any user, write only their own
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Posts - anyone authenticated can read, owner can write
+    match /posts/{postId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+
+    // Gatherings/Events
+    match /gatherings/{gatheringId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.organizerId;
+    }
+
+    // Comments
+    match /comments/{commentId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+
+    // Tips - users can read their own sent/received tips
+    match /tips/{tipId} {
+      allow read: if request.auth != null &&
+        (request.auth.uid == resource.data.senderId || request.auth.uid == resource.data.creatorId);
+      // Tips are created by Cloud Functions only
+      allow write: if false;
+    }
+
+    // Cleanup Jobs
+    match /jobs/{jobId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.reportedBy;
+    }
+  }
+}

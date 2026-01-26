@@ -16,8 +16,16 @@ struct ProfileView: View {
                     // Profile header
                     profileHeader
 
+                    // Social Links
+                    if let socialLinks = userState.currentUser?.socialLinks, socialLinks.hasAnyLink {
+                        socialLinksSection(socialLinks)
+                    }
+
                     // Stats cards
                     statsCards
+
+                    // Extended Stats
+                    extendedStatsSection
 
                     // Level progress
                     levelProgress
@@ -142,12 +150,117 @@ struct ProfileView: View {
         }
     }
 
+    // MARK: - Social Links Section
+
+    private func socialLinksSection(_ socialLinks: SocialLinks) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Connect")
+                .font(.headline)
+
+            HStack(spacing: 16) {
+                if let instagram = socialLinks.instagram {
+                    SocialLinkButton(platform: .instagram, username: instagram)
+                }
+                if let twitter = socialLinks.twitter {
+                    SocialLinkButton(platform: .twitter, username: twitter)
+                }
+                if let linkedin = socialLinks.linkedin {
+                    SocialLinkButton(platform: .linkedin, username: linkedin)
+                }
+                if let youtube = socialLinks.youtube {
+                    SocialLinkButton(platform: .youtube, username: youtube)
+                }
+                if let website = socialLinks.website {
+                    SocialLinkButton(platform: .website, username: website)
+                }
+            }
+        }
+    }
+
     private var statsCards: some View {
         HStack(spacing: 12) {
             StatCard(icon: "leaf.fill", value: "\(userState.currentUser?.totalPosts ?? 0)", label: "Cleanups", color: .green)
             StatCard(icon: "trash.fill", value: "\(String(format: "%.1f", userState.currentUser?.totalWasteKg ?? 0)) kg", label: "Collected", color: .orange)
             StatCard(icon: "star.fill", value: "\(userState.currentUser?.totalPoints ?? 0)", label: "Points", color: .yellow)
         }
+    }
+
+    // MARK: - Extended Stats Section
+
+    private var extendedStatsSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Impact Stats")
+                .font(.headline)
+
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                ImpactStatCard(
+                    icon: "clock.fill",
+                    value: String(format: "%.1f", userState.currentUser?.totalVolunteerHours ?? 0),
+                    unit: "hrs",
+                    label: "Volunteer Time",
+                    color: .blue
+                )
+
+                ImpactStatCard(
+                    icon: "leaf.arrow.circlepath",
+                    value: String(format: "%.1f", userState.currentUser?.totalCO2Saved ?? 0),
+                    unit: "kg",
+                    label: "CO₂ Saved",
+                    color: .green
+                )
+
+                ImpactStatCard(
+                    icon: "flame.fill",
+                    value: "\(userState.currentUser?.currentStreak ?? 0)",
+                    unit: "days",
+                    label: "Current Streak",
+                    color: .orange
+                )
+
+                ImpactStatCard(
+                    icon: "trophy.fill",
+                    value: "\(userState.currentUser?.longestStreak ?? 0)",
+                    unit: "days",
+                    label: "Best Streak",
+                    color: .yellow
+                )
+
+                ImpactStatCard(
+                    icon: "mappin.and.ellipse",
+                    value: "\(userState.currentUser?.totalAreasImpacted ?? 0)",
+                    unit: "areas",
+                    label: "Locations Cleaned",
+                    color: .purple
+                )
+
+                ImpactStatCard(
+                    icon: "video.fill",
+                    value: "\(userState.currentUser?.videosVerified ?? 0)",
+                    unit: "posts",
+                    label: "Verified Videos",
+                    color: .teal
+                )
+
+                ImpactStatCard(
+                    icon: "shippingbox.fill",
+                    value: "\(userState.currentUser?.totalSuppliesContributed ?? 0)",
+                    unit: "items",
+                    label: "Supplies Given",
+                    color: .indigo
+                )
+
+                ImpactStatCard(
+                    icon: "indianrupeesign.circle.fill",
+                    value: "₹\(userState.currentUser?.totalDonationsAmount ?? 0)",
+                    unit: "",
+                    label: "Total Donated",
+                    color: .pink
+                )
+            }
+        }
+        .padding()
+        .background(Color.gray.opacity(0.05))
+        .cornerRadius(12)
     }
 
     private var levelProgress: some View {
@@ -227,6 +340,73 @@ struct ProfileView: View {
         .background(Color(.systemBackground))
         .cornerRadius(12)
         .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
+    }
+}
+
+// MARK: - Social Link Button
+
+struct SocialLinkButton: View {
+    let platform: SocialPlatform
+    let username: String
+
+    var body: some View {
+        Button {
+            if let url = platform.url(for: username) {
+                UIApplication.shared.open(url)
+            }
+        } label: {
+            VStack(spacing: 6) {
+                Image(systemName: platform.icon)
+                    .font(.title2)
+                    .foregroundColor(platform.color)
+
+                Text(platform.displayName)
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+            }
+            .frame(width: 60)
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+// MARK: - Impact Stat Card
+
+struct ImpactStatCard: View {
+    let icon: String
+    let value: String
+    let unit: String
+    let label: String
+    let color: Color
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 4) {
+                Image(systemName: icon)
+                    .font(.caption)
+                    .foregroundColor(color)
+                Spacer()
+            }
+
+            HStack(alignment: .lastTextBaseline, spacing: 2) {
+                Text(value)
+                    .font(.headline)
+                if !unit.isEmpty {
+                    Text(unit)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+            }
+
+            Text(label)
+                .font(.caption2)
+                .foregroundColor(.secondary)
+                .lineLimit(1)
+        }
+        .padding(12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(color.opacity(0.1))
+        .cornerRadius(10)
     }
 }
 
