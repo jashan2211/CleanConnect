@@ -123,7 +123,7 @@ class PaymentService {
     func checkCanReceivePayments() async throws -> Bool {
         #if canImport(FirebaseFunctions)
         try await StripeService.shared.checkConnectStatus()
-        return StripeService.shared.canReceivePayments
+        return await StripeService.shared.canReceivePayments
         #else
         return false
         #endif

@@ -83,6 +83,9 @@
 		F0001098 /* WidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002098 /* WidgetViews.swift */; };
 		F0001099 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002099 /* LocalizationManager.swift */; };
 		F0001100 /* WatchSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002100 /* WatchSyncService.swift */; };
+		F0001101 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002101 /* FirestoreService.swift */; };
+		F0001102 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002102 /* StorageService.swift */; };
+		F0001103 /* StripeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002103 /* StripeService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -158,6 +161,9 @@
 		F0002098 /* WidgetViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetViews.swift; sourceTree = "<group>"; };
 		F0002099 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
 		F0002100 /* WatchSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSyncService.swift; sourceTree = "<group>"; };
+		F0002101 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		F0002102 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		F0002103 /* StripeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +283,9 @@
 				F0002070 /* KeychainManager.swift */,
 				F0002071 /* AuthenticationService.swift */,
 				F0002100 /* WatchSyncService.swift */,
+				F0002101 /* FirestoreService.swift */,
+				F0002102 /* StorageService.swift */,
+				F0002103 /* StripeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -582,6 +591,9 @@
 				F0001098 /* WidgetViews.swift in Sources */,
 				F0001099 /* LocalizationManager.swift in Sources */,
 				F0001100 /* WatchSyncService.swift in Sources */,
+				F0001101 /* FirestoreService.swift in Sources */,
+				F0001102 /* StorageService.swift in Sources */,
+				F0001103 /* StripeService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
