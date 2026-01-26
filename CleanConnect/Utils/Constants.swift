@@ -91,8 +91,8 @@ struct AppConfig {
 
     // Payment configuration
     struct Payment {
-        static let platformFeePercent = 0.05 // 5%
-        static let creatorSharePercent = 0.90 // 90%
+        static let platformFeePercent = 0.07 // 7%
+        static let creatorSharePercent = 0.93 // 93%
         static let gstPercent = 0.18 // 18% GST
         static let upiLimit = 100000 // ₹1,00,000 UPI limit
         static let minTipAmount = 10 // ₹10
@@ -117,10 +117,10 @@ struct AppConfig {
 
     // URLs
     struct URLs {
-        static let termsOfService = "https://cleanconnect.app/terms"
-        static let privacyPolicy = "https://cleanconnect.app/privacy"
-        static let helpCenter = "https://cleanconnect.app/help"
-        static let contactEmail = "support@cleanconnect.app"
+        static let termsOfService = "https://thebighead.ca/CleanConnect/terms"
+        static let privacyPolicy = "https://thebighead.ca/CleanConnect/privacy"
+        static let helpCenter = "https://thebighead.ca/CleanConnect/support"
+        static let contactEmail = "support@thebighead.ca"
     }
 }
 

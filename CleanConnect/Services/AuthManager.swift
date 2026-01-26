@@ -27,52 +27,7 @@ class AuthManager: ObservableObject {
         isLoading = false
     }
 
-    // MARK: - Quick Start (Local User)
-
-    func signInAsGuest(displayName: String = "Guest User") async throws {
-        let userId = UUID().uuidString
-
-        // Create local user
-        let newUser = User(
-            id: userId,
-            displayName: displayName,
-            email: nil,
-            photoURL: nil,
-            bio: nil,
-            state: nil,
-            district: nil,
-            pincode: nil,
-            totalPoints: 0,
-            totalPosts: 0,
-            totalWasteKg: 0,
-            totalEventsOrganized: 0,
-            totalEventsAttended: 0,
-            tipsReceived: 0,
-            tipsGiven: 0,
-            level: 1,
-            levelName: "Eco Scout",
-            karmaScore: 0,
-            followersCount: 0,
-            followingCount: 0,
-            badges: [],
-            createdAt: Date(),
-            lastActive: Date(),
-            isAnonymous: true,
-            verified: false
-        )
-
-        // Save user
-        try dataManager.save(newUser, to: "\(userId).json", in: "users")
-        dataManager.setUserDefault(newUser, forKey: StorageKeys.currentUser)
-
-        // Update auth state
-        UserDefaults.standard.set(userId, forKey: StorageKeys.isAuthenticated)
-        currentUserId = userId
-        isAuthenticated = true
-
-        // Notify UserState
-        await UserState.shared.loadUserData(userId: userId)
-    }
+    // MARK: - Sign In With Name (Local User)
 
     func signInWithName(_ name: String, state: String?, district: String?) async throws {
         let userId = UUID().uuidString
@@ -93,6 +48,15 @@ class AuthManager: ObservableObject {
             totalEventsAttended: 0,
             tipsReceived: 0,
             tipsGiven: 0,
+            totalVolunteerHours: 0,
+            totalSuppliesContributed: 0,
+            totalDonationsAmount: 0,
+            totalCO2Saved: 0,
+            longestStreak: 0,
+            currentStreak: 0,
+            totalAreasImpacted: 0,
+            videosVerified: 0,
+            socialLinks: nil,
             level: 1,
             levelName: "Eco Scout",
             karmaScore: 0,
@@ -102,7 +66,9 @@ class AuthManager: ObservableObject {
             createdAt: Date(),
             lastActive: Date(),
             isAnonymous: false,
-            verified: false
+            verified: false,
+            stripeAccountId: nil,
+            stripeOnboardingComplete: nil
         )
 
         try dataManager.save(newUser, to: "\(userId).json", in: "users")
@@ -115,9 +81,21 @@ class AuthManager: ObservableObject {
         await UserState.shared.loadUserData(userId: userId)
     }
 
+    // MARK: - Check Auth Status (sync with AuthenticationService)
+
+    func checkAuthStatus() async {
+        let authService = AuthenticationService.shared
+        if authService.isAuthenticated, let user = authService.currentUser {
+            currentUserId = user.id
+            isAuthenticated = true
+            await UserState.shared.loadUserData(userId: user.id)
+        }
+    }
+
     // MARK: - Sign Out
 
     func signOut() async throws {
+        await AuthenticationService.shared.signOut()
         UserDefaults.standard.removeObject(forKey: StorageKeys.isAuthenticated)
         dataManager.removeUserDefault(forKey: StorageKeys.currentUser)
         currentUserId = nil
