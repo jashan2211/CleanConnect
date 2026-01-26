@@ -185,7 +185,9 @@ final class AuthenticationService: ObservableObject {
         photoURL: String?,
         provider: AuthProvider
     ) async throws {
-        // Check if user exists
+        var userToSave: User
+
+        // Check if user exists locally
         if let existingUser = try? dataManager.load(User.self, from: "\(id).json", in: "users") {
             var updated = existingUser
             updated.lastActive = Date()
@@ -195,10 +197,10 @@ final class AuthenticationService: ObservableObject {
             if let photo = photoURL, existingUser.photoURL == nil {
                 updated.photoURL = photo
             }
-            try dataManager.save(updated, to: "\(id).json", in: "users")
+            userToSave = updated
         } else {
             // Create new user
-            let newUser = User(
+            userToSave = User(
                 id: id,
                 displayName: displayName ?? "User",
                 email: email,
@@ -236,8 +238,13 @@ final class AuthenticationService: ObservableObject {
                 stripeAccountId: nil,
                 stripeOnboardingComplete: nil
             )
-            try dataManager.save(newUser, to: "\(id).json", in: "users")
         }
+
+        // Save locally
+        try dataManager.save(userToSave, to: "\(id).json", in: "users")
+
+        // Save to Firestore (creates document if doesn't exist, updates if it does)
+        try await FirestoreService.shared.saveUser(userToSave)
 
         // Update auth state
         UserDefaults.standard.set(id, forKey: StorageKeys.isAuthenticated)
