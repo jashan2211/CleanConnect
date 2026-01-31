@@ -8,16 +8,53 @@
 
 | Item | Status |
 |------|--------|
+| Build Succeeds | ✅ Complete |
 | Developer Account | ✅ Complete |
 | Firebase Backend | ✅ Deployed |
 | Firestore Rules | ✅ Deployed |
 | Firestore Indexes | ✅ Deployed |
 | Cloud Functions (11) | ✅ Deployed |
 | App Icon (1024x1024) | ✅ Created |
+| Privacy Manifest | ✅ Committed |
+| Privacy Descriptions | ✅ Camera, Location, Photos |
 | Screenshots | ✅ Taken |
 | Legal Pages on Website | ✅ Hosted |
 | Stripe Connect | ⏳ Awaiting Approval |
 | App Store Connect | ⬜ Ready to Setup |
+
+---
+
+## Current App Configuration
+
+| Setting | Value |
+|---------|-------|
+| Bundle ID | `ca.thebighead.cleanconnect` |
+| Version | 1.0.0 |
+| Build | 1 |
+| Deployment Target | iOS 17.0 |
+| Development Team | F385ZL83XQ |
+
+---
+
+## Recent Updates (January 30, 2026)
+
+### Leaderboard Tab (Replaced Jobs)
+- **Top Givers**: Ranked by tips given + event donations
+- **Top Earners**: Ranked by tips received
+- Podium view for top 3 users
+- Scope filters: All India, My State, My District
+
+### Enhanced Feed UI
+- **Location Filters**: All India, My State, My District, Nearby
+- **Time Filters**: All Time, Today, This Week, This Month
+- **Category Filters**: All Types, Beach, Park, Street, Drain, Lake/River, Mountain
+- **Sort Options**: Hot, New, Top Today, Top Week, Most Tipped, Nearby
+- Active filters bar showing applied filters
+
+### Privacy Manifest (PrivacyInfo.xcprivacy)
+Declares:
+- **Collected Data**: Location, Photos/Videos, User ID, Name, Email
+- **Accessed APIs**: UserDefaults, FileTimestamp, DiskSpace
 
 ---
 
@@ -34,7 +71,7 @@
 | Platform | iOS |
 | Name | CleanConnect |
 | Primary Language | English (U.S.) |
-| Bundle ID | com.cleanconnect.app |
+| Bundle ID | ca.thebighead.cleanconnect |
 | SKU | cleanconnect-ios-2026 |
 | User Access | Full Access |
 
@@ -119,9 +156,9 @@ Click **Get Started** and declare the following data types:
 - Linked to User: Yes
 
 **4. Location**
-- Coarse Location ✓ (state/district selection)
+- Precise Location ✓ (nearby events & posts)
 - Purpose: App Functionality
-- Linked to User: Yes
+- Linked to User: No
 
 **5. Financial Info** (if Stripe is enabled)
 - Payment Info ✓ (tips/donations)
@@ -147,12 +184,12 @@ Upload screenshots for:
 - Devices: iPhone 11 Pro Max, iPhone XS Max
 
 **Recommended Screenshot Order:**
-1. Feed View - Show posts with upvotes and video badges
+1. Feed View - Show posts with filters and video badges
 2. Create Post - Show video link input field
 3. Post Detail - Show map, comments, tip button
-4. Leaderboard - Show top cleaners with points
+4. Leaderboard - Show Top Givers and Top Earners with podium
 5. Events - Show community cleanup events
-6. Profile - Show user stats and badges
+6. Profile - Show user stats and earnings
 
 #### App Preview (Optional)
 - 15-30 second video showing app functionality
@@ -177,16 +214,18 @@ VIDEO PROOF SYSTEM
 Link your YouTube Shorts or Instagram Reels to verify your cleanup. Verified posts earn more trust and tips.
 
 COMMUNITY VOTING
-Upvote genuine cleanups, downvote suspicious ones. Sort by Top, New, or Most Tipped.
+Upvote genuine cleanups, downvote suspicious ones. Sort by Hot, New, Top, or Most Tipped.
 
 EARN TIPS
 Receive tips from grateful community members. Only 7% platform fee - you keep 93%.
 
-LOCAL IMPACT
-Filter posts by your State or District. See cleanups happening near you.
+LEADERBOARDS
+• Top Givers - Users who donate the most tips and event contributions
+• Top Earners - Cleanup heroes who earn the most from their efforts
+• Filter by All India, Your State, or Your District
 
-LEADERBOARD
-Compete with other cleaners. Earn points for every cleanup and climb the rankings.
+SMART FILTERS
+Filter posts by location, time range, and category (Beach, Park, Street, Drain, Lake/River, Mountain).
 
 COMMUNITY EVENTS
 Join or organize cleanup events in your area. Coordinate with other volunteers.
@@ -228,13 +267,14 @@ Initial release of CleanConnect - India's cleanup community platform!
 • Upvote and downvote posts
 • Send and receive tips
 • Join community cleanup events
-• Climb the leaderboard
+• Dual leaderboards: Top Givers & Top Earners
+• Smart filters by location, time, and category
 • Filter by state and district
 ```
 
 #### Copyright
 ```
-© 2025 The Big Head
+© 2026 The Big Head
 ```
 
 ---
@@ -260,10 +300,13 @@ CleanConnect is a community platform for environmental cleanup activities in Ind
 TO TEST:
 1. Sign in with Apple or Google
 2. Browse the feed to see cleanup posts
-3. Create a test post with a YouTube link (e.g., https://youtube.com/shorts/dQw4w9WgXcQ)
-4. Upvote/downvote posts
-5. Check the leaderboard
-6. Browse community events
+3. Use filters to sort by Hot, New, Top, or Most Tipped
+4. Filter by location (All India, My State, My District, Nearby)
+5. Filter by category (Beach, Park, Street, etc.)
+6. Create a test post with a YouTube link (e.g., https://youtube.com/shorts/dQw4w9WgXcQ)
+7. Upvote/downvote posts
+8. Check the leaderboard (Top Givers vs Top Earners)
+9. Browse community events
 
 PAYMENT FEATURES:
 Tipping requires Stripe Connect setup. The tip feature allows users to send monetary tips to cleanup volunteers. Platform takes 7% fee, creator receives 93%.
@@ -288,10 +331,10 @@ No demo account needed - the app supports Sign in with Apple.
    - General tab → Version: `1.0.0`, Build: `1`
 
 2. **Verify Bundle ID**
-   - Should be: `com.cleanconnect.app`
+   - Should be: `ca.thebighead.cleanconnect`
 
 3. **Verify Signing**
-   - Team: Your Apple Developer Team
+   - Team: Your Apple Developer Team (F385ZL83XQ)
    - Signing Certificate: Distribution
    - Provisioning Profile: Automatic or App Store
 
@@ -547,7 +590,7 @@ Events to monitor:
 
 | Version | Build | Date | Notes |
 |---------|-------|------|-------|
-| 1.0.0 | 1 | Jan 2026 | Initial release |
+| 1.0.0 | 1 | Jan 2026 | Initial release with Leaderboard & Enhanced Feed |
 
 ---
 
