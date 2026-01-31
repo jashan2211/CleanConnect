@@ -88,6 +88,46 @@
         { "fieldPath": "state", "order": "ASCENDING" },
         { "fieldPath": "startDate", "order": "ASCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "eventComments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "eventId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "eventSupplies",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "eventId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "eventTasks",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "eventId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "supplyContributions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "supplyItemId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "eventRSVPs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "gatheringId", "order": "ASCENDING" },
+        { "fieldPath": "userId", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

@@ -53,5 +53,55 @@ service cloud.firestore {
       allow update: if request.auth != null;
       allow delete: if request.auth != null && request.auth.uid == resource.data.reportedBy;
     }
+
+    // Event Comments (Discussions)
+    match /eventComments/{commentId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.authorId;
+    }
+
+    // Event Comment Votes
+    match /eventCommentVotes/{voteId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    // Event Supplies
+    match /eventSupplies/{supplyId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.requesterId;
+    }
+
+    // Supply Contributions
+    match /supplyContributions/{contributionId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.contributorId;
+    }
+
+    // Event Tasks
+    match /eventTasks/{taskId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.creatorId;
+    }
+
+    // Task Volunteers
+    match /taskVolunteers/{volunteerId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+
+    // Event RSVPs
+    match /eventRSVPs/{rsvpId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
   }
 }

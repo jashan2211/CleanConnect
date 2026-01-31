@@ -418,6 +418,8 @@ class EventForumViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var error: String?
 
+    private let firestoreService = FirestoreService.shared
+
     var topLevelComments: [EventComment] {
         comments.filter { $0.parentId == nil }
     }
@@ -433,76 +435,32 @@ class EventForumViewModel: ObservableObject {
     func loadComments() {
         isLoading = true
 
-        // Load from local storage
         Task {
-            try? await Task.sleep(nanoseconds: 500_000_000) // Simulate loading
-
-            // Mock data for demonstration
-            comments = [
-                EventComment(
-                    id: "c1",
-                    eventId: eventId,
-                    parentId: nil,
-                    authorId: "u1",
-                    authorName: "Rahul Sharma",
-                    authorPhotoURL: nil,
-                    content: "What should we bring? I have some extra trash bags at home that I can contribute.",
-                    upvotes: 15,
-                    downvotes: 1,
-                    replyCount: 2,
-                    isOrganizer: false,
-                    isPinned: false,
-                    createdAt: Date().addingTimeInterval(-7200),
-                    editedAt: nil
-                ),
-                EventComment(
-                    id: "c2",
-                    eventId: eventId,
-                    parentId: "c1",
-                    authorId: "org1",
-                    authorName: "Event Organizer",
-                    authorPhotoURL: nil,
-                    content: "That would be amazing! We definitely need more bags. Please check the supplies list and pledge what you can bring.",
-                    upvotes: 8,
-                    downvotes: 0,
-                    replyCount: 0,
-                    isOrganizer: true,
-                    isPinned: false,
-                    createdAt: Date().addingTimeInterval(-6000),
-                    editedAt: nil
-                ),
-                EventComment(
-                    id: "c3",
-                    eventId: eventId,
-                    parentId: nil,
-                    authorId: "u2",
-                    authorName: "Priya Patel",
-                    authorPhotoURL: nil,
-                    content: "Is there parking available nearby? Coming with 3 friends and we'll be driving.",
-                    upvotes: 6,
-                    downvotes: 0,
-                    replyCount: 1,
-                    isOrganizer: false,
-                    isPinned: false,
-                    createdAt: Date().addingTimeInterval(-3600),
-                    editedAt: nil
-                )
-            ]
-
-            isLoading = false
+            do {
+                comments = try await firestoreService.getEventComments(eventId: eventId)
+                isLoading = false
+            } catch {
+                self.error = error.localizedDescription
+                isLoading = false
+            }
         }
     }
 
     func addComment(content: String, parentId: String?) async {
+        guard let currentUser = UserState.shared.currentUser else {
+            error = "Please sign in to comment"
+            return
+        }
+
         let newComment = EventComment(
             id: UUID().uuidString,
             eventId: eventId,
             parentId: parentId,
-            authorId: UserState.shared.currentUser?.id ?? "",
-            authorName: UserState.shared.currentUser?.displayName ?? "Anonymous",
-            authorPhotoURL: UserState.shared.currentUser?.photoURL,
+            authorId: currentUser.id,
+            authorName: currentUser.displayName,
+            authorPhotoURL: currentUser.photoURL,
             content: content,
-            upvotes: 1,
+            upvotes: 0,
             downvotes: 0,
             replyCount: 0,
             isOrganizer: false,
@@ -511,27 +469,54 @@ class EventForumViewModel: ObservableObject {
             editedAt: nil
         )
 
-        // Update parent reply count
+        // Optimistically add to local array
+        comments.append(newComment)
+
+        // Update parent reply count locally
         if let parentId = parentId,
            let index = comments.firstIndex(where: { $0.id == parentId }) {
             comments[index].replyCount += 1
         }
 
-        comments.append(newComment)
-
-        // TODO: Save to local storage
+        // Save to Firestore
+        do {
+            try await firestoreService.saveEventComment(newComment)
+        } catch {
+            self.error = "Failed to save comment: \(error.localizedDescription)"
+            // Remove optimistically added comment on failure
+            comments.removeAll { $0.id == newComment.id }
+        }
     }
 
     func vote(commentId: String, isUpvote: Bool) {
+        guard let currentUser = UserState.shared.currentUser else { return }
         guard let index = comments.firstIndex(where: { $0.id == commentId }) else { return }
 
+        // Optimistically update UI
         if isUpvote {
             comments[index].upvotes += 1
         } else {
             comments[index].downvotes += 1
         }
 
-        // TODO: Save vote to local storage
+        // Save to Firestore
+        Task {
+            do {
+                try await firestoreService.voteOnEventComment(
+                    commentId: commentId,
+                    userId: currentUser.id,
+                    isUpvote: isUpvote
+                )
+            } catch {
+                // Revert on failure
+                if isUpvote {
+                    comments[index].upvotes -= 1
+                } else {
+                    comments[index].downvotes -= 1
+                }
+                self.error = "Failed to save vote"
+            }
+        }
     }
 
     func sort(by option: EventForumView.SortOption) {

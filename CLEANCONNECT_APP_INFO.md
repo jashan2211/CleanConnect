@@ -376,10 +376,79 @@ npx firebase deploy --only firestore:rules
 | Screenshots | ⬜ Needed |
 | Privacy/Terms/Support Pages | ✅ Created (need hosting) |
 | Firebase Backend | ✅ Deployed |
-| Stripe Configuration | ✅ Configured |
+| Stripe Configuration | ⏳ Awaiting Approval |
 | Xcode Build | ✅ Succeeds |
 | App Store Connect Setup | ⬜ Not Started |
-| Submit for Review | ⬜ Not Started |
+| Submit for Review | ⬜ Waiting for Stripe |
+
+---
+
+## Pre-Submission Checklist
+
+### 1. Deploy Firestore Updates
+Run these commands in Terminal from the CleanConnect folder:
+```bash
+# Deploy updated Firestore rules (includes new event collections)
+npx firebase deploy --only firestore:rules
+
+# Deploy updated indexes
+npx firebase deploy --only firestore:indexes
+```
+
+### 2. Wait for Stripe Connect Approval
+- Check status at: https://dashboard.stripe.com
+- Once approved, test a tip payment with test card `4242 4242 4242 4242`
+
+### 3. Create App Icon
+See "App Icon Design Prompt" section below
+
+### 4. Take Screenshots
+See "Screenshot Requirements" section above
+
+### 5. Host Legal Pages
+Upload these to your website:
+- `WebPages/privacy.md` → `thebighead.ca/cleanconnect/privacy`
+- `WebPages/terms.md` → `thebighead.ca/cleanconnect/terms`
+- `WebPages/support.md` → `thebighead.ca/cleanconnect/support`
+
+---
+
+## App Icon Design Prompt
+
+Copy this prompt into an AI image generator (Midjourney, DALL-E, etc.):
+
+```
+iOS app icon for CleanConnect, an environmental cleanup community app for India.
+
+Design elements:
+- Indian tricolor gradient background (saffron #FF9933 at top, white in middle, green #138808 at bottom)
+- Central icon: A stylized broom or rake sweeping leaves/trash
+- OR: Two hands holding/protecting a green leaf or globe
+- Clean, modern, flat design style
+- No text in the icon
+- Premium fintech aesthetic
+- 1024x1024 pixels
+- No rounded corners (iOS adds them automatically)
+
+Alternative concept:
+- Green leaf transforming into a checkmark
+- Symbolizing cleanup = positive impact
+- On gradient tricolor background
+
+Style: Minimal, vector-like, suitable for small sizes (29pt)
+```
+
+### Icon Requirements
+| Size | Scale | Purpose |
+|------|-------|---------|
+| 40×40 | 2x | iPhone Notifications |
+| 60×60 | 3x | iPhone Notifications |
+| 58×58 | 2x | iPhone Settings |
+| 87×87 | 3x | iPhone Settings |
+| 80×80 | 2x | iPhone Spotlight |
+| 120×120 | 3x | iPhone Spotlight/Home |
+| 180×180 | 3x | iPhone Home Screen |
+| 1024×1024 | 1x | App Store |
 
 ---
 
@@ -388,13 +457,36 @@ npx firebase deploy --only firestore:rules
 **Week 1:**
 - Monitor crash reports in Xcode Organizer
 - Respond to App Store reviews
-- Check Firebase logs for errors
+- Check Firebase logs: `npx firebase functions:log`
 
 **Future (v2):**
 - Cleanup Bounties (paid jobs)
 - Push notifications
 - Following system
 - Hindi localization
+
+---
+
+## Troubleshooting
+
+### Firebase Issues
+```bash
+# Check function logs
+npx firebase functions:log
+
+# Redeploy everything
+npx firebase deploy
+```
+
+### Build Issues in Xcode
+1. Clean build folder: **Product → Clean Build Folder** (Cmd+Shift+K)
+2. Delete derived data: `rm -rf ~/Library/Developer/Xcode/DerivedData`
+3. Rebuild: **Cmd+B**
+
+### Stripe Not Working
+- Verify Connect account is approved at dashboard.stripe.com
+- Check webhook is configured (see FINAL_STEPS section above)
+- Use test card `4242 4242 4242 4242` for testing
 
 ---
 

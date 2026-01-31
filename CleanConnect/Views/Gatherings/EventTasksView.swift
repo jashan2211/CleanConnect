@@ -161,64 +161,63 @@ struct EventTasksView: View {
 
     private func loadTasks() {
         isLoading = true
-        // Load from local storage
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            // Mock data
-            tasks = [
-                EventTask.preview,
-                EventTask(
-                    id: "task-2",
-                    eventId: event.id,
-                    creatorId: "user-1",
-                    title: "Arrange refreshment station",
-                    description: "Set up water and snacks for volunteers",
-                    category: .refreshments,
-                    priority: .medium,
-                    status: .assigned,
-                    assigneeId: "user-2",
-                    assigneeName: "Priya",
-                    maxVolunteers: 2,
-                    currentVolunteers: 1,
-                    dueTime: nil,
-                    completedAt: nil,
-                    createdAt: Date()
-                ),
-                EventTask(
-                    id: "task-3",
-                    eventId: event.id,
-                    creatorId: "user-1",
-                    title: "Take photos throughout the event",
-                    description: nil,
-                    category: .photography,
-                    priority: .low,
-                    status: .open,
-                    assigneeId: nil,
-                    assigneeName: nil,
-                    maxVolunteers: 3,
-                    currentVolunteers: 0,
-                    dueTime: nil,
-                    completedAt: nil,
-                    createdAt: Date()
-                )
-            ]
-            isLoading = false
+        Task {
+            do {
+                tasks = try await FirestoreService.shared.getEventTasks(eventId: event.id)
+                isLoading = false
+            } catch {
+                print("Error loading tasks: \(error)")
+                isLoading = false
+            }
         }
     }
 
     private func volunteerForTask(_ task: EventTask) {
+        guard let currentUser = UserState.shared.currentUser else { return }
         guard let index = tasks.firstIndex(where: { $0.id == task.id }) else { return }
+
+        // Optimistically update UI
         tasks[index].currentVolunteers += 1
         if tasks[index].currentVolunteers >= tasks[index].maxVolunteers {
             tasks[index].status = .assigned
         }
-        tasks[index].assigneeId = UserState.shared.currentUser?.id
-        tasks[index].assigneeName = UserState.shared.currentUser?.displayName
+        tasks[index].assigneeId = currentUser.id
+        tasks[index].assigneeName = currentUser.displayName
+
+        // Save to Firestore
+        Task {
+            do {
+                let volunteer = TaskVolunteer(
+                    id: UUID().uuidString,
+                    taskId: task.id,
+                    userId: currentUser.id,
+                    userName: currentUser.displayName,
+                    userPhotoURL: currentUser.photoURL,
+                    status: .volunteered,
+                    joinedAt: Date()
+                )
+                try await FirestoreService.shared.volunteerForTask(taskId: task.id, volunteer: volunteer)
+            } catch {
+                print("Error volunteering for task: \(error)")
+            }
+        }
     }
 
     private func markTaskComplete(_ task: EventTask) {
         guard let index = tasks.firstIndex(where: { $0.id == task.id }) else { return }
+
+        // Optimistically update UI
         tasks[index].status = .completed
         tasks[index].completedAt = Date()
+
+        // Save to Firestore
+        Task {
+            do {
+                try await FirestoreService.shared.updateTaskStatus(taskId: task.id, status: .completed)
+            } catch {
+                print("Error marking task complete: \(error)")
+            }
+        }
     }
 }
 

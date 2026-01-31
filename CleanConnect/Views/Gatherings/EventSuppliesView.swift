@@ -188,71 +188,49 @@ struct EventSuppliesView: View {
 
     private func loadSupplies() {
         isLoading = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            supplies = [
-                SupplyItem.preview,
-                SupplyItem(
-                    id: "supply-2",
-                    eventId: event.id,
-                    requesterId: "user-1",
-                    category: "Safety Gear",
-                    name: "Disposable Gloves",
-                    description: "Latex or nitrile gloves for handling waste",
-                    quantity: 200,
-                    unit: "pairs",
-                    estimatedCost: 800,
-                    fulfilledQuantity: 200,
-                    deliveryAddress: nil,
-                    deliveryInstructions: nil,
-                    status: .fulfilled,
-                    urgency: .medium,
-                    createdAt: Date(),
-                    neededBy: nil
-                ),
-                SupplyItem(
-                    id: "supply-3",
-                    eventId: event.id,
-                    requesterId: "user-1",
-                    category: "Food & Refreshments",
-                    name: "Bottled Water (500ml)",
-                    description: "For volunteer hydration",
-                    quantity: 100,
-                    unit: "bottles",
-                    estimatedCost: 1500,
-                    fulfilledQuantity: 30,
-                    deliveryAddress: "Juhu Beach, Near Lifeguard Station",
-                    deliveryInstructions: "Deliver by 6:30 AM",
-                    status: .partiallyFulfilled,
-                    urgency: .urgent,
-                    createdAt: Date(),
-                    neededBy: Date().addingTimeInterval(86400)
-                )
-            ]
-            isLoading = false
+        Task {
+            do {
+                supplies = try await FirestoreService.shared.getEventSupplies(eventId: event.id)
+                isLoading = false
+            } catch {
+                print("Error loading supplies: \(error)")
+                isLoading = false
+            }
         }
     }
 
     private func addFromTemplate(_ template: SupplyTemplate) {
-        for item in template.items {
-            let supply = SupplyItem(
-                id: UUID().uuidString,
-                eventId: event.id,
-                requesterId: UserState.shared.currentUser?.id ?? "",
-                category: template.category,
-                name: item.name,
-                description: nil,
-                quantity: item.defaultQty,
-                unit: item.unit,
-                estimatedCost: nil,
-                fulfilledQuantity: 0,
-                deliveryAddress: nil,
-                deliveryInstructions: nil,
-                status: .requested,
-                urgency: .medium,
-                createdAt: Date(),
-                neededBy: event.eventDate
-            )
-            supplies.append(supply)
+        Task {
+            for item in template.items {
+                let supply = SupplyItem(
+                    id: UUID().uuidString,
+                    eventId: event.id,
+                    requesterId: UserState.shared.currentUser?.id ?? "",
+                    category: template.category,
+                    name: item.name,
+                    description: nil,
+                    quantity: item.defaultQty,
+                    unit: item.unit,
+                    estimatedCost: nil,
+                    fulfilledQuantity: 0,
+                    deliveryAddress: nil,
+                    deliveryInstructions: nil,
+                    status: .requested,
+                    urgency: .medium,
+                    createdAt: Date(),
+                    neededBy: event.eventDate
+                )
+
+                // Save to Firestore
+                do {
+                    try await FirestoreService.shared.saveSupplyItem(supply)
+                    await MainActor.run {
+                        supplies.append(supply)
+                    }
+                } catch {
+                    print("Error saving supply: \(error)")
+                }
+            }
         }
     }
 
