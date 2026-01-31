@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		781AD1022F28CD0D00681818 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 781AD1012F28CD0D00681818 /* GoogleService-Info.plist */; };
 		7878D3822F2759BF00E33A0E /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7878D3812F2759BF00E33A0E /* GoogleSignIn */; };
 		7878D3842F2759BF00E33A0E /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7878D3832F2759BF00E33A0E /* GoogleSignInSwift */; };
 		7878D3872F275ED800E33A0E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7878D3862F275ED800E33A0E /* FirebaseAuth */; };
 		7878D3892F275EE000E33A0E /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7878D3882F275EE000E33A0E /* FirebaseCore */; };
-		7878D38C2F27607000E33A0E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7878D38B2F27607000E33A0E /* GoogleService-Info.plist */; };
 		78BC7D5B2F277F8200649813 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 78BC7D5A2F277F8200649813 /* FirebaseFunctions */; };
 		78BC7D5D2F277F8B00649813 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 78BC7D5C2F277F8B00649813 /* FirebaseFirestore */; };
 		78BC7D5F2F277F9700649813 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 78BC7D5E2F277F9700649813 /* FirebaseStorage */; };
@@ -86,11 +86,11 @@
 		F0001101 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002101 /* FirestoreService.swift */; };
 		F0001102 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002102 /* StorageService.swift */; };
 		F0001103 /* StripeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002103 /* StripeService.swift */; };
+		F0001104 /* CloudFunctionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002104 /* CloudFunctionsService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7878D38A2F275FA500E33A0E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		7878D38B2F27607000E33A0E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		781AD1012F28CD0D00681818 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F0002000 /* CleanConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0002001 /* CleanConnectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanConnectApp.swift; sourceTree = "<group>"; };
 		F0002002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -164,6 +164,7 @@
 		F0002101 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
 		F0002102 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		F0002103 /* StripeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeService.swift; sourceTree = "<group>"; };
+		F0002104 /* CloudFunctionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunctionsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,7 +195,6 @@
 		F0004000 = {
 			isa = PBXGroup;
 			children = (
-				7878D38A2F275FA500E33A0E /* GoogleService-Info.plist */,
 				F0004001 /* CleanConnect */,
 				7878D3852F275ED800E33A0E /* Frameworks */,
 				F0004002 /* Products */,
@@ -204,7 +204,7 @@
 		F0004001 /* CleanConnect */ = {
 			isa = PBXGroup;
 			children = (
-				7878D38B2F27607000E33A0E /* GoogleService-Info.plist */,
+				781AD1012F28CD0D00681818 /* GoogleService-Info.plist */,
 				F0004003 /* App */,
 				F0004004 /* Models */,
 				F0004005 /* Views */,
@@ -286,6 +286,7 @@
 				F0002101 /* FirestoreService.swift */,
 				F0002102 /* StorageService.swift */,
 				F0002103 /* StripeService.swift */,
+				F0002104 /* CloudFunctionsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -513,7 +514,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0001003 /* Assets.xcassets in Resources */,
-				7878D38C2F27607000E33A0E /* GoogleService-Info.plist in Resources */,
+				781AD1022F28CD0D00681818 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +595,7 @@
 				F0001101 /* FirestoreService.swift in Sources */,
 				F0001102 /* StorageService.swift in Sources */,
 				F0001103 /* StripeService.swift in Sources */,
+				F0001104 /* CloudFunctionsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

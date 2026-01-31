@@ -2,12 +2,16 @@
 // Detailed view of a cleanup post
 
 import SwiftUI
+import MapKit
 
 struct PostDetailView: View {
     let post: Post
     @StateObject private var viewModel: PostDetailViewModel
     @State private var newComment = ""
     @State private var showTipSheet = false
+    @State private var showFullMap = false
+    @State private var showDeleteAlert = false
+    @State private var commentToDelete: Comment?
 
     init(post: Post) {
         self.post = post
@@ -188,21 +192,48 @@ struct PostDetailView: View {
                 Text("\(post.district), \(post.state)")
                     .font(.subheadline)
             }
-            // Map placeholder
-            Rectangle()
-                .fill(Color.gray.opacity(0.1))
-                .frame(height: 150)
-                .cornerRadius(12)
-                .overlay(
-                    VStack {
-                        Image(systemName: "map")
-                            .font(.largeTitle)
-                            .foregroundColor(.gray)
-                        Text("Map View")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+
+            if let lat = post.latitude, let lon = post.longitude {
+                Button(action: { showFullMap = true }) {
+                    ZStack(alignment: .bottomTrailing) {
+                        MapSnapshotView(latitude: lat, longitude: lon)
+                            .frame(height: 150)
+                            .cornerRadius(12)
+
+                        HStack(spacing: 4) {
+                            Image(systemName: "arrow.up.left.and.arrow.down.right")
+                                .font(.caption2)
+                            Text("View Map")
+                                .font(.caption2.bold())
+                        }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.black.opacity(0.7))
+                        .cornerRadius(4)
+                        .padding(8)
                     }
-                )
+                }
+                .buttonStyle(.plain)
+            } else {
+                Rectangle()
+                    .fill(Color.gray.opacity(0.1))
+                    .frame(height: 150)
+                    .cornerRadius(12)
+                    .overlay(
+                        VStack {
+                            Image(systemName: "map")
+                                .font(.largeTitle)
+                                .foregroundColor(.gray)
+                            Text("Location not available")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    )
+            }
+        }
+        .sheet(isPresented: $showFullMap) {
+            FullMapView(post: post)
         }
     }
 
@@ -224,8 +255,30 @@ struct PostDetailView: View {
 
             // Comments list
             ForEach(viewModel.comments) { comment in
-                CommentRow(comment: comment)
+                CommentRow(
+                    comment: comment,
+                    canDelete: viewModel.canDeleteComment(comment),
+                    onDelete: {
+                        commentToDelete = comment
+                        showDeleteAlert = true
+                    }
+                )
             }
+        }
+        .alert("Delete Comment", isPresented: $showDeleteAlert) {
+            Button("Cancel", role: .cancel) {
+                commentToDelete = nil
+            }
+            Button("Delete", role: .destructive) {
+                if let comment = commentToDelete {
+                    Task {
+                        _ = await viewModel.deleteComment(comment)
+                        commentToDelete = nil
+                    }
+                }
+            }
+        } message: {
+            Text("Are you sure you want to delete this comment?")
         }
     }
 
@@ -281,6 +334,8 @@ struct StatItem: View {
 
 struct CommentRow: View {
     let comment: Comment
+    var canDelete: Bool = false
+    var onDelete: (() -> Void)?
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
@@ -301,6 +356,14 @@ struct CommentRow: View {
                     Text(comment.createdAt.timeAgo())
                         .font(.caption)
                         .foregroundColor(.secondary)
+
+                    if canDelete {
+                        Button(action: { onDelete?() }) {
+                            Image(systemName: "trash")
+                                .font(.caption)
+                                .foregroundColor(.red)
+                        }
+                    }
                 }
                 Text(comment.text)
                     .font(.subheadline)

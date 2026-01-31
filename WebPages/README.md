@@ -1,14 +1,14 @@
-# CleanConnect Web Pages
+# cleanconnect Web Pages
 
-This folder contains the required legal pages for the CleanConnect app submission to the App Store.
+This folder contains the required legal pages for the cleanconnect app submission to the App Store.
 
 ## Files
 
 | File | URL to Host At |
 |------|----------------|
-| `privacy.md` | `thebighead.ca/CleanConnect/privacy` |
-| `terms.md` | `thebighead.ca/CleanConnect/terms` |
-| `support.md` | `thebighead.ca/CleanConnect/support` |
+| `privacy.md` | `thebighead.ca/cleanconnect/privacy` |
+| `terms.md` | `thebighead.ca/cleanconnect/terms` |
+| `support.md` | `thebighead.ca/cleanconnect/support` |
 
 ## How to Use
 
@@ -32,9 +32,9 @@ Host these files on GitHub Pages with a Jekyll theme that renders markdown.
 
 Make sure these URLs are accessible before submitting to the App Store:
 
-- **Privacy Policy**: `https://thebighead.ca/CleanConnect/privacy`
-- **Terms of Service**: `https://thebighead.ca/CleanConnect/terms`
-- **Support**: `https://thebighead.ca/CleanConnect/support`
+- **Privacy Policy**: `https://thebighead.ca/cleanconnect/privacy`
+- **Terms of Service**: `https://thebighead.ca/cleanconnect/terms`
+- **Support**: `https://thebighead.ca/cleanconnect/support`
 
 ## Company Details
 
@@ -57,8 +57,8 @@ Make sure these URLs are accessible before submitting to the App Store:
 
 ## Checklist
 
-- [ ] Upload privacy.md to thebighead.ca/CleanConnect/privacy
-- [ ] Upload terms.md to thebighead.ca/CleanConnect/terms
-- [ ] Upload support.md to thebighead.ca/CleanConnect/support
+- [ ] Upload privacy.md to thebighead.ca/cleanconnect/privacy
+- [ ] Upload terms.md to thebighead.ca/cleanconnect/terms
+- [ ] Upload support.md to thebighead.ca/cleanconnect/support
 - [ ] Test all URLs are accessible
 - [ ] Add URLs to App Store Connect listing

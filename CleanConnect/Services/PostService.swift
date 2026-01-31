@@ -2,6 +2,7 @@
 // Post-related operations with Firebase
 
 import Foundation
+import FirebaseAuth
 
 class PostService {
     static let shared = PostService()
@@ -33,9 +34,11 @@ class PostService {
         afterImageData: Data?,
         videoProofURL: String?
     ) async throws {
-        guard let userId = await AuthManager.shared.currentUserId else {
+        // IMPORTANT: Use Firebase Auth uid directly for Firestore rules to work
+        guard let firebaseUser = Auth.auth().currentUser else {
             throw PostError.notAuthenticated
         }
+        let userId = firebaseUser.uid
 
         let userName = await UserState.shared.currentUser?.displayName ?? "User"
         let userPhotoURL = await UserState.shared.currentUser?.photoURL
@@ -192,6 +195,60 @@ class PostService {
         #endif
 
         return comment
+    }
+
+    // MARK: - Delete Operations
+
+    func deletePost(postId: String) async throws {
+        #if canImport(FirebaseFunctions)
+        try await CloudFunctionsService.shared.deletePost(postId: postId)
+        #else
+        // Local delete
+        try localDataManager.delete(from: "\(postId).json", in: "posts")
+        #endif
+    }
+
+    func deleteComment(commentId: String) async throws {
+        #if canImport(FirebaseFunctions)
+        try await CloudFunctionsService.shared.deleteComment(commentId: commentId)
+        #else
+        try localDataManager.delete(from: "\(commentId).json", in: "comments")
+        #endif
+    }
+
+    // MARK: - Voting
+
+    func voteOnPost(postId: String, voteType: String) async throws -> VoteResult {
+        #if canImport(FirebaseFunctions)
+        return try await CloudFunctionsService.shared.voteOnPost(postId: postId, voteType: voteType)
+        #else
+        // Local voting (simplified)
+        guard var post = try? localDataManager.load(Post.self, from: "\(postId).json", in: "posts") else {
+            throw PostError.invalidData
+        }
+
+        if voteType == "up" {
+            post.communityVotes += 1
+        } else if voteType == "down" {
+            post.communityDownvotes += 1
+        }
+
+        try localDataManager.save(post, to: "\(postId).json", in: "posts")
+
+        return VoteResult(
+            communityVotes: post.communityVotes,
+            communityDownvotes: post.communityDownvotes,
+            voteScore: post.communityVotes - post.communityDownvotes
+        )
+        #endif
+    }
+
+    func getUserVote(postId: String) async throws -> String? {
+        #if canImport(FirebaseFunctions)
+        return try await CloudFunctionsService.shared.getUserVote(postId: postId)
+        #else
+        return nil // Local mode doesn't track individual votes
+        #endif
     }
 
     // MARK: - Helpers

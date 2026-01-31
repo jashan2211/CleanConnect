@@ -1,17 +1,20 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Users can read any user, write only their own
+    // Users - can read any user, create/update their own
     match /users/{userId} {
       allow read: if request.auth != null;
-      allow write: if request.auth != null && request.auth.uid == userId;
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null && request.auth.uid == userId;
+      allow delete: if false; // Users cannot delete their account via client
     }
 
-    // Posts - anyone authenticated can read, owner can write
+    // Posts - anyone authenticated can read, owner can create/update/delete
     match /posts/{postId} {
       allow read: if request.auth != null;
-      allow create: if request.auth != null;
-      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+      allow update: if request.auth != null && resource.data.userId == request.auth.uid;
+      allow delete: if request.auth != null && resource.data.userId == request.auth.uid;
     }
 
     // Gatherings/Events
@@ -33,6 +36,13 @@ service cloud.firestore {
       allow read: if request.auth != null &&
         (request.auth.uid == resource.data.senderId || request.auth.uid == resource.data.creatorId);
       // Tips are created by Cloud Functions only
+      allow write: if false;
+    }
+
+    // Votes - managed by Cloud Functions for consistency
+    match /votes/{voteId} {
+      allow read: if request.auth != null;
+      // Votes are created/updated by Cloud Functions only
       allow write: if false;
     }
 

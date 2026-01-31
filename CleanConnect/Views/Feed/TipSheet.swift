@@ -84,7 +84,7 @@ struct TipSheet: View {
 
                     // Platform fee note
                     VStack(spacing: 4) {
-                        Text("10% platform fee applies")
+                        Text("7% platform fee applies")
                             .font(.caption)
                             .foregroundColor(.secondary)
                         Text("Secure payment via Stripe (UPI, Cards, Net Banking)")
@@ -268,7 +268,7 @@ struct TipSheet: View {
     }
 
     private func paymentBreakdown(amount: Int) -> some View {
-        let platformFee = Int(Double(amount) * 0.10)
+        let platformFee = Int(Double(amount) * AppConfig.Payment.platformFeePercent)
         let creatorReceives = amount - platformFee
 
         return VStack(spacing: 8) {
@@ -280,7 +280,7 @@ struct TipSheet: View {
             .font(.subheadline)
 
             HStack {
-                Text("Platform Fee (10%)")
+                Text("Platform Fee (7%)")
                 Spacer()
                 Text("-₹\(platformFee)")
             }

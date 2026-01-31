@@ -25,12 +25,51 @@ class FirestoreService {
     }
 
     func updateUserStats(userId: String, points: Int, wasteKg: Double) async throws {
-        try await db.collection("users").document(userId).updateData([
-            "totalPoints": FieldValue.increment(Int64(points)),
-            "totalWasteKg": FieldValue.increment(wasteKg),
-            "totalPosts": FieldValue.increment(Int64(1)),
-            "lastActive": Timestamp(date: Date())
-        ])
+        let userRef = db.collection("users").document(userId)
+
+        // Check if user document exists first
+        let doc = try await userRef.getDocument()
+
+        if doc.exists {
+            // Update existing user
+            try await userRef.updateData([
+                "totalPoints": FieldValue.increment(Int64(points)),
+                "totalWasteKg": FieldValue.increment(wasteKg),
+                "totalPosts": FieldValue.increment(Int64(1)),
+                "lastActive": Timestamp(date: Date())
+            ])
+        } else {
+            // Create user document with initial stats (shouldn't normally happen)
+            try await userRef.setData([
+                "id": userId,
+                "displayName": "User",
+                "totalPoints": points,
+                "totalWasteKg": wasteKg,
+                "totalPosts": 1,
+                "totalEventsOrganized": 0,
+                "totalEventsAttended": 0,
+                "tipsReceived": 0,
+                "tipsGiven": 0,
+                "totalVolunteerHours": 0,
+                "totalSuppliesContributed": 0,
+                "totalDonationsAmount": 0,
+                "totalCO2Saved": 0,
+                "longestStreak": 0,
+                "currentStreak": 0,
+                "totalAreasImpacted": 0,
+                "videosVerified": 0,
+                "level": 1,
+                "levelName": "Eco Scout",
+                "karmaScore": 0,
+                "followersCount": 0,
+                "followingCount": 0,
+                "badges": [],
+                "createdAt": Timestamp(date: Date()),
+                "lastActive": Timestamp(date: Date()),
+                "isAnonymous": false,
+                "verified": false
+            ])
+        }
     }
 
     // MARK: - Posts

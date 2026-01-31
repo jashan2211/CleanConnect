@@ -348,3 +348,411 @@ exports.createDashboardLink = functions.https.onCall(async (data, context) => {
     throw new functions.https.HttpsError("internal", error.message);
   }
 });
+
+// ============================================
+// POST MANAGEMENT - Vote, Delete, Update
+// ============================================
+
+/**
+ * Vote on a post (upvote or downvote)
+ * Each user can only vote once per post
+ */
+exports.voteOnPost = functions.https.onCall(async (data, context) => {
+  if (!context.auth) {
+    throw new functions.https.HttpsError("unauthenticated", "Must be logged in");
+  }
+
+  const { postId, voteType } = data; // voteType: "up", "down", or "none" (to remove vote)
+  const userId = context.auth.uid;
+
+  if (!postId) {
+    throw new functions.https.HttpsError("invalid-argument", "Post ID required");
+  }
+
+  if (!["up", "down", "none"].includes(voteType)) {
+    throw new functions.https.HttpsError("invalid-argument", "Vote type must be 'up', 'down', or 'none'");
+  }
+
+  const db = admin.firestore();
+  const postRef = db.collection("posts").doc(postId);
+  const voteRef = db.collection("votes").doc(`${userId}_${postId}`);
+
+  try {
+    return await db.runTransaction(async (transaction) => {
+      const postDoc = await transaction.get(postRef);
+      const voteDoc = await transaction.get(voteRef);
+
+      if (!postDoc.exists) {
+        throw new functions.https.HttpsError("not-found", "Post not found");
+      }
+
+      const postData = postDoc.data();
+      let upvotes = postData.communityVotes || 0;
+      let downvotes = postData.communityDownvotes || 0;
+
+      const previousVote = voteDoc.exists ? voteDoc.data().voteType : null;
+
+      // Remove previous vote effect
+      if (previousVote === "up") upvotes--;
+      if (previousVote === "down") downvotes--;
+
+      // Apply new vote
+      if (voteType === "up") upvotes++;
+      if (voteType === "down") downvotes++;
+
+      // Update post
+      transaction.update(postRef, {
+        communityVotes: upvotes,
+        communityDownvotes: downvotes,
+        voteScore: upvotes - downvotes, // For sorting
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      // Save or delete vote record
+      if (voteType === "none") {
+        transaction.delete(voteRef);
+      } else {
+        transaction.set(voteRef, {
+          userId,
+          postId,
+          voteType,
+          votedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+      }
+
+      return {
+        success: true,
+        communityVotes: upvotes,
+        communityDownvotes: downvotes,
+        voteScore: upvotes - downvotes,
+      };
+    });
+  } catch (error) {
+    console.error("Error voting on post:", error);
+    throw new functions.https.HttpsError("internal", error.message);
+  }
+});
+
+/**
+ * Get user's vote for a post
+ */
+exports.getUserVote = functions.https.onCall(async (data, context) => {
+  if (!context.auth) {
+    return { voteType: null };
+  }
+
+  const { postId } = data;
+  const userId = context.auth.uid;
+
+  if (!postId) {
+    throw new functions.https.HttpsError("invalid-argument", "Post ID required");
+  }
+
+  try {
+    const voteDoc = await admin.firestore()
+      .collection("votes")
+      .doc(`${userId}_${postId}`)
+      .get();
+
+    return {
+      voteType: voteDoc.exists ? voteDoc.data().voteType : null,
+    };
+  } catch (error) {
+    console.error("Error getting user vote:", error);
+    throw new functions.https.HttpsError("internal", error.message);
+  }
+});
+
+/**
+ * Delete a post (owner only)
+ * Also deletes associated comments and images
+ */
+exports.deletePost = functions.https.onCall(async (data, context) => {
+  if (!context.auth) {
+    throw new functions.https.HttpsError("unauthenticated", "Must be logged in");
+  }
+
+  const { postId } = data;
+  const userId = context.auth.uid;
+
+  if (!postId) {
+    throw new functions.https.HttpsError("invalid-argument", "Post ID required");
+  }
+
+  const db = admin.firestore();
+  const storage = admin.storage().bucket();
+
+  try {
+    // Get the post
+    const postDoc = await db.collection("posts").doc(postId).get();
+
+    if (!postDoc.exists) {
+      throw new functions.https.HttpsError("not-found", "Post not found");
+    }
+
+    const postData = postDoc.data();
+
+    // Check ownership
+    if (postData.userId !== userId) {
+      throw new functions.https.HttpsError("permission-denied", "You can only delete your own posts");
+    }
+
+    // Delete associated comments
+    const commentsSnapshot = await db.collection("comments")
+      .where("postId", "==", postId)
+      .get();
+
+    const batch = db.batch();
+
+    commentsSnapshot.docs.forEach((doc) => {
+      batch.delete(doc.ref);
+    });
+
+    // Delete associated votes
+    const votesSnapshot = await db.collection("votes")
+      .where("postId", "==", postId)
+      .get();
+
+    votesSnapshot.docs.forEach((doc) => {
+      batch.delete(doc.ref);
+    });
+
+    // Delete the post
+    batch.delete(db.collection("posts").doc(postId));
+
+    // Update user stats (subtract points)
+    batch.update(db.collection("users").doc(userId), {
+      totalPosts: admin.firestore.FieldValue.increment(-1),
+      totalPoints: admin.firestore.FieldValue.increment(-postData.pointsEarned || 0),
+      totalWasteKg: admin.firestore.FieldValue.increment(-postData.wasteCollectedKg || 0),
+    });
+
+    await batch.commit();
+
+    // Delete images from storage (async, don't wait)
+    try {
+      await storage.deleteFiles({ prefix: `posts/${postId}/` });
+    } catch (storageError) {
+      console.log("Storage cleanup error (non-fatal):", storageError.message);
+    }
+
+    return { success: true, message: "Post deleted successfully" };
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    throw new functions.https.HttpsError("internal", error.message);
+  }
+});
+
+/**
+ * Delete a comment (owner only)
+ */
+exports.deleteComment = functions.https.onCall(async (data, context) => {
+  if (!context.auth) {
+    throw new functions.https.HttpsError("unauthenticated", "Must be logged in");
+  }
+
+  const { commentId } = data;
+  const userId = context.auth.uid;
+
+  if (!commentId) {
+    throw new functions.https.HttpsError("invalid-argument", "Comment ID required");
+  }
+
+  const db = admin.firestore();
+
+  try {
+    const commentDoc = await db.collection("comments").doc(commentId).get();
+
+    if (!commentDoc.exists) {
+      throw new functions.https.HttpsError("not-found", "Comment not found");
+    }
+
+    const commentData = commentDoc.data();
+
+    // Check ownership
+    if (commentData.userId !== userId) {
+      throw new functions.https.HttpsError("permission-denied", "You can only delete your own comments");
+    }
+
+    // Update post comment count
+    if (commentData.postId) {
+      await db.collection("posts").doc(commentData.postId).update({
+        comments: admin.firestore.FieldValue.increment(-1),
+      });
+    }
+
+    // Delete the comment
+    await db.collection("comments").doc(commentId).delete();
+
+    return { success: true, message: "Comment deleted successfully" };
+  } catch (error) {
+    console.error("Error deleting comment:", error);
+    throw new functions.https.HttpsError("internal", error.message);
+  }
+});
+
+/**
+ * Recalculate and update user stats
+ * Call this if stats get out of sync
+ */
+exports.recalculateUserStats = functions.https.onCall(async (data, context) => {
+  if (!context.auth) {
+    throw new functions.https.HttpsError("unauthenticated", "Must be logged in");
+  }
+
+  const userId = context.auth.uid;
+  const db = admin.firestore();
+
+  try {
+    // Get all user's posts
+    const postsSnapshot = await db.collection("posts")
+      .where("userId", "==", userId)
+      .get();
+
+    let totalPosts = 0;
+    let totalWasteKg = 0;
+    let totalPoints = 0;
+
+    postsSnapshot.docs.forEach((doc) => {
+      const post = doc.data();
+      totalPosts++;
+      totalWasteKg += post.wasteCollectedKg || 0;
+      totalPoints += post.pointsEarned || 0;
+    });
+
+    // Get tips received
+    const tipsSnapshot = await db.collection("tips")
+      .where("creatorId", "==", userId)
+      .where("status", "==", "completed")
+      .get();
+
+    let tipsReceived = 0;
+    tipsSnapshot.docs.forEach((doc) => {
+      tipsReceived += doc.data().creatorReceives || 0;
+    });
+
+    // Update user document
+    await db.collection("users").doc(userId).update({
+      totalPosts,
+      totalWasteKg,
+      totalPoints,
+      tipsReceived,
+      statsUpdatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    return {
+      success: true,
+      stats: { totalPosts, totalWasteKg, totalPoints, tipsReceived },
+    };
+  } catch (error) {
+    console.error("Error recalculating stats:", error);
+    throw new functions.https.HttpsError("internal", error.message);
+  }
+});
+
+// ============================================
+// FEED QUERIES - Get posts with sorting
+// ============================================
+
+/**
+ * Get posts with advanced sorting and filtering
+ * Supports: hot, new, top (day/week/month/year/all)
+ */
+exports.getFeedPosts = functions.https.onCall(async (data, context) => {
+  const {
+    sortBy = "hot",      // hot, new, top
+    timeRange = "all",   // day, week, month, year, all
+    state = null,
+    district = null,
+    verifiedOnly = false,
+    limit = 20,
+    startAfter = null,
+  } = data;
+
+  const db = admin.firestore();
+
+  try {
+    let query = db.collection("posts");
+
+    // Location filters
+    if (state) {
+      query = query.where("state", "==", state);
+    }
+    if (district) {
+      query = query.where("district", "==", district);
+    }
+
+    // Verified filter
+    if (verifiedOnly) {
+      query = query.where("hasVideoProof", "==", true);
+    }
+
+    // Time range filter
+    if (timeRange !== "all") {
+      const now = new Date();
+      let startDate;
+
+      switch (timeRange) {
+        case "day":
+          startDate = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+          break;
+        case "week":
+          startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+          break;
+        case "month":
+          startDate = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+          break;
+        case "year":
+          startDate = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
+          break;
+      }
+
+      if (startDate) {
+        query = query.where("createdAt", ">=", startDate);
+      }
+    }
+
+    // Sorting
+    switch (sortBy) {
+      case "new":
+        query = query.orderBy("createdAt", "desc");
+        break;
+      case "top":
+        query = query.orderBy("voteScore", "desc").orderBy("createdAt", "desc");
+        break;
+      case "tipped":
+        query = query.orderBy("tipsReceived", "desc").orderBy("createdAt", "desc");
+        break;
+      case "hot":
+      default:
+        // Hot = combination of recency and votes (simplified)
+        query = query.orderBy("createdAt", "desc");
+        break;
+    }
+
+    // Pagination
+    if (startAfter) {
+      const startDoc = await db.collection("posts").doc(startAfter).get();
+      if (startDoc.exists) {
+        query = query.startAfter(startDoc);
+      }
+    }
+
+    query = query.limit(limit);
+
+    const snapshot = await query.get();
+    const posts = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    return {
+      posts,
+      hasMore: posts.length === limit,
+      lastPostId: posts.length > 0 ? posts[posts.length - 1].id : null,
+    };
+  } catch (error) {
+    console.error("Error getting feed posts:", error);
+    throw new functions.https.HttpsError("internal", error.message);
+  }
+});

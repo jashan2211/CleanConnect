@@ -3,7 +3,7 @@
 
 import SwiftUI
 
-struct StatCard: View {
+struct ProfileStatCard: View {
     let icon: String
     let value: String
     let label: String

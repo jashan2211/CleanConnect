@@ -13,7 +13,6 @@ struct ContentView: View {
         case events = "Events"
         case feed = "Feed"
         case discover = "Discover"
-        case companies = "Services"
         case profile = "Profile"
 
         var icon: String {
@@ -21,7 +20,6 @@ struct ContentView: View {
             case .events: return "calendar.badge.plus"
             case .feed: return "leaf.fill"
             case .discover: return "sparkles"
-            case .companies: return "building.2.fill"
             case .profile: return "person.circle.fill"
             }
         }
@@ -73,12 +71,6 @@ struct ContentView: View {
                     Label(Tab.discover.rawValue, systemImage: Tab.discover.icon)
                 }
                 .tag(Tab.discover)
-
-            CompaniesView()
-                .tabItem {
-                    Label(Tab.companies.rawValue, systemImage: Tab.companies.icon)
-                }
-                .tag(Tab.companies)
 
             ProfileView()
                 .tabItem {
