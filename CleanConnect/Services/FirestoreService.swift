@@ -155,6 +155,22 @@ class FirestoreService {
         return snapshot.documents.compactMap { try? $0.data(as: Gathering.self) }
     }
 
+    func deleteGathering(gatheringId: String) async throws {
+        try await db.collection("gatherings").document(gatheringId).delete()
+
+        // Also delete related data (comments, supplies, tasks, RSVPs)
+        let collections = ["eventComments", "eventSupplies", "eventTasks", "eventRSVPs"]
+        for collection in collections {
+            let snapshot = try await db.collection(collection)
+                .whereField("eventId", isEqualTo: gatheringId)
+                .getDocuments()
+
+            for doc in snapshot.documents {
+                try await doc.reference.delete()
+            }
+        }
+    }
+
     // MARK: - Leaderboard
 
     func getLeaderboard(state: String? = nil, limit: Int = 50) async throws -> [User] {

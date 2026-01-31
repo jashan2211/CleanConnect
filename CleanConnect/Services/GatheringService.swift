@@ -224,6 +224,34 @@ class GatheringService {
         gathering.fundraisingRaised = (gathering.fundraisingRaised ?? 0) + amount
         try dataManager.save(gathering, to: "\(gatheringId).json", in: "gatherings")
     }
+
+    func deleteGathering(gatheringId: String) async throws {
+        // Verify user is the organizer
+        guard let userId = await AuthManager.shared.currentUserId else {
+            throw GatheringError.notAuthenticated
+        }
+
+        guard let gathering = try? dataManager.load(Gathering.self, from: "\(gatheringId).json", in: "gatherings") else {
+            throw GatheringError.notFound
+        }
+
+        guard gathering.organizerId == userId else {
+            throw GatheringError.notAuthorized
+        }
+
+        // Delete from Firebase if available
+        #if canImport(FirebaseFirestore)
+        try await FirestoreService.shared.deleteGathering(gatheringId: gatheringId)
+        #endif
+
+        // Delete local file
+        try dataManager.delete(from: "\(gatheringId).json", in: "gatherings")
+
+        // Delete associated image if exists
+        if let imageURL = gathering.imageURL, imageURL.hasPrefix("/") {
+            try? FileManager.default.removeItem(atPath: imageURL)
+        }
+    }
 }
 
 enum GatheringsFilter {
@@ -236,12 +264,14 @@ enum GatheringError: LocalizedError {
     case notAuthenticated
     case notFound
     case invalidData
+    case notAuthorized
 
     var errorDescription: String? {
         switch self {
         case .notAuthenticated: return "You must be signed in"
         case .notFound: return "Event not found"
         case .invalidData: return "Invalid event data"
+        case .notAuthorized: return "You don't have permission to do this"
         }
     }
 }

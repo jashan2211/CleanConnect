@@ -2,6 +2,7 @@
 // Detailed view of a community cleanup event
 
 import SwiftUI
+import UIKit
 
 struct EventDetailView: View {
     let gathering: Gathering
@@ -10,6 +11,10 @@ struct EventDetailView: View {
     @State private var showDonationSheet = false
     @State private var showOrganizerVideo = false
     @State private var showLiveStream = false
+    @State private var showDeleteAlert = false
+    @State private var isDeleting = false
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var userState: UserState
 
     init(gathering: Gathering) {
         self.gathering = gathering
@@ -83,12 +88,40 @@ struct EventDetailView: View {
                             Label("Join WhatsApp Group", systemImage: "bubble.left.fill")
                         }
                     }
-                    Button(action: {}) {
-                        Label("Report", systemImage: "flag")
+
+                    if isOrganizer {
+                        Divider()
+                        Button(role: .destructive, action: { showDeleteAlert = true }) {
+                            Label("Delete Event", systemImage: "trash")
+                        }
+                    } else {
+                        Button(action: {}) {
+                            Label("Report", systemImage: "flag")
+                        }
                     }
                 } label: {
                     Image(systemName: "ellipsis.circle")
                 }
+            }
+        }
+        .alert("Delete Event", isPresented: $showDeleteAlert) {
+            Button("Cancel", role: .cancel) {}
+            Button("Delete", role: .destructive) {
+                deleteEvent()
+            }
+        } message: {
+            Text("Are you sure you want to delete this event? This action cannot be undone.")
+        }
+        .overlay {
+            if isDeleting {
+                Color.black.opacity(0.3)
+                    .ignoresSafeArea()
+                    .overlay(
+                        ProgressView("Deleting...")
+                            .padding()
+                            .background(.regularMaterial)
+                            .cornerRadius(12)
+                    )
             }
         }
         .sheet(isPresented: $showRSVP) {
@@ -102,10 +135,23 @@ struct EventDetailView: View {
     private var headerImage: some View {
         Group {
             if let imageURL = gathering.imageURL {
-                AsyncImage(url: URL(string: imageURL)) { image in
-                    image.resizable().scaledToFill()
-                } placeholder: {
-                    headerPlaceholder
+                // Handle both local file paths and remote URLs
+                if imageURL.hasPrefix("/") {
+                    // Local file path - use Image from UIImage
+                    if let uiImage = UIImage(contentsOfFile: imageURL) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                    } else {
+                        headerPlaceholder
+                    }
+                } else {
+                    // Remote URL
+                    AsyncImage(url: URL(string: imageURL)) { image in
+                        image.resizable().scaledToFill()
+                    } placeholder: {
+                        headerPlaceholder
+                    }
                 }
             } else {
                 headerPlaceholder
@@ -633,6 +679,24 @@ struct EventDetailView: View {
         if let lat = gathering.latitude, let lng = gathering.longitude {
             let url = URL(string: "maps://?daddr=\(lat),\(lng)")!
             UIApplication.shared.open(url)
+        }
+    }
+
+    private func deleteEvent() {
+        isDeleting = true
+        Task {
+            do {
+                try await GatheringService.shared.deleteGathering(gatheringId: gathering.id)
+                await MainActor.run {
+                    isDeleting = false
+                    dismiss()
+                }
+            } catch {
+                await MainActor.run {
+                    isDeleting = false
+                    print("Error deleting event: \(error)")
+                }
+            }
         }
     }
 }
