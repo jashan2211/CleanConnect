@@ -799,15 +799,78 @@ struct VideoPlayerSheet: View {
 
     var body: some View {
         NavigationStack {
-            YouTubePlayerView(videoURL: videoURL, autoplay: true)
-                .ignoresSafeArea()
-                .navigationTitle("Video Proof")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button("Done") { dismiss() }
+            VStack(spacing: 24) {
+                Spacer()
+
+                // YouTube thumbnail
+                if let thumbnailURL = thumbnailURL {
+                    AsyncImage(url: thumbnailURL) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(16/9, contentMode: .fit)
+                            .cornerRadius(12)
+                    } placeholder: {
+                        Rectangle()
+                            .fill(Color.black)
+                            .aspectRatio(16/9, contentMode: .fit)
+                            .cornerRadius(12)
+                            .overlay(ProgressView().tint(.white))
                     }
+                    .padding(.horizontal)
                 }
+
+                // Open in YouTube button
+                Button {
+                    openInYouTube()
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "play.rectangle.fill")
+                            .font(.title2)
+                        Text("Watch on YouTube")
+                            .font(.headline)
+                    }
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 16)
+                    .background(Color.red)
+                    .cornerRadius(12)
+                }
+                .padding(.horizontal)
+
+                Text("Videos open in the YouTube app for the best viewing experience")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+
+                Spacer()
+            }
+            .navigationTitle("Video Proof")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") { dismiss() }
+                }
+            }
+        }
+    }
+
+    private var thumbnailURL: URL? {
+        guard let id = videoURL.youTubeVideoId else { return nil }
+        return URL(string: "https://img.youtube.com/vi/\(id)/hqdefault.jpg")
+    }
+
+    private func openInYouTube() {
+        guard let videoId = videoURL.youTubeVideoId else { return }
+
+        // Try YouTube app first, then Safari
+        let youtubeAppURL = URL(string: "youtube://\(videoId)")
+        let youtubeWebURL = URL(string: "https://www.youtube.com/watch?v=\(videoId)")
+
+        if let appURL = youtubeAppURL, UIApplication.shared.canOpenURL(appURL) {
+            UIApplication.shared.open(appURL)
+        } else if let webURL = youtubeWebURL {
+            UIApplication.shared.open(webURL)
         }
     }
 }

@@ -8,6 +8,8 @@ struct ProfileView: View {
     @EnvironmentObject var userState: UserState
     @State private var showSettings = false
     @State private var showEditProfile = false
+    @State private var userPosts: [Post] = []
+    @State private var isLoadingPosts = false
 
     var body: some View {
         NavigationStack {
@@ -32,6 +34,9 @@ struct ProfileView: View {
 
                     // Badges
                     badgesSection
+
+                    // My Posts
+                    myPostsSection
 
                     // Recent activity
                     recentActivitySection
@@ -317,6 +322,82 @@ struct ProfileView: View {
         }
     }
 
+    // MARK: - My Posts Section
+
+    private var myPostsSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text("My Posts")
+                    .font(.headline)
+                Spacer()
+                if !userPosts.isEmpty {
+                    NavigationLink(destination: AllUserPostsView(posts: userPosts)) {
+                        Text("See All")
+                            .font(.caption)
+                            .foregroundColor(.green)
+                    }
+                }
+            }
+
+            if isLoadingPosts {
+                HStack {
+                    Spacer()
+                    ProgressView()
+                        .padding()
+                    Spacer()
+                }
+            } else if userPosts.isEmpty {
+                VStack(spacing: 12) {
+                    Image(systemName: "leaf")
+                        .font(.largeTitle)
+                        .foregroundColor(.gray.opacity(0.5))
+                    Text("No posts yet")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    Text("Share your first cleanup!")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 24)
+            } else {
+                // Show preview of first 3 posts
+                ForEach(userPosts.prefix(3)) { post in
+                    NavigationLink(destination: PostDetailView(post: post)) {
+                        MyPostRow(post: post)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
+        .padding()
+        .background(Color.gray.opacity(0.05))
+        .cornerRadius(12)
+        .onAppear {
+            loadUserPosts()
+        }
+    }
+
+    private func loadUserPosts() {
+        guard let userId = userState.currentUser?.id else { return }
+        isLoadingPosts = true
+
+        Task {
+            do {
+                let posts = try await FirestoreService.shared.getUserPosts(userId: userId)
+                await MainActor.run {
+                    self.userPosts = posts
+                    self.isLoadingPosts = false
+                }
+            } catch {
+                print("Error loading user posts: \(error)")
+                await MainActor.run {
+                    self.isLoadingPosts = false
+                }
+            }
+        }
+    }
+
     private var recentActivitySection: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Recent Activity")
@@ -407,6 +488,104 @@ struct ImpactStatCard: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(color.opacity(0.1))
         .cornerRadius(10)
+    }
+}
+
+// MARK: - My Post Row
+
+struct MyPostRow: View {
+    let post: Post
+
+    var body: some View {
+        HStack(spacing: 12) {
+            // Thumbnail or placeholder
+            if let imageURL = post.afterImageURL ?? post.beforeImageURL {
+                AsyncImage(url: URL(string: imageURL)) { image in
+                    image.resizable().scaledToFill()
+                } placeholder: {
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.2))
+                        .overlay(ProgressView())
+                }
+                .frame(width: 60, height: 60)
+                .cornerRadius(8)
+            } else {
+                Rectangle()
+                    .fill(Color.green.opacity(0.1))
+                    .frame(width: 60, height: 60)
+                    .cornerRadius(8)
+                    .overlay(
+                        Image(systemName: "leaf.fill")
+                            .foregroundColor(.green)
+                    )
+            }
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(post.description.isEmpty ? "Cleanup post" : post.description)
+                    .font(.subheadline)
+                    .lineLimit(2)
+
+                HStack(spacing: 12) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "arrow.up")
+                            .font(.caption2)
+                        Text("\(post.communityVotes)")
+                            .font(.caption)
+                    }
+                    .foregroundColor(.orange)
+
+                    HStack(spacing: 4) {
+                        Image(systemName: "trash.fill")
+                            .font(.caption2)
+                        Text("\(String(format: "%.1f", post.wasteCollectedKg)) kg")
+                            .font(.caption)
+                    }
+                    .foregroundColor(.secondary)
+
+                    if post.tipsReceived > 0 {
+                        HStack(spacing: 4) {
+                            Image(systemName: "indianrupeesign.circle.fill")
+                                .font(.caption2)
+                            Text("₹\(post.tipsReceived)")
+                                .font(.caption)
+                        }
+                        .foregroundColor(.green)
+                    }
+                }
+            }
+
+            Spacer()
+
+            VStack(alignment: .trailing, spacing: 4) {
+                Text(post.createdAt.timeAgo())
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+
+                if post.hasVideoProof {
+                    Image(systemName: "checkmark.seal.fill")
+                        .font(.caption)
+                        .foregroundColor(.green)
+                }
+            }
+        }
+        .padding(.vertical, 8)
+    }
+}
+
+// MARK: - All User Posts View
+
+struct AllUserPostsView: View {
+    let posts: [Post]
+
+    var body: some View {
+        List(posts) { post in
+            NavigationLink(destination: PostDetailView(post: post)) {
+                MyPostRow(post: post)
+            }
+        }
+        .listStyle(.plain)
+        .navigationTitle("My Posts")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

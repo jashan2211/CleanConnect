@@ -11,11 +11,19 @@ struct PostDetailView: View {
     @State private var showTipSheet = false
     @State private var showFullMap = false
     @State private var showDeleteAlert = false
+    @State private var showDeletePostAlert = false
     @State private var commentToDelete: Comment?
+    @State private var isDeleting = false
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var userState: UserState
 
     init(post: Post) {
         self.post = post
         _viewModel = StateObject(wrappedValue: PostDetailViewModel(postId: post.id))
+    }
+
+    private var isOwnPost: Bool {
+        userState.currentUser?.id == post.userId
     }
 
     var body: some View {
@@ -61,12 +69,40 @@ struct PostDetailView: View {
                     Button(action: {}) {
                         Label("Share", systemImage: "square.and.arrow.up")
                     }
-                    Button(action: {}) {
-                        Label("Report", systemImage: "flag")
+
+                    if isOwnPost {
+                        Divider()
+                        Button(role: .destructive, action: { showDeletePostAlert = true }) {
+                            Label("Delete Post", systemImage: "trash")
+                        }
+                    } else {
+                        Button(action: {}) {
+                            Label("Report", systemImage: "flag")
+                        }
                     }
                 } label: {
                     Image(systemName: "ellipsis.circle")
                 }
+            }
+        }
+        .alert("Delete Post", isPresented: $showDeletePostAlert) {
+            Button("Cancel", role: .cancel) {}
+            Button("Delete", role: .destructive) {
+                deletePost()
+            }
+        } message: {
+            Text("Are you sure you want to delete this post? This action cannot be undone.")
+        }
+        .overlay {
+            if isDeleting {
+                Color.black.opacity(0.3)
+                    .ignoresSafeArea()
+                    .overlay(
+                        ProgressView("Deleting...")
+                            .padding()
+                            .background(.regularMaterial)
+                            .cornerRadius(12)
+                    )
             }
         }
         .sheet(isPresented: $showTipSheet) {
@@ -287,6 +323,24 @@ struct PostDetailView: View {
         Task {
             await viewModel.addComment(newComment)
             newComment = ""
+        }
+    }
+
+    private func deletePost() {
+        isDeleting = true
+        Task {
+            do {
+                try await PostService.shared.deletePost(postId: post.id)
+                await MainActor.run {
+                    isDeleting = false
+                    dismiss()
+                }
+            } catch {
+                await MainActor.run {
+                    isDeleting = false
+                    print("Error deleting post: \(error)")
+                }
+            }
         }
     }
 }
