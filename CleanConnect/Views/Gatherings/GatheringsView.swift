@@ -103,7 +103,7 @@ struct EventCard: View {
         VStack(alignment: .leading, spacing: 12) {
             // Header image
             if let imageURL = gathering.imageURL {
-                AsyncImage(url: URL(string: imageURL)) { image in
+                SmartAsyncImage(url: imageURL) { image in
                     image.resizable().scaledToFill()
                 } placeholder: {
                     Rectangle()

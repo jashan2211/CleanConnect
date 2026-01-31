@@ -79,7 +79,7 @@ class WatchSyncService: NSObject {
                 try session.updateApplicationContext(context)
                 lastSyncDate = Date()
             } catch {
-                print("Error syncing to watch: \(error)")
+                // Silently fail watch sync
             }
         }
     }
@@ -92,8 +92,8 @@ class WatchSyncService: NSObject {
             "streak": streak
         ]
 
-        session.sendMessage(message, replyHandler: nil) { error in
-            print("Error sending streak update: \(error.localizedDescription)")
+        session.sendMessage(message, replyHandler: nil) { _ in
+            // Silently fail
         }
     }
 
@@ -106,8 +106,8 @@ class WatchSyncService: NSObject {
             "message": message
         ]
 
-        session.sendMessage(data, replyHandler: nil) { error in
-            print("Error sending achievement: \(error.localizedDescription)")
+        session.sendMessage(data, replyHandler: nil) { _ in
+            // Silently fail
         }
     }
 }

@@ -6,11 +6,16 @@ import CoreLocation
 
 @MainActor
 class LocationManager: NSObject, ObservableObject {
+    static let shared = LocationManager()
+
     @Published var location: CLLocation?
     @Published var isLoading = false
     @Published var error: String?
 
     private let manager = CLLocationManager()
+
+    // Alias for compatibility
+    var lastLocation: CLLocation? { location }
 
     override init() {
         super.init()

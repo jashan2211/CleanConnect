@@ -8,6 +8,7 @@ struct ProfileView: View {
     @EnvironmentObject var userState: UserState
     @State private var showSettings = false
     @State private var showEditProfile = false
+    @State private var showWallet = false
     @State private var userPosts: [Post] = []
     @State private var isLoadingPosts = false
 
@@ -390,7 +391,6 @@ struct ProfileView: View {
                     self.isLoadingPosts = false
                 }
             } catch {
-                print("Error loading user posts: \(error)")
                 await MainActor.run {
                     self.isLoadingPosts = false
                 }
@@ -414,7 +414,21 @@ struct ProfileView: View {
             MenuItem(icon: "bookmark.fill", title: "Saved Posts", color: .blue) {}
             MenuItem(icon: "person.2.fill", title: "My Squad", color: .purple) {}
             MenuItem(icon: "calendar", title: "My Events", color: .orange) {}
-            MenuItem(icon: "creditcard.fill", title: "Wallet & Payments", color: .green) {}
+            NavigationLink(destination: WalletView()) {
+                HStack(spacing: 12) {
+                    Image(systemName: "creditcard.fill")
+                        .font(.title3)
+                        .foregroundColor(.green)
+                        .frame(width: 30)
+                    Text("Wallet & Payments")
+                        .foregroundColor(.primary)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                .padding()
+            }
             MenuItem(icon: "gift.fill", title: "Refer & Earn", color: .pink) {}
             MenuItem(icon: "questionmark.circle.fill", title: "Help & Support", color: .gray) {}
         }

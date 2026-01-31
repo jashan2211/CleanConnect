@@ -12,10 +12,18 @@ class FeedViewModel: ObservableObject {
     @Published var errorMessage: String?
 
     // Current filter and sort settings
-    private var currentFilter: FeedView.PostFilter = .all
-    private var currentSort: FeedView.SortOption = .hot
+    private var currentFilter: PostFilter = .all
+    private var currentSort: SortOption = .hot
     private var currentTimeRange: TimeRange = .all
     private var lastPostId: String?
+
+    enum PostFilter {
+        case all, myState, myDistrict, following, verified
+    }
+
+    enum SortOption {
+        case hot, new, topDay, topWeek, mostTipped
+    }
 
     enum TimeRange: String, CaseIterable {
         case day = "day"
@@ -152,7 +160,6 @@ class FeedViewModel: ObservableObject {
                 hasMorePosts = newPosts.count >= 20
                 #endif
             } catch {
-                print("Error loading posts: \(error)")
                 errorMessage = error.localizedDescription
             }
             isLoading = false
@@ -180,7 +187,7 @@ class FeedViewModel: ObservableObject {
                 lastPostId = result.lastPostId
                 #endif
             } catch {
-                print("Error loading more posts: \(error)")
+                // Silently fail pagination
             }
             isLoading = false
         }
@@ -216,35 +223,24 @@ class FeedViewModel: ObservableObject {
             hasMorePosts = newPosts.count >= 20
             #endif
         } catch {
-            print("Error refreshing: \(error)")
+            // Silently fail refresh
         }
     }
 
     // MARK: - Filters & Sorting
 
-    func applyFilter(_ filter: FeedView.PostFilter) {
+    func applyFilter(_ filter: PostFilter) {
         currentFilter = filter
-        refresh()
-    }
-
-    func applySort(_ sort: FeedView.SortOption) {
-        currentSort = sort
-
-        // Adjust time range based on sort option
-        switch sort {
-        case .topDay:
-            currentTimeRange = .day
-        case .topWeek:
-            currentTimeRange = .week
-        default:
-            break // Keep current time range
-        }
-
         refresh()
     }
 
     func applyTimeRange(_ timeRange: TimeRange) {
         currentTimeRange = timeRange
+        refresh()
+    }
+
+    func applySort(_ sort: SortOption) {
+        currentSort = sort
         refresh()
     }
 
@@ -260,7 +256,6 @@ class FeedViewModel: ObservableObject {
                 posts[index].communityDownvotes = result.communityDownvotes
             }
         } catch {
-            print("Error voting: \(error)")
             errorMessage = "Failed to register vote"
         }
     }
@@ -275,7 +270,6 @@ class FeedViewModel: ObservableObject {
             posts.removeAll { $0.id == post.id }
             return true
         } catch {
-            print("Error deleting post: \(error)")
             errorMessage = "Failed to delete post"
             return false
         }

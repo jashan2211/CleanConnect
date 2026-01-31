@@ -694,7 +694,6 @@ struct EventDetailView: View {
             } catch {
                 await MainActor.run {
                     isDeleting = false
-                    print("Error deleting event: \(error)")
                 }
             }
         }

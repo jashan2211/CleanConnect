@@ -1,5 +1,5 @@
 // DiscoverView.swift
-// Central hub for discovering features: Leaderboards, Pollution Map, Badges, Live Events
+// Central hub for discovering features and community events
 // iOS 17+ with modern SwiftUI patterns - 2026
 
 import SwiftUI
@@ -11,51 +11,45 @@ struct DiscoverView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    // Cleanup Jobs - Featured
-                    cleanupJobsSection
+                    // Featured: Upcoming Events
+                    upcomingEventsSection
 
-                    // Featured section - Live Events
-                    liveEventsSection
-
-                    // Main feature cards
-                    featureCardsSection
-
-                    // Quick Stats
-                    communityStatsSection
+                    // Coming Soon features
+                    comingSoonSection
                 }
                 .padding()
             }
             .navigationTitle("Discover")
-            .searchable(text: $searchText, prompt: "Search features...")
+            .searchable(text: $searchText, prompt: "Search...")
         }
     }
 
-    // MARK: - Cleanup Jobs Section
+    // MARK: - Upcoming Events Section
 
-    private var cleanupJobsSection: some View {
+    private var upcomingEventsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 HStack(spacing: 6) {
-                    Image(systemName: "briefcase.fill")
+                    Image(systemName: "calendar.badge.clock")
                         .foregroundColor(.green)
-                    Text("Cleanup Jobs")
+                    Text("Cleanup Events")
                         .font(.headline)
                 }
 
                 Spacer()
 
                 NavigationLink {
-                    JobsMapView()
+                    GatheringsView()
                 } label: {
-                    Text("View Map")
+                    Text("View All")
                         .font(.subheadline)
                         .foregroundColor(.green)
                 }
             }
 
-            // Jobs preview card
+            // Events preview card
             NavigationLink {
-                JobsMapView()
+                GatheringsView()
             } label: {
                 ZStack(alignment: .bottomLeading) {
                     LinearGradient(
@@ -64,7 +58,7 @@ struct DiscoverView: View {
                         endPoint: .bottomTrailing
                     )
 
-                    // Map pattern overlay
+                    // Decorative pattern
                     GeometryReader { geo in
                         Path { path in
                             for i in stride(from: 0, to: geo.size.width, by: 30) {
@@ -79,19 +73,19 @@ struct DiscoverView: View {
                         .stroke(Color.white.opacity(0.1), lineWidth: 1)
                     }
 
-                    // Map pins decoration
+                    // Calendar icons decoration
                     HStack {
                         Spacer()
                         VStack(spacing: 20) {
-                            Image(systemName: "mappin.circle.fill")
+                            Image(systemName: "person.3.fill")
                                 .font(.title)
                                 .foregroundColor(.white.opacity(0.4))
                                 .offset(x: -20)
-                            Image(systemName: "mappin.circle.fill")
+                            Image(systemName: "leaf.fill")
                                 .font(.title2)
                                 .foregroundColor(.white.opacity(0.3))
                                 .offset(x: 10)
-                            Image(systemName: "mappin.circle.fill")
+                            Image(systemName: "hands.sparkles.fill")
                                 .font(.title3)
                                 .foregroundColor(.white.opacity(0.25))
                                 .offset(x: -30)
@@ -103,9 +97,9 @@ struct DiscoverView: View {
                         Spacer()
 
                         HStack(spacing: 6) {
-                            Image(systemName: "hand.raised.fill")
+                            Image(systemName: "sparkles")
                                 .font(.caption)
-                            Text("Earn rewards")
+                            Text("Join the movement")
                                 .font(.caption.bold())
                         }
                         .foregroundColor(.white)
@@ -114,23 +108,22 @@ struct DiscoverView: View {
                         .background(Color.black.opacity(0.3))
                         .cornerRadius(4)
 
-                        Text("Find cleanup jobs near you")
+                        Text("Community Cleanup Events")
                             .font(.title3.weight(.bold))
                             .foregroundColor(.white)
 
-                        Text("Complete jobs, post proof, earn points & tips")
+                        Text("Join or organize cleanup drives in your area")
                             .font(.caption)
                             .foregroundColor(.white.opacity(0.9))
 
-                        // Quick stats
                         HStack(spacing: 16) {
                             HStack(spacing: 4) {
-                                Image(systemName: "briefcase.fill")
-                                Text("24 jobs nearby")
+                                Image(systemName: "calendar")
+                                Text("Upcoming events")
                             }
                             HStack(spacing: 4) {
                                 Image(systemName: "star.fill")
-                                Text("Up to 150 pts")
+                                Text("Earn points")
                             }
                         }
                         .font(.caption2)
@@ -146,239 +139,78 @@ struct DiscoverView: View {
         }
     }
 
-    // MARK: - Live Events Section
+    // MARK: - Coming Soon Section
 
-    private var liveEventsSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                HStack(spacing: 6) {
-                    Circle()
-                        .fill(Color.red)
-                        .frame(width: 8, height: 8)
-                    Text("Live Now")
-                        .font(.headline)
-                }
-
-                Spacer()
-
-                NavigationLink {
-                    OngoingEventsView()
-                } label: {
-                    Text("See All")
-                        .font(.subheadline)
-                        .foregroundColor(.green)
-                }
-            }
-
-            // Live event preview card
-            NavigationLink {
-                OngoingEventsView()
-            } label: {
-                ZStack(alignment: .bottomLeading) {
-                    LinearGradient(
-                        colors: [Color.red.opacity(0.8), Color.orange.opacity(0.6)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-
-                    VStack(alignment: .leading, spacing: 8) {
-                        Spacer()
-
-                        HStack(spacing: 6) {
-                            Circle()
-                                .fill(Color.white)
-                                .frame(width: 6, height: 6)
-                            Text("LIVE")
-                                .font(.caption.bold())
-                                .foregroundColor(.white)
-                        }
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(Color.red)
-                        .cornerRadius(4)
-
-                        Text("Watch cleanup events as they happen")
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundColor(.white)
-
-                        Text("See real-time progress from events across India")
-                            .font(.caption)
-                            .foregroundColor(.white.opacity(0.8))
-                    }
-                    .padding()
-                }
-                .frame(height: 140)
-                .cornerRadius(16)
-            }
-            .buttonStyle(.plain)
-        }
-    }
-
-    // MARK: - Feature Cards
-
-    private var featureCardsSection: some View {
+    private var comingSoonSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Explore")
-                .font(.headline)
-
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                // Leaderboards
-                NavigationLink {
-                    LeaderboardsView()
-                } label: {
-                    DiscoverFeatureCard(
-                        icon: "trophy.fill",
-                        title: "Leaderboards",
-                        subtitle: "Top contributors",
-                        color: .yellow,
-                        gradient: [.yellow, .orange]
-                    )
-                }
-
-                // Badges
-                NavigationLink {
-                    BadgesView()
-                } label: {
-                    DiscoverFeatureCard(
-                        icon: "medal.fill",
-                        title: "Badges",
-                        subtitle: "Your achievements",
-                        color: .purple,
-                        gradient: [.purple, .pink]
-                    )
-                }
-
-                // Pollution Map
-                NavigationLink {
-                    PollutionMapView()
-                } label: {
-                    DiscoverFeatureCard(
-                        icon: "map.fill",
-                        title: "Pollution Map",
-                        subtitle: "Report hotspots",
-                        color: .red,
-                        gradient: [.red, .orange]
-                    )
-                }
-
-                // Community Stats (placeholder for future)
-                NavigationLink {
-                    CommunityImpactView()
-                } label: {
-                    DiscoverFeatureCard(
-                        icon: "chart.bar.fill",
-                        title: "Impact",
-                        subtitle: "Community stats",
-                        color: .green,
-                        gradient: [.green, .teal]
-                    )
-                }
-            }
-        }
-    }
-
-    // MARK: - Community Stats Section
-
-    private var communityStatsSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Community Impact")
+            Text("Coming Soon")
                 .font(.headline)
 
             VStack(spacing: 12) {
-                HStack(spacing: 16) {
-                    DiscoverStatCard(
-                        icon: "leaf.fill",
-                        value: "2.5M",
-                        label: "kg waste collected",
-                        color: .green
-                    )
+                ComingSoonCard(
+                    icon: "trophy.fill",
+                    title: "Leaderboards",
+                    description: "Compete with top contributors across India",
+                    color: .yellow
+                )
 
-                    DiscoverStatCard(
-                        icon: "person.3.fill",
-                        value: "150K+",
-                        label: "volunteers",
-                        color: .blue
-                    )
-                }
+                ComingSoonCard(
+                    icon: "medal.fill",
+                    title: "Badges & Achievements",
+                    description: "Earn badges for your cleanup milestones",
+                    color: .purple
+                )
 
-                HStack(spacing: 16) {
-                    DiscoverStatCard(
-                        icon: "calendar.badge.checkmark",
-                        value: "12K",
-                        label: "events completed",
-                        color: .orange
-                    )
+                ComingSoonCard(
+                    icon: "map.fill",
+                    title: "Pollution Hotspot Map",
+                    description: "Report and track pollution in your area",
+                    color: .red
+                )
 
-                    DiscoverStatCard(
-                        icon: "indianrupeesign.circle.fill",
-                        value: "₹85L",
-                        label: "tips distributed",
-                        color: .purple
-                    )
-                }
+                ComingSoonCard(
+                    icon: "briefcase.fill",
+                    title: "Cleanup Jobs",
+                    description: "Find paid cleanup opportunities nearby",
+                    color: .blue
+                )
             }
         }
     }
 }
 
-// MARK: - Feature Card
+// MARK: - Coming Soon Card
 
-struct DiscoverFeatureCard: View {
+struct ComingSoonCard: View {
     let icon: String
     let title: String
-    let subtitle: String
-    let color: Color
-    let gradient: [Color]
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Image(systemName: icon)
-                .font(.title)
-                .foregroundColor(.white)
-                .frame(width: 44, height: 44)
-                .background(
-                    LinearGradient(colors: gradient, startPoint: .topLeading, endPoint: .bottomTrailing)
-                )
-                .cornerRadius(12)
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text(title)
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundColor(.primary)
-
-                Text(subtitle)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(16)
-    }
-}
-
-// MARK: - Impact Stat Card
-
-struct DiscoverStatCard: View {
-    let icon: String
-    let value: String
-    let label: String
+    let description: String
     let color: Color
 
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 16) {
             Image(systemName: icon)
                 .font(.title2)
                 .foregroundColor(color)
-                .frame(width: 40)
+                .frame(width: 44, height: 44)
+                .background(color.opacity(0.15))
+                .cornerRadius(12)
 
-            VStack(alignment: .leading, spacing: 2) {
-                Text(value)
-                    .font(.headline)
-                    .foregroundColor(.primary)
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text(title)
+                        .font(.subheadline.weight(.semibold))
 
-                Text(label)
+                    Text("SOON")
+                        .font(.caption2.bold())
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(Color.gray)
+                        .cornerRadius(4)
+                }
+
+                Text(description)
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -386,140 +218,8 @@ struct DiscoverStatCard: View {
             Spacer()
         }
         .padding()
-        .frame(maxWidth: .infinity)
-        .background(color.opacity(0.1))
+        .background(Color(.secondarySystemBackground))
         .cornerRadius(12)
-    }
-}
-
-// MARK: - Community Impact View
-
-struct CommunityImpactView: View {
-    var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                // Header stats
-                VStack(spacing: 8) {
-                    Text("2,500,000")
-                        .font(.system(size: 48, weight: .bold, design: .rounded))
-                        .foregroundColor(.green)
-
-                    Text("kg of waste collected")
-                        .font(.headline)
-                        .foregroundColor(.secondary)
-
-                    Text("by our amazing community")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-                .padding(.top, 20)
-
-                // Stats grid
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                    BigStatCard(value: "150,000+", label: "Active Volunteers", icon: "person.3.fill", color: .blue)
-                    BigStatCard(value: "12,000+", label: "Events Completed", icon: "calendar.badge.checkmark", color: .orange)
-                    BigStatCard(value: "500+", label: "Districts Covered", icon: "map.fill", color: .purple)
-                    BigStatCard(value: "₹85L+", label: "Tips Distributed", icon: "indianrupeesign.circle.fill", color: .green)
-                }
-                .padding(.horizontal)
-
-                // Monthly trend
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Monthly Growth")
-                        .font(.headline)
-
-                    HStack(alignment: .bottom, spacing: 8) {
-                        ForEach(0..<12, id: \.self) { month in
-                            VStack(spacing: 4) {
-                                RoundedRectangle(cornerRadius: 4)
-                                    .fill(Color.green.opacity(0.7 + Double(month) * 0.025))
-                                    .frame(width: 20, height: CGFloat(30 + month * 8))
-
-                                Text(["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"][month])
-                                    .font(.caption2)
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-                .padding()
-                .background(Color(.secondarySystemBackground))
-                .cornerRadius(16)
-                .padding(.horizontal)
-
-                // Top states
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Top Contributing States")
-                        .font(.headline)
-
-                    ForEach(topStates, id: \.0) { state, percentage in
-                        HStack {
-                            Text(state)
-                                .font(.subheadline)
-
-                            Spacer()
-
-                            ProgressView(value: percentage, total: 100)
-                                .frame(width: 100)
-                                .tint(.green)
-
-                            Text("\(Int(percentage))%")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                                .frame(width: 40, alignment: .trailing)
-                        }
-                    }
-                }
-                .padding()
-                .background(Color(.secondarySystemBackground))
-                .cornerRadius(16)
-                .padding(.horizontal)
-
-                Spacer(minLength: 50)
-            }
-        }
-        .navigationTitle("Community Impact")
-        .navigationBarTitleDisplayMode(.large)
-    }
-
-    private var topStates: [(String, Double)] {
-        [
-            ("Maharashtra", 22),
-            ("Karnataka", 18),
-            ("Tamil Nadu", 15),
-            ("Gujarat", 12),
-            ("Delhi NCR", 10),
-            ("Kerala", 8),
-            ("Others", 15)
-        ]
-    }
-}
-
-struct BigStatCard: View {
-    let value: String
-    let label: String
-    let icon: String
-    let color: Color
-
-    var body: some View {
-        VStack(spacing: 12) {
-            Image(systemName: icon)
-                .font(.title)
-                .foregroundColor(color)
-
-            Text(value)
-                .font(.title2.bold())
-
-            Text(label)
-                .font(.caption)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-        }
-        .frame(maxWidth: .infinity)
-        .padding()
-        .background(color.opacity(0.1))
-        .cornerRadius(16)
     }
 }
 

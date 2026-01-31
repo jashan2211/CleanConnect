@@ -193,7 +193,6 @@ struct EventSuppliesView: View {
                 supplies = try await FirestoreService.shared.getEventSupplies(eventId: event.id)
                 isLoading = false
             } catch {
-                print("Error loading supplies: \(error)")
                 isLoading = false
             }
         }
@@ -228,7 +227,7 @@ struct EventSuppliesView: View {
                         supplies.append(supply)
                     }
                 } catch {
-                    print("Error saving supply: \(error)")
+                    // Silently fail
                 }
             }
         }

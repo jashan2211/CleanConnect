@@ -55,7 +55,6 @@ class LeaderboardViewModel: ObservableObject {
                     entries = createSampleLeaderboard()
                 }
             } catch {
-                print("Error loading leaderboard: \(error)")
                 entries = createSampleLeaderboard()
             }
             isLoading = false

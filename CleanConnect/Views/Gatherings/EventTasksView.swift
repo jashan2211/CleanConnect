@@ -166,7 +166,6 @@ struct EventTasksView: View {
                 tasks = try await FirestoreService.shared.getEventTasks(eventId: event.id)
                 isLoading = false
             } catch {
-                print("Error loading tasks: \(error)")
                 isLoading = false
             }
         }
@@ -198,7 +197,7 @@ struct EventTasksView: View {
                 )
                 try await FirestoreService.shared.volunteerForTask(taskId: task.id, volunteer: volunteer)
             } catch {
-                print("Error volunteering for task: \(error)")
+                // Silently fail
             }
         }
     }
@@ -215,7 +214,7 @@ struct EventTasksView: View {
             do {
                 try await FirestoreService.shared.updateTaskStatus(taskId: task.id, status: .completed)
             } catch {
-                print("Error marking task complete: \(error)")
+                // Silently fail
             }
         }
     }

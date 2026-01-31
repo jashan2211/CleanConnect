@@ -24,7 +24,7 @@ class PostDetailViewModel: ObservableObject {
             do {
                 comments = try await PostService.shared.getComments(postId: postId)
             } catch {
-                print("Error loading comments: \(error)")
+                // Silently fail
             }
             isLoading = false
         }
@@ -45,7 +45,6 @@ class PostDetailViewModel: ObservableObject {
             )
             comments.insert(comment, at: 0) // Add to top
         } catch {
-            print("Error adding comment: \(error)")
             errorMessage = "Failed to add comment"
         }
     }
@@ -63,7 +62,6 @@ class PostDetailViewModel: ObservableObject {
             comments.removeAll { $0.id == comment.id }
             return true
         } catch {
-            print("Error deleting comment: \(error)")
             errorMessage = "Failed to delete comment"
             return false
         }

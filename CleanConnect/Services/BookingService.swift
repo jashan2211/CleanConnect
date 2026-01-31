@@ -126,7 +126,7 @@ class BookingService {
         )
 
         // Save review (would be in reviews directory)
-        print("Review created: \(review.id)")
+        try dataManager.save(review, to: "\(review.id).json", in: "reviews")
     }
 }
 

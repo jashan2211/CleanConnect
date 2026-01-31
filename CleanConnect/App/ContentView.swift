@@ -12,14 +12,14 @@ struct ContentView: View {
     enum Tab: String, CaseIterable {
         case events = "Events"
         case feed = "Feed"
-        case discover = "Discover"
+        case leaderboard = "Rankings"
         case profile = "Profile"
 
         var icon: String {
             switch self {
             case .events: return "calendar.badge.plus"
             case .feed: return "leaf.fill"
-            case .discover: return "sparkles"
+            case .leaderboard: return "trophy.fill"
             case .profile: return "person.circle.fill"
             }
         }
@@ -66,11 +66,11 @@ struct ContentView: View {
                 }
                 .tag(Tab.feed)
 
-            DiscoverView()
+            LeaderboardTabView()
                 .tabItem {
-                    Label(Tab.discover.rawValue, systemImage: Tab.discover.icon)
+                    Label(Tab.leaderboard.rawValue, systemImage: Tab.leaderboard.icon)
                 }
-                .tag(Tab.discover)
+                .tag(Tab.leaderboard)
 
             ProfileView()
                 .tabItem {

@@ -338,7 +338,6 @@ struct PostDetailView: View {
             } catch {
                 await MainActor.run {
                     isDeleting = false
-                    print("Error deleting post: \(error)")
                 }
             }
         }

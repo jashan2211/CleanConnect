@@ -58,12 +58,14 @@
 		F0001050 /* ProfileComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002050 /* ProfileComponents.swift */; };
 		F0001051 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002051 /* SettingsView.swift */; };
 		F0001052 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002052 /* EditProfileView.swift */; };
+		F0001053 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002053 /* WalletView.swift */; };
 		F0001060 /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002060 /* CachedAsyncImage.swift */; };
 		F0001061 /* InputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002061 /* InputValidation.swift */; };
 		F0001062 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002062 /* ConfettiView.swift */; };
 		F0001063 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002063 /* OnboardingView.swift */; };
 		F0001064 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002064 /* SkeletonView.swift */; };
 		F0001065 /* AccessibilityHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002065 /* AccessibilityHelpers.swift */; };
+		F0001066 /* SmartAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002066 /* SmartAsyncImage.swift */; };
 		F0001070 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002070 /* KeychainManager.swift */; };
 		F0001071 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002071 /* AuthenticationService.swift */; };
 		F0001072 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002072 /* SignInView.swift */; };
@@ -73,12 +75,7 @@
 		F0001081 /* EventTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002081 /* EventTasksView.swift */; };
 		F0001082 /* EventSuppliesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002082 /* EventSuppliesView.swift */; };
 		F0001090 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002090 /* DiscoverView.swift */; };
-		F0001091 /* LeaderboardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002091 /* LeaderboardsView.swift */; };
-		F0001092 /* PollutionMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002092 /* PollutionMapView.swift */; };
-		F0001093 /* BadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002093 /* BadgesView.swift */; };
-		F0001094 /* LiveStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002094 /* LiveStreamView.swift */; };
 		F0001095 /* CleanupJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002095 /* CleanupJob.swift */; };
-		F0001096 /* JobsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002096 /* JobsMapView.swift */; };
 		F0001097 /* ImpactDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002097 /* ImpactDashboardView.swift */; };
 		F0001098 /* WidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002098 /* WidgetViews.swift */; };
 		F0001099 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002099 /* LocalizationManager.swift */; };
@@ -87,6 +84,10 @@
 		F0001102 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002102 /* StorageService.swift */; };
 		F0001103 /* StripeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002103 /* StripeService.swift */; };
 		F0001104 /* CloudFunctionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002104 /* CloudFunctionsService.swift */; };
+		F0001105 /* CleanupRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002105 /* CleanupRequestService.swift */; };
+		F0001106 /* CleanupRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002106 /* CleanupRequestsView.swift */; };
+		F0001107 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = F0002107 /* PrivacyInfo.xcprivacy */; };
+		F0001108 /* LeaderboardTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0002108 /* LeaderboardTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -136,12 +137,14 @@
 		F0002050 /* ProfileComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComponents.swift; sourceTree = "<group>"; };
 		F0002051 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F0002052 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		F0002053 /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
 		F0002060 /* CachedAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
 		F0002061 /* InputValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidation.swift; sourceTree = "<group>"; };
 		F0002062 /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		F0002063 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		F0002064 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		F0002065 /* AccessibilityHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityHelpers.swift; sourceTree = "<group>"; };
+		F0002066 /* SmartAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartAsyncImage.swift; sourceTree = "<group>"; };
 		F0002070 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		F0002071 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		F0002072 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -151,12 +154,7 @@
 		F0002081 /* EventTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTasksView.swift; sourceTree = "<group>"; };
 		F0002082 /* EventSuppliesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSuppliesView.swift; sourceTree = "<group>"; };
 		F0002090 /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
-		F0002091 /* LeaderboardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardsView.swift; sourceTree = "<group>"; };
-		F0002092 /* PollutionMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionMapView.swift; sourceTree = "<group>"; };
-		F0002093 /* BadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesView.swift; sourceTree = "<group>"; };
-		F0002094 /* LiveStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamView.swift; sourceTree = "<group>"; };
 		F0002095 /* CleanupJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupJob.swift; sourceTree = "<group>"; };
-		F0002096 /* JobsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsMapView.swift; sourceTree = "<group>"; };
 		F0002097 /* ImpactDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactDashboardView.swift; sourceTree = "<group>"; };
 		F0002098 /* WidgetViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetViews.swift; sourceTree = "<group>"; };
 		F0002099 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
@@ -165,6 +163,10 @@
 		F0002102 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		F0002103 /* StripeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeService.swift; sourceTree = "<group>"; };
 		F0002104 /* CloudFunctionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunctionsService.swift; sourceTree = "<group>"; };
+		F0002105 /* CleanupRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupRequestService.swift; sourceTree = "<group>"; };
+		F0002106 /* CleanupRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupRequestsView.swift; sourceTree = "<group>"; };
+		F0002107 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		F0002108 /* LeaderboardTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,7 @@
 				F0004008 /* Extensions */,
 				F0002003 /* Assets.xcassets */,
 				F0002035 /* Info.plist */,
+				F0002107 /* PrivacyInfo.xcprivacy */,
 			);
 			path = CleanConnect;
 			sourceTree = "<group>";
@@ -250,7 +253,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		F0004005 /* Views */ = {
+			F0004005 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				F0004009 /* Auth */,
@@ -259,12 +262,9 @@
 				F0004012 /* Companies */,
 				F0004013 /* Profile */,
 				F0004016 /* Discover */,
-				F0004017 /* Leaderboards */,
-				F0004018 /* Map */,
-				F0004019 /* Badges */,
-				F0004020 /* Jobs */,
 				F0004021 /* Impact */,
 				F0004022 /* Widgets */,
+				F0004023 /* Leaderboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -287,6 +287,7 @@
 				F0002102 /* StorageService.swift */,
 				F0002103 /* StripeService.swift */,
 				F0002104 /* CloudFunctionsService.swift */,
+				F0002105 /* CleanupRequestService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -341,7 +342,6 @@
 				F0002080 /* EventForumView.swift */,
 				F0002081 /* EventTasksView.swift */,
 				F0002082 /* EventSuppliesView.swift */,
-				F0002094 /* LiveStreamView.swift */,
 			);
 			path = Gatherings;
 			sourceTree = "<group>";
@@ -363,6 +363,7 @@
 				F0002050 /* ProfileComponents.swift */,
 				F0002051 /* SettingsView.swift */,
 				F0002052 /* EditProfileView.swift */,
+				F0002053 /* WalletView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -390,6 +391,7 @@
 				F0002063 /* OnboardingView.swift */,
 				F0002064 /* SkeletonView.swift */,
 				F0002065 /* AccessibilityHelpers.swift */,
+				F0002066 /* SmartAsyncImage.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -398,40 +400,9 @@
 			isa = PBXGroup;
 			children = (
 				F0002090 /* DiscoverView.swift */,
+				F0002106 /* CleanupRequestsView.swift */,
 			);
 			path = Discover;
-			sourceTree = "<group>";
-		};
-		F0004017 /* Leaderboards */ = {
-			isa = PBXGroup;
-			children = (
-				F0002091 /* LeaderboardsView.swift */,
-			);
-			path = Leaderboards;
-			sourceTree = "<group>";
-		};
-		F0004018 /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				F0002092 /* PollutionMapView.swift */,
-			);
-			path = Map;
-			sourceTree = "<group>";
-		};
-		F0004019 /* Badges */ = {
-			isa = PBXGroup;
-			children = (
-				F0002093 /* BadgesView.swift */,
-			);
-			path = Badges;
-			sourceTree = "<group>";
-		};
-		F0004020 /* Jobs */ = {
-			isa = PBXGroup;
-			children = (
-				F0002096 /* JobsMapView.swift */,
-			);
-			path = Jobs;
 			sourceTree = "<group>";
 		};
 		F0004021 /* Impact */ = {
@@ -448,6 +419,14 @@
 				F0002098 /* WidgetViews.swift */,
 			);
 			path = Widgets;
+			sourceTree = "<group>";
+		};
+		F0004023 /* Leaderboard */ = {
+			isa = PBXGroup;
+			children = (
+				F0002108 /* LeaderboardTabView.swift */,
+			);
+			path = Leaderboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -515,6 +494,7 @@
 			files = (
 				F0001003 /* Assets.xcassets in Resources */,
 				781AD1022F28CD0D00681818 /* GoogleService-Info.plist in Resources */,
+				F0001107 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,12 +547,14 @@
 				F0001050 /* ProfileComponents.swift in Sources */,
 				F0001051 /* SettingsView.swift in Sources */,
 				F0001052 /* EditProfileView.swift in Sources */,
+				F0001053 /* WalletView.swift in Sources */,
 				F0001060 /* CachedAsyncImage.swift in Sources */,
 				F0001061 /* InputValidation.swift in Sources */,
 				F0001062 /* ConfettiView.swift in Sources */,
 				F0001063 /* OnboardingView.swift in Sources */,
 				F0001064 /* SkeletonView.swift in Sources */,
 				F0001065 /* AccessibilityHelpers.swift in Sources */,
+				F0001066 /* SmartAsyncImage.swift in Sources */,
 				F0001070 /* KeychainManager.swift in Sources */,
 				F0001071 /* AuthenticationService.swift in Sources */,
 				F0001072 /* SignInView.swift in Sources */,
@@ -582,12 +564,7 @@
 				F0001081 /* EventTasksView.swift in Sources */,
 				F0001082 /* EventSuppliesView.swift in Sources */,
 				F0001090 /* DiscoverView.swift in Sources */,
-				F0001091 /* LeaderboardsView.swift in Sources */,
-				F0001092 /* PollutionMapView.swift in Sources */,
-				F0001093 /* BadgesView.swift in Sources */,
-				F0001094 /* LiveStreamView.swift in Sources */,
 				F0001095 /* CleanupJob.swift in Sources */,
-				F0001096 /* JobsMapView.swift in Sources */,
 				F0001097 /* ImpactDashboardView.swift in Sources */,
 				F0001098 /* WidgetViews.swift in Sources */,
 				F0001099 /* LocalizationManager.swift in Sources */,
@@ -596,6 +573,9 @@
 				F0001102 /* StorageService.swift in Sources */,
 				F0001103 /* StripeService.swift in Sources */,
 				F0001104 /* CloudFunctionsService.swift in Sources */,
+				F0001105 /* CleanupRequestService.swift in Sources */,
+				F0001106 /* CleanupRequestsView.swift in Sources */,
+				F0001108 /* LeaderboardTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

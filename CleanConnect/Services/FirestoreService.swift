@@ -156,17 +156,27 @@ class FirestoreService {
     }
 
     func deleteGathering(gatheringId: String) async throws {
-        try await db.collection("gatherings").document(gatheringId).delete()
+        // Try to delete from Firestore - don't throw if it fails (might be local-only data)
+        do {
+            try await db.collection("gatherings").document(gatheringId).delete()
+        } catch {
+            // Continue - the event might only exist locally
+        }
 
         // Also delete related data (comments, supplies, tasks, RSVPs)
+        // These are best-effort - don't fail if they don't exist
         let collections = ["eventComments", "eventSupplies", "eventTasks", "eventRSVPs"]
         for collection in collections {
-            let snapshot = try await db.collection(collection)
-                .whereField("eventId", isEqualTo: gatheringId)
-                .getDocuments()
+            do {
+                let snapshot = try await db.collection(collection)
+                    .whereField("eventId", isEqualTo: gatheringId)
+                    .getDocuments()
 
-            for doc in snapshot.documents {
-                try await doc.reference.delete()
+                for doc in snapshot.documents {
+                    try? await doc.reference.delete()
+                }
+            } catch {
+                // Ignore errors for related data cleanup
             }
         }
     }

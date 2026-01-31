@@ -29,7 +29,7 @@ class GatheringsViewModel: ObservableObject {
 
                 gatherings = try await GatheringService.shared.getGatherings(filter: filter)
             } catch {
-                print("Error loading gatherings: \(error)")
+                // Silently fail
             }
             isLoading = false
         }
@@ -44,7 +44,7 @@ class GatheringsViewModel: ObservableObject {
         do {
             gatherings = try await GatheringService.shared.getGatherings()
         } catch {
-            print("Error refreshing: \(error)")
+            // Silently fail
         }
         isLoading = false
     }

@@ -8,98 +8,7 @@ class GatheringService {
     private let dataManager = LocalDataManager.shared
 
     private init() {
-        loadSampleDataIfNeeded()
-    }
-
-    private func loadSampleDataIfNeeded() {
-        let gatherings = (try? dataManager.loadAll(Gathering.self, from: "gatherings")) ?? []
-        if gatherings.isEmpty {
-            createSampleGatherings()
-        }
-    }
-
-    private func createSampleGatherings() {
-        let sampleGatherings = [
-            Gathering(
-                id: UUID().uuidString,
-                organizerId: "sample-user-1",
-                organizerName: "Rajesh Kumar",
-                organizerPhotoURL: nil,
-                title: "Weekend Beach Cleanup Drive",
-                description: "Join us for a community beach cleanup at Juhu! We'll provide gloves and bags. Let's make our beach beautiful again!",
-                imageURL: nil,
-                eventDate: Date().addingTimeInterval(86400 * 7),
-                endDate: nil,
-                durationHours: 3,
-                state: "Maharashtra",
-                district: "Mumbai",
-                address: "Juhu Beach, Near Food Court",
-                latitude: 19.0883,
-                longitude: 72.8264,
-                attendeesCount: 45,
-                maxAttendees: 100,
-                fundraisingGoal: 5000,
-                fundraisingRaised: 3200,
-                whatsappGroupLink: nil,
-                status: "upcoming",
-                createdAt: Date(),
-                updatedAt: nil
-            ),
-            Gathering(
-                id: UUID().uuidString,
-                organizerId: "sample-user-2",
-                organizerName: "Priya Sharma",
-                organizerPhotoURL: nil,
-                title: "Lodhi Garden Green Initiative",
-                description: "Monthly cleanup drive at Lodhi Garden. Families welcome! We'll also have a tree plantation activity.",
-                imageURL: nil,
-                eventDate: Date().addingTimeInterval(86400 * 14),
-                endDate: nil,
-                durationHours: 4,
-                state: "Delhi",
-                district: "South Delhi",
-                address: "Lodhi Garden Main Gate",
-                latitude: 28.5933,
-                longitude: 77.2190,
-                attendeesCount: 32,
-                maxAttendees: 50,
-                fundraisingGoal: 3000,
-                fundraisingRaised: 1500,
-                whatsappGroupLink: nil,
-                status: "upcoming",
-                createdAt: Date().addingTimeInterval(-86400),
-                updatedAt: nil
-            ),
-            Gathering(
-                id: UUID().uuidString,
-                organizerId: "sample-user-3",
-                organizerName: "Arjun Patel",
-                organizerPhotoURL: nil,
-                title: "Sabarmati River Cleanup",
-                description: "Large scale cleanup of Sabarmati Riverfront. Join hands to keep our river clean!",
-                imageURL: nil,
-                eventDate: Date().addingTimeInterval(86400 * 21),
-                endDate: nil,
-                durationHours: 5,
-                state: "Gujarat",
-                district: "Ahmedabad",
-                address: "Sabarmati Riverfront, East Bank",
-                latitude: 23.0225,
-                longitude: 72.5714,
-                attendeesCount: 78,
-                maxAttendees: 200,
-                fundraisingGoal: 10000,
-                fundraisingRaised: 6500,
-                whatsappGroupLink: nil,
-                status: "upcoming",
-                createdAt: Date().addingTimeInterval(-172800),
-                updatedAt: nil
-            )
-        ]
-
-        for gathering in sampleGatherings {
-            try? dataManager.save(gathering, to: "\(gathering.id).json", in: "gatherings")
-        }
+        // No sample data - users create their own events
     }
 
     func createGathering(
@@ -119,19 +28,33 @@ class GatheringService {
         }
 
         let userName = await UserState.shared.currentUser?.displayName ?? "Organizer"
+        let userPhotoURL = await UserState.shared.currentUser?.photoURL
         let gatheringId = UUID().uuidString
 
-        // Save image if provided
+        // Upload image to Firebase Storage if provided
         var imageURL: String?
         if let data = imageData {
-            imageURL = try? dataManager.saveImage(data, filename: "\(gatheringId)_cover.jpg")
+            // Save locally first for offline access
+            let localPath = try? dataManager.saveImage(data, filename: "\(gatheringId)_cover.jpg")
+
+            // Upload to Firebase Storage
+            #if canImport(FirebaseStorage)
+            do {
+                imageURL = try await StorageService.shared.uploadEventImage(data, eventId: gatheringId)
+            } catch {
+                // Fall back to local storage
+                imageURL = localPath
+            }
+            #else
+            imageURL = localPath
+            #endif
         }
 
         let gathering = Gathering(
             id: gatheringId,
             organizerId: userId,
             organizerName: userName,
-            organizerPhotoURL: nil,
+            organizerPhotoURL: userPhotoURL,
             title: title,
             description: description,
             imageURL: imageURL,
@@ -153,7 +76,17 @@ class GatheringService {
             updatedAt: nil
         )
 
+        // Save locally first
         try dataManager.save(gathering, to: "\(gatheringId).json", in: "gatherings")
+
+        // Sync to Firestore
+        #if canImport(FirebaseFirestore)
+        do {
+            try await FirestoreService.shared.saveGathering(gathering)
+        } catch {
+            // Continue with local storage only
+        }
+        #endif
 
         // Update user stats
         if var user = await UserState.shared.currentUser {
@@ -235,13 +168,19 @@ class GatheringService {
             throw GatheringError.notFound
         }
 
-        guard gathering.organizerId == userId else {
+        // Allow deletion if user is organizer OR if it's sample data (for testing)
+        let isSampleData = gathering.organizerId.hasPrefix("sample-")
+        guard gathering.organizerId == userId || isSampleData else {
             throw GatheringError.notAuthorized
         }
 
-        // Delete from Firebase if available
+        // Delete from Firebase if available (best effort - don't fail if Firestore fails)
         #if canImport(FirebaseFirestore)
-        try await FirestoreService.shared.deleteGathering(gatheringId: gatheringId)
+        do {
+            try await FirestoreService.shared.deleteGathering(gatheringId: gatheringId)
+        } catch {
+            // Continue with local deletion only
+        }
         #endif
 
         // Delete local file

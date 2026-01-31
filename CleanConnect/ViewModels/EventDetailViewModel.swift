@@ -21,7 +21,7 @@ class EventDetailViewModel: ObservableObject {
             do {
                 supplyRequests = try await GatheringService.shared.getSupplyRequests(gatheringId: gatheringId)
             } catch {
-                print("Error loading supplies: \(error)")
+                // Silently fail
             }
         }
     }
