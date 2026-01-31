@@ -245,7 +245,7 @@ class GatheringService {
         #endif
 
         // Delete local file
-        try dataManager.delete(from: "\(gatheringId).json", in: "gatherings")
+        try dataManager.delete(filename: "\(gatheringId).json", from: "gatherings")
 
         // Delete associated image if exists
         if let imageURL = gathering.imageURL, imageURL.hasPrefix("/") {
