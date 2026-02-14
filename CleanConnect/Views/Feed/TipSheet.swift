@@ -12,6 +12,8 @@ struct TipSheet: View {
     @State private var showSuccess = false
     @State private var showError = false
     @State private var errorMessage = ""
+    @State private var creatorCanReceive = false
+    @State private var isCheckingCreator = true
 
     let presetAmounts = [10, 50, 100, 500, 1000]
 
@@ -26,91 +28,98 @@ struct TipSheet: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    // AI Disclaimer Warning
-                    aiDisclaimerBanner
-
                     // Recipient info
                     recipientHeader
 
-                    // Verification status
-                    verificationStatusView
+                    if isCheckingCreator {
+                        ProgressView("Checking payment availability...")
+                            .padding(.vertical, 40)
+                    } else if !creatorCanReceive {
+                        tipsComingSoonBanner
+                    } else {
+                        // AI Disclaimer Warning
+                        aiDisclaimerBanner
 
-                    Divider()
+                        // Verification status
+                        verificationStatusView
 
-                    // Amount selection
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text("Select Amount")
-                            .font(.headline)
+                        Divider()
 
-                        // Preset amounts
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 12) {
-                            ForEach(presetAmounts, id: \.self) { amount in
-                                AmountButton(
-                                    amount: amount,
-                                    isSelected: selectedAmount == amount
-                                ) {
-                                    selectedAmount = amount
-                                    customAmount = ""
+                        // Amount selection
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text("Select Amount")
+                                .font(.headline)
+
+                            // Preset amounts
+                            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 12) {
+                                ForEach(presetAmounts, id: \.self) { amount in
+                                    AmountButton(
+                                        amount: amount,
+                                        isSelected: selectedAmount == amount
+                                    ) {
+                                        selectedAmount = amount
+                                        customAmount = ""
+                                    }
+                                }
+                            }
+
+                            // Custom amount
+                            HStack {
+                                Text("Custom")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                                HStack(spacing: 4) {
+                                    Text("₹")
+                                        .foregroundColor(.secondary)
+                                    TextField("Amount", text: $customAmount)
+                                        .keyboardType(.numberPad)
+                                        .frame(width: 80)
+                                        .textFieldStyle(.roundedBorder)
+                                        .onChange(of: customAmount) { _, _ in
+                                            selectedAmount = nil
+                                        }
                                 }
                             }
                         }
 
-                        // Custom amount
-                        HStack {
-                            Text("Custom")
-                                .font(.subheadline)
+                        // Payment breakdown
+                        if let amount = tipAmount, amount > 0 {
+                            paymentBreakdown(amount: amount)
+                        }
+
+                        Spacer()
+
+                        // Platform fee note
+                        VStack(spacing: 4) {
+                            Text("7% platform fee applies")
+                                .font(.caption)
                                 .foregroundColor(.secondary)
-                            Spacer()
-                            HStack(spacing: 4) {
-                                Text("₹")
-                                    .foregroundColor(.secondary)
-                                TextField("Amount", text: $customAmount)
-                                    .keyboardType(.numberPad)
-                                    .frame(width: 80)
-                                    .textFieldStyle(.roundedBorder)
-                                    .onChange(of: customAmount) { _, _ in
-                                        selectedAmount = nil
-                                    }
-                            }
+                            Text("Secure payment via Stripe (UPI, Cards, Net Banking)")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
                         }
-                    }
 
-                    // Payment breakdown
-                    if let amount = tipAmount, amount > 0 {
-                        paymentBreakdown(amount: amount)
-                    }
-
-                    Spacer()
-
-                    // Platform fee note
-                    VStack(spacing: 4) {
-                        Text("7% platform fee applies")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                        Text("Secure payment via Stripe (UPI, Cards, Net Banking)")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-
-                    // Pay button
-                    Button(action: processTip) {
-                        HStack {
-                            if isProcessing {
-                                ProgressView()
-                                    .tint(.white)
-                            } else {
-                                Image(systemName: "indianrupeesign.circle.fill")
-                                Text(tipAmount.map { "Pay ₹\($0)" } ?? "Select Amount")
+                        // Pay button
+                        Button(action: processTip) {
+                            HStack {
+                                if isProcessing {
+                                    ProgressView()
+                                        .tint(.white)
+                                } else {
+                                    Image(systemName: "indianrupeesign.circle.fill")
+                                    Text(tipAmount.map { "Pay ₹\($0)" } ?? "Select Amount")
+                                }
                             }
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(tipAmount != nil ? Color.green : Color.gray)
+                            .foregroundColor(.white)
+                            .cornerRadius(12)
+                            .fontWeight(.semibold)
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(tipAmount != nil ? Color.green : Color.gray)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
-                        .fontWeight(.semibold)
+                        .disabled(tipAmount == nil || isProcessing)
                     }
-                    .disabled(tipAmount == nil || isProcessing)
                 }
             }
             .padding()
@@ -131,7 +140,51 @@ struct TipSheet: View {
             } message: {
                 Text(errorMessage)
             }
+            .task {
+                await checkCreatorPaymentStatus()
+            }
         }
+    }
+
+    // MARK: - Tips Coming Soon Banner
+
+    private var tipsComingSoonBanner: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "gift.circle")
+                .font(.system(size: 60))
+                .foregroundStyle(
+                    LinearGradient(colors: [.orange, .pink], startPoint: .topLeading, endPoint: .bottomTrailing)
+                )
+
+            Text("Tips Coming Soon")
+                .font(.title3.bold())
+
+            Text("This creator hasn't set up their payment account yet. Once they do, you'll be able to send them tips to support their cleanup efforts.")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+
+            Button(action: { dismiss() }) {
+                Text("Got It")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.green)
+                    .foregroundColor(.white)
+                    .cornerRadius(12)
+            }
+            .padding(.top, 8)
+        }
+        .padding(.vertical, 40)
+    }
+
+    private func checkCreatorPaymentStatus() async {
+        if let user = try? await UserService.shared.getUser(userId: post.userId) {
+            creatorCanReceive = user.stripeAccountId != nil && (user.stripeOnboardingComplete ?? false)
+        } else {
+            creatorCanReceive = false
+        }
+        isCheckingCreator = false
     }
 
     private var aiDisclaimerBanner: some View {

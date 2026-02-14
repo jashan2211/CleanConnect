@@ -172,8 +172,7 @@ struct EventSuppliesView: View {
     }
 
     private var totalContributors: Int {
-        // Count unique contributors
-        10 // Mock value
+        supplies.filter { $0.fulfilledQuantity > 0 }.count
     }
 
     private func iconFor(_ category: SupplyCategory) -> String {

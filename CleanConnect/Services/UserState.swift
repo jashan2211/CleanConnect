@@ -79,10 +79,8 @@ class UserState: ObservableObject {
     }
 
     private func loadRecentActivity() {
-        // Load from local storage or show sample data
-        recentActivity = [
-            UserActivity(id: "1", type: .postCreated, title: "Ready to make an impact!", description: nil, timestamp: Date(), pointsEarned: 0, relatedId: nil)
-        ]
+        // No hardcoded activity - real activity comes from user actions
+        recentActivity = []
     }
 
     private func loadWallet(userId: String) {

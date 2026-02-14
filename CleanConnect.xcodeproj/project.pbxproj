@@ -91,6 +91,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		781AD1002F28CD0D00681818 /* CleanConnect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CleanConnect.entitlements; sourceTree = "<group>"; };
 		781AD1012F28CD0D00681818 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F0002000 /* CleanConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0002001 /* CleanConnectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanConnectApp.swift; sourceTree = "<group>"; };
@@ -206,6 +207,7 @@
 		F0004001 /* CleanConnect */ = {
 			isa = PBXGroup;
 			children = (
+				781AD1002F28CD0D00681818 /* CleanConnect.entitlements */,
 				781AD1012F28CD0D00681818 /* GoogleService-Info.plist */,
 				F0004003 /* App */,
 				F0004004 /* Models */,
@@ -706,9 +708,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CleanConnect/CleanConnect.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = F385ZL83XQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -741,9 +744,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CleanConnect/CleanConnect.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = F385ZL83XQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;

@@ -33,14 +33,18 @@ struct ProfileView: View {
                     // Level progress
                     levelProgress
 
-                    // Badges
-                    badgesSection
+                    // Badges (only show if user has earned some)
+                    if !userState.earnedBadges.isEmpty {
+                        badgesSection
+                    }
 
                     // My Posts
                     myPostsSection
 
-                    // Recent activity
-                    recentActivitySection
+                    // Recent activity (only show if there's real activity)
+                    if !userState.recentActivity.isEmpty {
+                        recentActivitySection
+                    }
 
                     // Menu items
                     menuSection
@@ -411,9 +415,6 @@ struct ProfileView: View {
 
     private var menuSection: some View {
         VStack(spacing: 0) {
-            MenuItem(icon: "bookmark.fill", title: "Saved Posts", color: .blue) {}
-            MenuItem(icon: "person.2.fill", title: "My Squad", color: .purple) {}
-            MenuItem(icon: "calendar", title: "My Events", color: .orange) {}
             NavigationLink(destination: WalletView()) {
                 HStack(spacing: 12) {
                     Image(systemName: "creditcard.fill")
@@ -429,8 +430,6 @@ struct ProfileView: View {
                 }
                 .padding()
             }
-            MenuItem(icon: "gift.fill", title: "Refer & Earn", color: .pink) {}
-            MenuItem(icon: "questionmark.circle.fill", title: "Help & Support", color: .gray) {}
         }
         .background(Color(.systemBackground))
         .cornerRadius(12)

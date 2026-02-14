@@ -134,6 +134,8 @@ struct AuthView: View {
             do {
                 try await authService.handleAppleSignIn(result: result)
                 await authManager.checkAuthStatus()
+            } catch AuthenticationError.cancelled {
+                // User cancelled, no error needed
             } catch {
                 errorMessage = error.localizedDescription
                 showError = true

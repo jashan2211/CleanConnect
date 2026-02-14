@@ -333,7 +333,7 @@ struct PostCard: View {
             Spacer()
 
             // Comments
-            Button(action: {}) {
+            NavigationLink(destination: PostDetailView(post: post)) {
                 HStack(spacing: 4) {
                     Image(systemName: "bubble.left")
                         .font(.subheadline)
@@ -346,7 +346,7 @@ struct PostCard: View {
             }
 
             // Share
-            Button(action: {}) {
+            ShareLink(item: "Check out this cleanup on CleanConnect: \(post.userName) collected \(String(format: "%.1f", post.wasteCollectedKg))kg of waste!") {
                 Image(systemName: "square.and.arrow.up")
                     .font(.subheadline)
                     .foregroundColor(.secondary)

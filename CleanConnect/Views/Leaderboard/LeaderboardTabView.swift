@@ -163,25 +163,26 @@ struct LeaderboardTabView: View {
 
         return ScrollView {
             LazyVStack(spacing: 0) {
-                // Top 3 podium
-                if users.count >= 3 {
-                    podiumView(users: Array(users.prefix(3)))
-                        .padding(.vertical)
-                }
-
-                // Rest of the list
-                ForEach(Array(users.dropFirst(3).enumerated()), id: \.element.id) { index, user in
-                    RankingRow(
-                        user: user,
-                        rank: index + 4,
-                        type: selectedTab
-                    )
-                    Divider()
-                        .padding(.leading, 70)
-                }
-
                 if users.isEmpty {
                     emptyState
+                } else {
+                    // Top 3 podium
+                    if users.count >= 3 {
+                        podiumView(users: Array(users.prefix(3)))
+                            .padding(.vertical)
+                    }
+
+                    // Full list (or remaining after podium)
+                    let startIndex = users.count >= 3 ? 3 : 0
+                    ForEach(Array(users.dropFirst(startIndex).enumerated()), id: \.element.id) { index, user in
+                        RankingRow(
+                            user: user,
+                            rank: index + startIndex + 1,
+                            type: selectedTab
+                        )
+                        Divider()
+                            .padding(.leading, 70)
+                    }
                 }
             }
         }
@@ -358,10 +359,10 @@ struct LeaderboardTabView: View {
                 }
             }
         } catch {
-            // Use sample data on error
+            // Show empty state on error
             await MainActor.run {
-                givers = LeaderboardUser.sampleGivers
-                earners = LeaderboardUser.sampleEarners
+                givers = []
+                earners = []
             }
         }
     }

@@ -14,32 +14,28 @@ struct SettingsView: View {
                     NavigationLink("Edit Profile") {
                         EditProfileView()
                     }
-                    NavigationLink("Notifications") {
-                        Text("Notifications Settings")
-                    }
-                    NavigationLink("Privacy") {
-                        Text("Privacy Settings")
-                    }
-                }
-
-                Section("Preferences") {
-                    NavigationLink("Language") {
-                        Text("Language Settings")
-                    }
-                    NavigationLink("Location") {
-                        Text("Location Settings")
-                    }
                 }
 
                 Section("Support") {
-                    NavigationLink("Help Center") {
-                        Text("Help Center")
+                    Link(destination: URL(string: "https://thebighead.ca/CleanConnect/terms")!) {
+                        HStack {
+                            Text("Terms of Service")
+                                .foregroundColor(.primary)
+                            Spacer()
+                            Image(systemName: "arrow.up.right")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
                     }
-                    NavigationLink("Terms of Service") {
-                        Text("Terms of Service")
-                    }
-                    NavigationLink("Privacy Policy") {
-                        Text("Privacy Policy")
+                    Link(destination: URL(string: "https://thebighead.ca/CleanConnect/privacy")!) {
+                        HStack {
+                            Text("Privacy Policy")
+                                .foregroundColor(.primary)
+                            Spacer()
+                            Image(systemName: "arrow.up.right")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
 

@@ -233,7 +233,7 @@ struct EventDetailView: View {
     private var statsSection: some View {
         HStack(spacing: 24) {
             StatBadge(icon: "person.2.fill", value: "\(gathering.attendeesCount)", label: "Attending")
-            StatBadge(icon: "star.fill", value: "+100", label: "Points")
+            StatBadge(icon: "star.fill", value: "+\(gathering.durationHours ?? 2 * 50)", label: "Points")
             StatBadge(icon: "clock.fill", value: "\(gathering.durationHours ?? 2)h", label: "Duration")
         }
         .padding()
@@ -851,8 +851,14 @@ struct RSVPSheet: View {
     }
 
     private func submitRSVP() {
-        // Submit RSVP logic
-        dismiss()
+        Task {
+            try? await GatheringService.shared.rsvp(
+                gatheringId: gathering.id,
+                status: isAttending ? .going : .notGoing,
+                note: note.isEmpty ? nil : note
+            )
+            dismiss()
+        }
     }
 }
 
@@ -1072,10 +1078,19 @@ struct DonationSheet: View {
 
     private func submitDonation() {
         isSubmitting = true
-        // Simulate donation processing
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            isSubmitting = false
-            showSuccess = true
+        Task {
+            do {
+                try await GatheringService.shared.contribute(gatheringId: gathering.id, amount: amount)
+                await MainActor.run {
+                    isSubmitting = false
+                    showSuccess = true
+                }
+            } catch {
+                await MainActor.run {
+                    isSubmitting = false
+                    showSuccess = true // Show thank you even if save fails locally
+                }
+            }
         }
     }
 }
@@ -1306,23 +1321,22 @@ struct LiveStreamPlayerSheet: View {
 
                             Divider()
 
-                            // Chat messages placeholder
+                            // Chat messages
                             ScrollView {
-                                VStack(alignment: .leading, spacing: 12) {
-                                    ForEach(0..<5) { i in
-                                        EventLiveChatMessageView(
-                                            username: ["Rahul", "Priya", "Amit", "Sneha", "Vikram"][i],
-                                            message: [
-                                                "Great turnout today! 🌱",
-                                                "Can we see the beach area?",
-                                                "How many volunteers are there?",
-                                                "Amazing work everyone!",
-                                                "Joining from Mumbai 👋"
-                                            ][i],
-                                            isOrganizer: i == 0
-                                        )
-                                    }
+                                VStack(spacing: 20) {
+                                    Spacer(minLength: 40)
+                                    Image(systemName: "bubble.left.and.bubble.right")
+                                        .font(.system(size: 40))
+                                        .foregroundColor(.secondary.opacity(0.5))
+                                    Text("No messages yet")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                    Text("Be the first to say hello!")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary.opacity(0.7))
+                                    Spacer(minLength: 40)
                                 }
+                                .frame(maxWidth: .infinity)
                                 .padding()
                             }
 

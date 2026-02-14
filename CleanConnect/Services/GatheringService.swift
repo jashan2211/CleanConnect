@@ -141,12 +141,7 @@ class GatheringService {
     }
 
     func getSupplyRequests(gatheringId: String) async throws -> [SupplyRequest] {
-        // Return sample supply requests
-        return [
-            SupplyRequest(id: "1", gatheringId: gatheringId, type: "gloves", name: "Cleaning Gloves", needed: 50, pledged: 30, pledges: nil),
-            SupplyRequest(id: "2", gatheringId: gatheringId, type: "bags", name: "Garbage Bags", needed: 100, pledged: 75, pledges: nil),
-            SupplyRequest(id: "3", gatheringId: gatheringId, type: "water", name: "Water Bottles", needed: 200, pledged: 120, pledges: nil)
-        ]
+        return []
     }
 
     func contribute(gatheringId: String, amount: Int) async throws {

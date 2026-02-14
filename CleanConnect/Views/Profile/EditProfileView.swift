@@ -16,17 +16,6 @@ struct EditProfileView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Profile Photo") {
-                    HStack {
-                        Spacer()
-                        Image(systemName: "person.circle.fill")
-                            .font(.system(size: 80))
-                            .foregroundColor(.gray)
-                        Spacer()
-                    }
-                    Button("Change Photo") {}
-                }
-
                 Section("Basic Info") {
                     TextField("Display Name", text: $displayName)
                     TextField("Bio", text: $bio, axis: .vertical)

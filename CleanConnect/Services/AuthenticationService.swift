@@ -11,6 +11,7 @@ import CryptoKit
 // MARK: - Firebase imports
 import FirebaseCore
 import FirebaseAuth
+import FirebaseFirestore
 import GoogleSignIn
 
 /// Production-ready authentication service
@@ -297,13 +298,28 @@ final class AuthenticationService: ObservableObject {
         guard let firebaseUser = Auth.auth().currentUser else {
             throw AuthenticationError.userNotFound
         }
+
+        // Delete user data from Firestore
+        let db = Firestore.firestore()
+        try? await db.collection("users").document(userId).delete()
+
+        // Delete user's posts
+        let posts = try? await db.collection("posts").whereField("userId", isEqualTo: userId).getDocuments()
+        for doc in posts?.documents ?? [] {
+            try? await doc.reference.delete()
+        }
+
+        // Delete user's tips
+        let tips = try? await db.collection("tips").whereField("senderId", isEqualTo: userId).getDocuments()
+        for doc in tips?.documents ?? [] {
+            try? await doc.reference.delete()
+        }
+
+        // Delete Firebase Auth account
         try await firebaseUser.delete()
 
         // Delete local data
         try? dataManager.delete(filename: "\(userId).json", from: "users")
-
-        // Delete all user-related data
-        // Posts, comments, bookings, etc.
 
         await signOut()
     }
