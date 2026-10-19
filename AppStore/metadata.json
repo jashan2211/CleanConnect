@@ -1,0 +1,57 @@
+{
+  "app": {
+    "bundleId": "ca.thebighead.cleanconnect",
+    "appStoreId": "6758537635",
+    "version": "2.0.0",
+    "primaryCategory": "LIFESTYLE",
+    "secondaryCategory": "SOCIAL_NETWORKING",
+    "copyright": "2026 Jashandeep Singh",
+    "supportUrl": "https://thebighead.ca/cleanconnect/support",
+    "marketingUrl": "https://thebighead.ca/cleanconnect",
+    "privacyPolicyUrl": "https://thebighead.ca/cleanconnect/privacy",
+    "resetRatingSummary": true
+  },
+  "localizations": {
+    "en-GB": {
+      "name": "Clean Connect: Report Garbage",
+      "subtitle": "Swachh India Cleanup Drives",
+      "keywords": "kachra,swachhata,bharat,cleanliness,litter,waste,dustbin,complaint,municipal,civic,volunteer,ngo",
+      "promotionalText": "New in 2.0: report garbage on a live map, join cleanup drives, share before/after photos, earn Swachh Points and support cleaners directly via UPI.",
+      "descriptionFile": "description.en.txt",
+      "whatsNewFile": "whats_new.en.txt"
+    },
+    "hi": {
+      "name": "Clean Connect: कचरा शिकायत",
+      "subtitle": "सफाई अभियान, स्वच्छ शहर",
+      "keywords": "कूड़ा,गंदगी,स्वच्छता,नगर,निगम,safai,kooda,gandagi,abhiyan,shramdaan,mohalla,swachhta,nagar,nigam",
+      "keywordsByteSafeFallback": "कूड़ा,गंदगी,safai,kooda,gandagi,abhiyan,shramdaan,mohalla,swachhta,nagar,nigam",
+      "promotionalText": "नया 2.0: लाइव मैप पर कचरा रिपोर्ट करें, सफाई अभियान से जुड़ें, पहले/बाद की फोटो शेयर करें, स्वच्छ पॉइंट्स कमाएं और UPI से सफाई करने वालों का सीधे साथ दें।",
+      "descriptionFile": "description.hi.txt",
+      "whatsNewFile": "whats_new.hi.txt"
+    },
+    "en-US": {
+      "name": "Clean Connect: India Cleanup",
+      "subtitle": "Report Litter & Join Drives",
+      "keywords": "garbage,trash,waste,volunteer,community,swachh,bharat,kachra,civic,ngo,plogging,desi,pickup,beach",
+      "promotionalText": "New in 2.0: report garbage spots across India, join cleanup drives, share before/after photos and support cleaners directly via UPI.",
+      "descriptionFile": "description.en.txt",
+      "whatsNewFile": "whats_new.en.txt"
+    },
+    "en-CA": {
+      "sameAs": "en-US"
+    }
+  },
+  "reviewNotesFile": "review_notes.txt",
+  "appPrivacy": {
+    "tracking": false,
+    "dataLinkedToUser": {
+      "Name": ["App Functionality"],
+      "Email Address": ["App Functionality"],
+      "User ID": ["App Functionality"],
+      "Photos or Videos": ["App Functionality"],
+      "Other User Content": ["App Functionality"],
+      "Precise Location": ["App Functionality"]
+    },
+    "notes": "Precise location is only stored when the user pins a report or a drive meeting point. No analytics, ads or third-party tracking SDKs. Payments are never processed in the app."
+  }
+}

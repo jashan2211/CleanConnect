@@ -1,0 +1,25 @@
+CleanConnect 2.0 is a full rebuild of the app.
+
+HOW TO TEST
+• No login is needed to browse: the Home feed, Map, Drives, Leaders and public profiles all work as a guest.
+• To post, tap "Report a spot" (camera button) and choose "Sign in with Apple". Any Apple ID works; no demo account is needed. Google sign-in is also offered.
+• Report flow: add a photo from the library or camera, pick a category and size, confirm the location and tap "Post report".
+• Open any spot, tap "Already cleaned", add an after photo and post. The spot turns green and a before/after slider appears.
+• Drives tab: "Organise a cleanup drive" creates an event others can join.
+
+USER-GENERATED CONTENT (Guideline 1.2)
+• Users accept the Terms and Community Guidelines (zero tolerance for objectionable content) before signing in.
+• Every spot, drive, comment and profile has "Report content" and "Block" in its ⋯ menu. Blocked users' content disappears immediately.
+• Content reported by 3 different people is hidden automatically; the developer reviews all reports within 24 hours.
+
+PAYMENTS (Guideline 3.2.1(vii))
+• The app sells nothing and has no in-app purchases.
+• Users can optionally add their UPI ID. Others can open their own UPI app (Google Pay, PhonePe, etc.) to send a gift directly to that person. It is optional, 100% goes to the receiver, the app never handles money and nothing in the app is unlocked by paying.
+
+ACCOUNT DELETION (Guideline 5.1.1(v))
+• You tab → gear icon → Settings → Delete account. This removes the profile and the user's content and revokes the Sign in with Apple token.
+
+PERMISSIONS
+• Location (when in use): pins reports and shows nearby spots. Camera: photographing spots. Photo library add: only when the user saves a share card.
+
+Contact: info@thebighead.ca

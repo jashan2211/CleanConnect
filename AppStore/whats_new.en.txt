@@ -1,0 +1,10 @@
+CleanConnect 2.0 is a completely rebuilt app.
+
+• Report dirty spots with a photo on a live map of your city
+• Claim a spot, clean it and share a before/after slider
+• Organise and join cleanup drives, with reminders and WhatsApp invites
+• Swachh Points, levels, badges, daily streaks and city, state and India leaderboards
+• Draft a complaint to your municipality in one tap
+• Support cleaners directly through their UPI. 100% goes to them
+• Now in Hindi
+• Browse without an account; sign in with Apple or Google to post
