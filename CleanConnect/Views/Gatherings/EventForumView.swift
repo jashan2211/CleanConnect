@@ -103,20 +103,11 @@ struct EventForumView: View {
     }
 
     private var emptyState: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "bubble.left.and.bubble.right")
-                .font(.system(size: 50))
-                .foregroundColor(.gray.opacity(0.5))
-
-            Text("No discussions yet")
-                .font(.headline)
-
-            Text("Be the first to start a conversation about this event!")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-        }
-        .padding(40)
+        EmptyStateView(
+            systemImage: "bubble.left.and.bubble.right",
+            title: "No discussions yet",
+            message: "Be the first to start a conversation about this event!"
+        )
     }
 
     private var commentInput: some View {

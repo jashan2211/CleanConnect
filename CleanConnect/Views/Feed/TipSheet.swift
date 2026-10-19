@@ -1,407 +1,234 @@
 // TipSheet.swift
-// Sheet for tipping content creators
+// External-link tipping. The app never moves money — we render a UPI QR
+// the user can scan with their banking app, plus a tappable PayPal.me link.
 
 import SwiftUI
+import CoreImage.CIFilterBuiltins
 
 struct TipSheet: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL
+
     let post: Post
-    @State private var selectedAmount: Int?
-    @State private var customAmount = ""
-    @State private var isProcessing = false
-    @State private var showSuccess = false
-    @State private var showError = false
-    @State private var errorMessage = ""
-    @State private var creatorCanReceive = false
-    @State private var isCheckingCreator = true
 
-    let presetAmounts = [10, 50, 100, 500, 1000]
-
-    var tipAmount: Int? {
-        if let selected = selectedAmount {
-            return selected
-        }
-        return Int(customAmount)
-    }
+    @State private var creator: User?
+    @State private var isLoading = true
+    @State private var loadError: String?
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 20) {
-                    // Recipient info
-                    recipientHeader
-
-                    if isCheckingCreator {
-                        ProgressView("Checking payment availability...")
-                            .padding(.vertical, 40)
-                    } else if !creatorCanReceive {
-                        tipsComingSoonBanner
-                    } else {
-                        // AI Disclaimer Warning
-                        aiDisclaimerBanner
-
-                        // Verification status
-                        verificationStatusView
-
-                        Divider()
-
-                        // Amount selection
-                        VStack(alignment: .leading, spacing: 16) {
-                            Text("Select Amount")
-                                .font(.headline)
-
-                            // Preset amounts
-                            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 12) {
-                                ForEach(presetAmounts, id: \.self) { amount in
-                                    AmountButton(
-                                        amount: amount,
-                                        isSelected: selectedAmount == amount
-                                    ) {
-                                        selectedAmount = amount
-                                        customAmount = ""
-                                    }
-                                }
-                            }
-
-                            // Custom amount
-                            HStack {
-                                Text("Custom")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                                Spacer()
-                                HStack(spacing: 4) {
-                                    Text("₹")
-                                        .foregroundColor(.secondary)
-                                    TextField("Amount", text: $customAmount)
-                                        .keyboardType(.numberPad)
-                                        .frame(width: 80)
-                                        .textFieldStyle(.roundedBorder)
-                                        .onChange(of: customAmount) { _, _ in
-                                            selectedAmount = nil
-                                        }
-                                }
-                            }
-                        }
-
-                        // Payment breakdown
-                        if let amount = tipAmount, amount > 0 {
-                            paymentBreakdown(amount: amount)
-                        }
-
-                        Spacer()
-
-                        // Platform fee note
-                        VStack(spacing: 4) {
-                            Text("7% platform fee applies")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            Text("Secure payment via Stripe (UPI, Cards, Net Banking)")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-
-                        // Pay button
-                        Button(action: processTip) {
-                            HStack {
-                                if isProcessing {
-                                    ProgressView()
-                                        .tint(.white)
-                                } else {
-                                    Image(systemName: "indianrupeesign.circle.fill")
-                                    Text(tipAmount.map { "Pay ₹\($0)" } ?? "Select Amount")
-                                }
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(tipAmount != nil ? Color.green : Color.gray)
-                            .foregroundColor(.white)
-                            .cornerRadius(12)
-                            .fontWeight(.semibold)
-                        }
-                        .disabled(tipAmount == nil || isProcessing)
-                    }
+            Group {
+                if isLoading {
+                    loadingView
+                } else if let creator, hasAnyPayoutOption(creator) {
+                    tipOptionsView(creator: creator)
+                } else {
+                    EmptyStateView(
+                        systemImage: "indianrupeesign.circle",
+                        title: "No tip method set up",
+                        message: loadError ?? "\(post.userName) hasn't added a UPI ID or PayPal link yet. Drop a comment to say thanks instead."
+                    )
                 }
             }
-            .padding()
-            .navigationTitle("Send Tip")
+            .navigationTitle("Send a tip")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") { dismiss() }
+                        .fontWeight(.semibold)
                 }
             }
-            .alert("Success!", isPresented: $showSuccess) {
-                Button("Done") { dismiss() }
-            } message: {
-                Text("Your tip of ₹\(tipAmount ?? 0) has been sent to \(post.userName)!")
-            }
-            .alert("Error", isPresented: $showError) {
-                Button("OK", role: .cancel) {}
-            } message: {
-                Text(errorMessage)
-            }
-            .task {
-                await checkCreatorPaymentStatus()
-            }
+            .task { await loadCreator() }
         }
     }
 
-    // MARK: - Tips Coming Soon Banner
-
-    private var tipsComingSoonBanner: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "gift.circle")
-                .font(.system(size: 60))
-                .foregroundStyle(
-                    LinearGradient(colors: [.orange, .pink], startPoint: .topLeading, endPoint: .bottomTrailing)
-                )
-
-            Text("Tips Coming Soon")
-                .font(.title3.bold())
-
-            Text("This creator hasn't set up their payment account yet. Once they do, you'll be able to send them tips to support their cleanup efforts.")
+    private var loadingView: some View {
+        VStack(spacing: AppSpacing.m) {
+            ProgressView()
+            Text("Loading tip options…")
                 .font(.subheadline)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-
-            Button(action: { dismiss() }) {
-                Text("Got It")
-                    .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
-            }
-            .padding(.top, 8)
+                .foregroundStyle(.secondary)
         }
-        .padding(.vertical, 40)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    private func checkCreatorPaymentStatus() async {
-        if let user = try? await UserService.shared.getUser(userId: post.userId) {
-            creatorCanReceive = user.stripeAccountId != nil && (user.stripeOnboardingComplete ?? false)
-        } else {
-            creatorCanReceive = false
-        }
-        isCheckingCreator = false
-    }
+    private func tipOptionsView(creator: User) -> some View {
+        ScrollView {
+            VStack(spacing: AppSpacing.l) {
+                creatorHeader(creator: creator)
 
-    private var aiDisclaimerBanner: some View {
-        VStack(spacing: 8) {
-            HStack(spacing: 8) {
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .foregroundColor(.ccAIWarning)
-                Text("Important Disclaimer")
-                    .font(.subheadline.bold())
-                    .foregroundColor(.ccAIWarning)
-            }
-
-            Text("Photos and videos may be AI-generated or manipulated. We recommend tipping only verified posts with video proof. CleanConnect is not responsible for fraudulent content.")
-                .font(.caption)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-        }
-        .padding()
-        .background(Color.ccAIWarning.opacity(0.1))
-        .cornerRadius(12)
-    }
-
-    private var verificationStatusView: some View {
-        VStack(spacing: 8) {
-            HStack {
-                Image(systemName: post.verificationBadge.icon)
-                    .foregroundColor(badgeColor)
-                Text(verificationText)
-                    .font(.subheadline.weight(.medium))
-                    .foregroundColor(badgeColor)
-                Spacer()
-            }
-
-            if post.hasVideoProof {
-                HStack(spacing: 4) {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.green)
-                    Text("Video proof available")
-                        .font(.caption)
-                        .foregroundColor(.green)
-                    Spacer()
-                    if let url = post.videoProofURL {
-                        Link(destination: URL(string: url) ?? URL(string: "https://youtube.com")!) {
-                            Text("Watch")
-                                .font(.caption.bold())
-                                .foregroundColor(.blue)
-                        }
-                    }
+                if let upiId = creator.upiId, !upiId.isEmpty {
+                    upiSection(upiId: upiId, displayName: creator.displayName)
                 }
-            } else {
-                HStack(spacing: 4) {
-                    Image(systemName: "exclamationmark.circle")
-                        .foregroundColor(.orange)
-                    Text("No video proof - Tip with caution")
-                        .font(.caption)
-                        .foregroundColor(.orange)
+
+                if let paypalURL = creator.paypalURL,
+                   !paypalURL.isEmpty,
+                   let url = URL(string: paypalURL) {
+                    paypalSection(url: url)
                 }
+
+                disclaimer
             }
-
-            // Community votes
-            HStack(spacing: 12) {
-                HStack(spacing: 4) {
-                    Image(systemName: "hand.thumbsup.fill")
-                        .foregroundColor(.green)
-                    Text("\(post.communityVotes)")
-                        .font(.caption)
-                }
-                HStack(spacing: 4) {
-                    Image(systemName: "hand.thumbsdown.fill")
-                        .foregroundColor(.red)
-                    Text("\(post.communityDownvotes)")
-                        .font(.caption)
-                }
-                Spacer()
-                Text("Community verification")
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
-            }
-        }
-        .padding()
-        .background(Color.gray.opacity(0.05))
-        .cornerRadius(12)
-    }
-
-    private var badgeColor: Color {
-        switch post.verificationBadge {
-        case .verified: return .blue
-        case .videoProof: return .green
-        case .communityVerified: return .orange
-        case .unverified: return .gray
+            .padding(AppSpacing.m)
         }
     }
 
-    private var verificationText: String {
-        switch post.verificationBadge {
-        case .verified: return "Fully Verified"
-        case .videoProof: return "Video Verified"
-        case .communityVerified: return "Community Verified"
-        case .unverified: return "Unverified Post"
-        }
-    }
-
-    private var recipientHeader: some View {
-        HStack(spacing: 12) {
-            AsyncImage(url: URL(string: post.userPhotoURL ?? "")) { image in
+    private func creatorHeader(creator: User) -> some View {
+        VStack(spacing: AppSpacing.s) {
+            AsyncImage(url: URL(string: creator.photoURL ?? "")) { image in
                 image.resizable().scaledToFill()
             } placeholder: {
-                Image(systemName: "person.circle.fill")
-                    .font(.largeTitle)
-                    .foregroundColor(.gray)
+                Circle()
+                    .fill(Color.ccPrimaryTint)
+                    .overlay(
+                        Text(String(creator.displayName.prefix(1)).uppercased())
+                            .font(.title3.bold())
+                            .foregroundColor(.ccPrimary)
+                    )
             }
-            .frame(width: 50, height: 50)
+            .frame(width: 64, height: 64)
             .clipShape(Circle())
 
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Tip to")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                Text(post.userName)
-                    .font(.headline)
-            }
-
-            Spacer()
-
-            VStack(alignment: .trailing) {
-                Text("For cleanup")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                Text("\(String(format: "%.1f", post.wasteCollectedKg)) kg collected")
-                    .font(.caption)
-                    .foregroundColor(.green)
-            }
-        }
-    }
-
-    private func paymentBreakdown(amount: Int) -> some View {
-        let platformFee = Int(Double(amount) * AppConfig.Payment.platformFeePercent)
-        let creatorReceives = amount - platformFee
-
-        return VStack(spacing: 8) {
-            HStack {
-                Text("Tip Amount")
-                Spacer()
-                Text("₹\(amount)")
-            }
-            .font(.subheadline)
-
-            HStack {
-                Text("Platform Fee (7%)")
-                Spacer()
-                Text("-₹\(platformFee)")
-            }
-            .font(.caption)
-            .foregroundColor(.secondary)
-
-            Divider()
-
-            HStack {
-                Text("Creator Receives")
-                    .fontWeight(.semibold)
-                Spacer()
-                Text("₹\(creatorReceives)")
-                    .fontWeight(.semibold)
-                    .foregroundColor(.green)
-            }
-            .font(.subheadline)
-        }
-        .padding()
-        .background(Color.gray.opacity(0.05))
-        .cornerRadius(12)
-    }
-
-    private func processTip() {
-        guard let amount = tipAmount else { return }
-
-        isProcessing = true
-
-        Task {
-            do {
-                try await PaymentService.shared.createTip(
-                    postId: post.id,
-                    recipientId: post.userId,
-                    amount: amount
-                )
-                await MainActor.run {
-                    isProcessing = false
-                    showSuccess = true
-                }
-            } catch {
-                await MainActor.run {
-                    isProcessing = false
-                    errorMessage = error.localizedDescription
-                    showError = true
-                }
-            }
-        }
-    }
-}
-
-struct AmountButton: View {
-    let amount: Int
-    let isSelected: Bool
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            Text("₹\(amount)")
+            Text(creator.displayName)
                 .font(.headline)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .background(isSelected ? Color.green : Color.gray.opacity(0.1))
-                .foregroundColor(isSelected ? .white : .primary)
-                .cornerRadius(12)
+
+            Text("Tip goes directly to their account")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private func upiSection(upiId: String, displayName: String) -> some View {
+        VStack(alignment: .leading, spacing: AppSpacing.s) {
+            Label("UPI", systemImage: "qrcode")
+                .font(.headline)
+
+            if let qr = upiQRCode(payee: upiId, name: displayName) {
+                Image(uiImage: qr)
+                    .interpolation(.none)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 220)
+                    .padding(AppSpacing.s)
+                    .background(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: AppCornerRadius.button, style: .continuous))
+                    .frame(maxWidth: .infinity)
+                    .accessibilityLabel("UPI QR code for \(upiId). Scan with any UPI app.")
+            }
+
+            HStack {
+                Text(upiId)
+                    .font(.subheadline.monospaced())
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+                Spacer()
+                Button {
+                    UIPasteboard.general.string = upiId
+                } label: {
+                    Label("Copy", systemImage: "doc.on.doc")
+                        .labelStyle(.titleAndIcon)
+                        .font(.subheadline)
+                }
+                .buttonStyle(GhostActionStyle())
+            }
+
+            Button {
+                if let url = upiDeepLink(payee: upiId, name: displayName) {
+                    openURL(url)
+                }
+            } label: {
+                Label("Open UPI app", systemImage: "arrow.up.forward.app")
+            }
+            .buttonStyle(PrimaryActionStyle())
+        }
+        .padding(AppSpacing.m)
+        .standardCard(padding: 0)
+    }
+
+    private func paypalSection(url: URL) -> some View {
+        VStack(alignment: .leading, spacing: AppSpacing.s) {
+            Label("PayPal", systemImage: "link")
+                .font(.headline)
+
+            Text(url.absoluteString)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+                .truncationMode(.middle)
+
+            Button {
+                openURL(url)
+            } label: {
+                Label("Open PayPal link", systemImage: "arrow.up.forward.app")
+            }
+            .buttonStyle(SecondaryActionStyle())
+        }
+        .padding(AppSpacing.m)
+        .standardCard(padding: 0)
+    }
+
+    private var disclaimer: some View {
+        Text("CleanConnect doesn't process payments. Tips go directly between you and the creator through your banking or PayPal app.")
+            .font(.footnote)
+            .foregroundStyle(.secondary)
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, AppSpacing.m)
+    }
+
+    // MARK: - Helpers
+
+    private func hasAnyPayoutOption(_ user: User) -> Bool {
+        let hasUPI = (user.upiId?.trimmingCharacters(in: .whitespaces).isEmpty == false)
+        let hasPayPal = (user.paypalURL?.trimmingCharacters(in: .whitespaces).isEmpty == false)
+        return hasUPI || hasPayPal
+    }
+
+    private func loadCreator() async {
+        // Try the cached current-user first if we happen to be tipping ourselves
+        // (preview / dev case). Otherwise fetch.
+        do {
+            if let fetched = try await UserService.shared.getUser(userId: post.userId) {
+                await MainActor.run {
+                    creator = fetched
+                    isLoading = false
+                }
+            } else {
+                await MainActor.run {
+                    loadError = "Couldn't load creator profile."
+                    isLoading = false
+                }
+            }
+        } catch {
+            await MainActor.run {
+                loadError = "Couldn't load creator profile."
+                isLoading = false
+            }
         }
     }
-}
 
-#Preview {
-    TipSheet(post: Post.preview)
+    private func upiDeepLink(payee: String, name: String) -> URL? {
+        var components = URLComponents()
+        components.scheme = "upi"
+        components.host = "pay"
+        components.queryItems = [
+            URLQueryItem(name: "pa", value: payee),
+            URLQueryItem(name: "pn", value: name),
+            URLQueryItem(name: "cu", value: "INR")
+        ]
+        return components.url
+    }
+
+    private func upiQRCode(payee: String, name: String) -> UIImage? {
+        guard let url = upiDeepLink(payee: payee, name: name) else { return nil }
+        let context = CIContext()
+        let filter = CIFilter.qrCodeGenerator()
+        filter.message = Data(url.absoluteString.utf8)
+        filter.correctionLevel = "M"
+        guard let output = filter.outputImage else { return nil }
+        // Scale up so the QR isn't tiny / blurry.
+        let scaled = output.transformed(by: CGAffineTransform(scaleX: 10, y: 10))
+        guard let cgImage = context.createCGImage(scaled, from: scaled.extent) else { return nil }
+        return UIImage(cgImage: cgImage)
+    }
 }

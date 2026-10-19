@@ -30,14 +30,6 @@ struct ProfileView: View {
                     // Extended Stats
                     extendedStatsSection
 
-                    // Level progress
-                    levelProgress
-
-                    // Badges (only show if user has earned some)
-                    if !userState.earnedBadges.isEmpty {
-                        badgesSection
-                    }
-
                     // My Posts
                     myPostsSection
 
@@ -45,9 +37,6 @@ struct ProfileView: View {
                     if !userState.recentActivity.isEmpty {
                         recentActivitySection
                     }
-
-                    // Menu items
-                    menuSection
                 }
                 .padding()
             }
@@ -189,9 +178,9 @@ struct ProfileView: View {
 
     private var statsCards: some View {
         HStack(spacing: 12) {
-            ProfileStatCard(icon: "leaf.fill", value: "\(userState.currentUser?.totalPosts ?? 0)", label: "Cleanups", color: .green)
-            ProfileStatCard(icon: "trash.fill", value: "\(String(format: "%.1f", userState.currentUser?.totalWasteKg ?? 0)) kg", label: "Collected", color: .orange)
-            ProfileStatCard(icon: "star.fill", value: "\(userState.currentUser?.totalPoints ?? 0)", label: "Points", color: .yellow)
+            ProfileStatCard(icon: "leaf.fill", value: "\(userState.currentUser?.totalPosts ?? 0)", label: "Cleanups", color: .ccPrimary)
+            ProfileStatCard(icon: "trash.fill", value: "\(String(format: "%.1f", userState.currentUser?.totalWasteKg ?? 0)) kg", label: "Collected", color: .ccPrimary)
+            ProfileStatCard(icon: "mappin.and.ellipse", value: "\(userState.currentUser?.totalAreasImpacted ?? 0)", label: "Areas", color: .ccPrimary)
         }
     }
 
@@ -208,7 +197,7 @@ struct ProfileView: View {
                     value: String(format: "%.1f", userState.currentUser?.totalVolunteerHours ?? 0),
                     unit: "hrs",
                     label: "Volunteer Time",
-                    color: .blue
+                    color: .ccPrimary
                 )
 
                 ImpactStatCard(
@@ -216,61 +205,28 @@ struct ProfileView: View {
                     value: String(format: "%.1f", userState.currentUser?.totalCO2Saved ?? 0),
                     unit: "kg",
                     label: "CO₂ Saved",
-                    color: .green
-                )
-
-                ImpactStatCard(
-                    icon: "flame.fill",
-                    value: "\(userState.currentUser?.currentStreak ?? 0)",
-                    unit: "days",
-                    label: "Current Streak",
-                    color: .orange
-                )
-
-                ImpactStatCard(
-                    icon: "trophy.fill",
-                    value: "\(userState.currentUser?.longestStreak ?? 0)",
-                    unit: "days",
-                    label: "Best Streak",
-                    color: .yellow
-                )
-
-                ImpactStatCard(
-                    icon: "mappin.and.ellipse",
-                    value: "\(userState.currentUser?.totalAreasImpacted ?? 0)",
-                    unit: "areas",
-                    label: "Locations Cleaned",
-                    color: .purple
+                    color: .ccPrimary
                 )
 
                 ImpactStatCard(
                     icon: "video.fill",
                     value: "\(userState.currentUser?.videosVerified ?? 0)",
                     unit: "posts",
-                    label: "Verified Videos",
-                    color: .teal
+                    label: "Video Proofs",
+                    color: .ccPrimary
                 )
 
                 ImpactStatCard(
-                    icon: "shippingbox.fill",
-                    value: "\(userState.currentUser?.totalSuppliesContributed ?? 0)",
-                    unit: "items",
-                    label: "Supplies Given",
-                    color: .indigo
-                )
-
-                ImpactStatCard(
-                    icon: "indianrupeesign.circle.fill",
-                    value: "₹\(userState.currentUser?.totalDonationsAmount ?? 0)",
-                    unit: "",
-                    label: "Total Donated",
-                    color: .pink
+                    icon: "mappin.and.ellipse",
+                    value: "\(userState.currentUser?.totalAreasImpacted ?? 0)",
+                    unit: "areas",
+                    label: "Locations",
+                    color: .ccPrimary
                 )
             }
         }
         .padding()
-        .background(Color.gray.opacity(0.05))
-        .cornerRadius(12)
+        .standardCard()
     }
 
     private var levelProgress: some View {
@@ -352,19 +308,11 @@ struct ProfileView: View {
                     Spacer()
                 }
             } else if userPosts.isEmpty {
-                VStack(spacing: 12) {
-                    Image(systemName: "leaf")
-                        .font(.largeTitle)
-                        .foregroundColor(.gray.opacity(0.5))
-                    Text("No posts yet")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    Text("Share your first cleanup!")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 24)
+                EmptyStateView(
+                    systemImage: "leaf",
+                    title: "No posts yet",
+                    message: "Share your first cleanup!"
+                )
             } else {
                 // Show preview of first 3 posts
                 ForEach(userPosts.prefix(3)) { post in
@@ -413,28 +361,6 @@ struct ProfileView: View {
         }
     }
 
-    private var menuSection: some View {
-        VStack(spacing: 0) {
-            NavigationLink(destination: WalletView()) {
-                HStack(spacing: 12) {
-                    Image(systemName: "creditcard.fill")
-                        .font(.title3)
-                        .foregroundColor(.green)
-                        .frame(width: 30)
-                    Text("Wallet & Payments")
-                        .foregroundColor(.primary)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                .padding()
-            }
-        }
-        .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
-    }
 }
 
 // MARK: - Social Link Button

@@ -501,17 +501,18 @@ struct FilterPill: View {
                     Text("\(count)")
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
-                        .background(isSelected ? Color.white.opacity(0.3) : Color.gray.opacity(0.2))
-                        .cornerRadius(8)
+                        .background(isSelected ? Color.white.opacity(0.3) : Color.ccSurface)
+                        .clipShape(RoundedRectangle(cornerRadius: AppSpacing.s, style: .continuous))
                 }
             }
             .font(.subheadline.weight(.medium))
-            .padding(.horizontal, 16)
-            .padding(.vertical, 8)
-            .background(isSelected ? Color.green : Color.gray.opacity(0.1))
+            .padding(.horizontal, AppSpacing.m)
+            .padding(.vertical, AppSpacing.s)
+            .background(isSelected ? Color.ccPrimary : Color.ccSurfaceSubtle)
             .foregroundColor(isSelected ? .white : .primary)
-            .cornerRadius(20)
+            .clipShape(RoundedRectangle(cornerRadius: AppCornerRadius.chip, style: .continuous))
         }
+        .buttonStyle(.plain)
     }
 }
 

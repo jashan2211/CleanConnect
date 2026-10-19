@@ -407,15 +407,17 @@ struct FeedView: View {
 
     // MARK: - Loading View
     private var loadingView: some View {
-        VStack(spacing: 16) {
-            Spacer()
-            ProgressView()
-                .scaleEffect(1.2)
-            Text("Loading cleanups...")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-            Spacer()
+        ScrollView {
+            LazyVStack(spacing: AppSpacing.s) {
+                ForEach(0..<3, id: \.self) { _ in
+                    PostCardSkeleton()
+                        .padding(.horizontal, AppSpacing.m)
+                }
+            }
+            .padding(.vertical, AppSpacing.s)
         }
+        .redacted(reason: .placeholder)
+        .accessibilityLabel("Loading cleanups")
     }
 
     // MARK: - Posts List
@@ -453,52 +455,15 @@ struct FeedView: View {
 
     // MARK: - Empty State
     private var emptyState: some View {
-        VStack(spacing: 20) {
-            Spacer()
-
-            ZStack {
-                Circle()
-                    .fill(Color.green.opacity(0.1))
-                    .frame(width: 120, height: 120)
-
-                Image(systemName: hasActiveFilters ? "line.3.horizontal.decrease.circle" : "leaf.arrow.triangle.circlepath")
-                    .font(.system(size: 50))
-                    .foregroundColor(.green)
-            }
-
-            Text(hasActiveFilters ? "No matching posts" : "No cleanups yet")
-                .font(.title2.bold())
-
-            Text(hasActiveFilters ? "Try adjusting your filters to see more posts" : "Be the first to share your cleanup effort!")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
-
-            if hasActiveFilters {
-                Button("Clear Filters") {
-                    clearFilters()
-                }
-                .font(.headline)
-                .foregroundColor(.green)
-            } else {
-                Button(action: { showCreatePost = true }) {
-                    HStack {
-                        Image(systemName: "plus.circle.fill")
-                        Text("Share Your Cleanup")
-                    }
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 14)
-                    .background(Color.green)
-                    .cornerRadius(25)
-                }
-            }
-
-            Spacer()
-        }
-        .padding()
+        EmptyStateView(
+            systemImage: hasActiveFilters ? "line.3.horizontal.decrease.circle" : "leaf.arrow.triangle.circlepath",
+            title: hasActiveFilters ? "No matching posts" : "No cleanups yet",
+            message: hasActiveFilters
+                ? "Try adjusting your filters to see more posts"
+                : "Be the first to share your cleanup effort!",
+            actionTitle: hasActiveFilters ? "Clear Filters" : "Share Your Cleanup",
+            action: { hasActiveFilters ? clearFilters() : (showCreatePost = true) }
+        )
     }
 
     // MARK: - Create Post Button
@@ -560,11 +525,12 @@ struct FeedFilterButton: View {
                     .font(.caption.weight(.medium))
             }
             .padding(.horizontal, 12)
-            .padding(.vertical, 8)
-            .background(isSelected ? color : Color(.systemGray6))
+            .padding(.vertical, AppSpacing.s)
+            .background(isSelected ? Color.ccPrimary : Color.ccSurfaceSubtle)
             .foregroundColor(isSelected ? .white : .primary)
-            .cornerRadius(16)
+            .clipShape(RoundedRectangle(cornerRadius: AppCornerRadius.chip, style: .continuous))
         }
+        .buttonStyle(.plain)
     }
 }
 
@@ -583,13 +549,15 @@ struct ActiveFilterChip: View {
             Button(action: onRemove) {
                 Image(systemName: "xmark.circle.fill")
                     .font(.caption)
+                    .iconHitTarget()
             }
+            .accessibilityLabel("Remove \(title) filter")
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 6)
-        .background(Color.green.opacity(0.2))
-        .foregroundColor(.green)
-        .cornerRadius(14)
+        .background(Color.ccPrimaryTint)
+        .foregroundColor(.ccPrimary)
+        .clipShape(RoundedRectangle(cornerRadius: AppCornerRadius.chip, style: .continuous))
     }
 }
 
@@ -614,12 +582,13 @@ struct FilterChip: View {
         Button(action: action) {
             Text(title)
                 .font(.subheadline.weight(.medium))
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .background(isSelected ? Color.green : Color.secondary.opacity(0.1))
+                .padding(.horizontal, AppSpacing.m)
+                .padding(.vertical, AppSpacing.s)
+                .background(isSelected ? Color.ccPrimary : Color.ccSurfaceSubtle)
                 .foregroundColor(isSelected ? .white : .primary)
-                .cornerRadius(20)
+                .clipShape(RoundedRectangle(cornerRadius: AppCornerRadius.chip, style: .continuous))
         }
+        .buttonStyle(.plain)
     }
 }
 

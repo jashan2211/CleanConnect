@@ -58,11 +58,6 @@ struct EventDetailView: View {
                         descriptionSection
                     }
 
-                    // Fundraising progress
-                    if let goal = gathering.fundraisingGoal, goal > 0 {
-                        fundraisingSection(goal: goal)
-                    }
-
                     // Quick Action Tabs - Forum, Tasks, Supplies
                     eventActionTabs
 
@@ -628,33 +623,19 @@ struct EventDetailView: View {
     }
 
     private var actionsSection: some View {
-        VStack(spacing: 12) {
-            Button(action: { showRSVP = true }) {
-                HStack {
-                    Image(systemName: "checkmark.circle.fill")
-                    Text("RSVP to Event")
-                }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.green)
-                .foregroundColor(.white)
-                .cornerRadius(12)
-                .fontWeight(.semibold)
+        VStack(spacing: AppSpacing.s) {
+            Button {
+                showRSVP = true
+            } label: {
+                Label("Pitch in — I'll clean here", systemImage: "hand.raised.fill")
             }
+            .buttonStyle(PrimaryActionStyle())
 
             if gathering.whatsappGroupLink != nil {
                 Button(action: openWhatsApp) {
-                    HStack {
-                        Image(systemName: "bubble.left.fill")
-                        Text("Join WhatsApp Group")
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color(hex: "25D366"))
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
-                    .fontWeight(.semibold)
+                    Label("Join WhatsApp Group", systemImage: "bubble.left.fill")
                 }
+                .buttonStyle(SecondaryActionStyle())
             }
         }
         .padding(.top)
@@ -776,11 +757,11 @@ struct RSVPSheet: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    Text("Will you attend?")
+                    Text("Pitch in to clean here?")
                         .font(.headline)
 
-                    Picker("RSVP", selection: $isAttending) {
-                        Text("Yes, I'm going!").tag(true)
+                    Picker("Pitch in", selection: $isAttending) {
+                        Text("Yes, count me in").tag(true)
                         Text("Can't make it").tag(false)
                     }
                     .pickerStyle(.segmented)
@@ -822,16 +803,9 @@ struct RSVPSheet: View {
 
                     Spacer(minLength: 20)
 
-                    Button(action: submitRSVP) {
-                        Text("Confirm RSVP")
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(canSubmit ? Color.green : Color.gray)
-                            .foregroundColor(.white)
-                            .cornerRadius(12)
-                            .fontWeight(.semibold)
-                    }
-                    .disabled(!canSubmit)
+                    Button(isAttending ? "I'll be there" : "Save response", action: submitRSVP)
+                        .buttonStyle(PrimaryActionStyle(isEnabled: canSubmit))
+                        .disabled(!canSubmit)
                 }
                 .padding()
             }
@@ -1323,21 +1297,11 @@ struct LiveStreamPlayerSheet: View {
 
                             // Chat messages
                             ScrollView {
-                                VStack(spacing: 20) {
-                                    Spacer(minLength: 40)
-                                    Image(systemName: "bubble.left.and.bubble.right")
-                                        .font(.system(size: 40))
-                                        .foregroundColor(.secondary.opacity(0.5))
-                                    Text("No messages yet")
-                                        .font(.subheadline)
-                                        .foregroundColor(.secondary)
-                                    Text("Be the first to say hello!")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary.opacity(0.7))
-                                    Spacer(minLength: 40)
-                                }
-                                .frame(maxWidth: .infinity)
-                                .padding()
+                                EmptyStateView(
+                                    systemImage: "bubble.left.and.bubble.right",
+                                    title: "No messages yet",
+                                    message: "Be the first to say hello!"
+                                )
                             }
 
                             Divider()

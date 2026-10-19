@@ -242,8 +242,8 @@ struct ImpactDashboardView: View {
             // Main stat
             VStack(spacing: 8) {
                 Text("\(String(format: "%.1f", viewModel.totalWasteKg))")
-                    .font(.system(size: 64, weight: .bold, design: .rounded))
-                    .foregroundColor(.green)
+                    .font(.system(.largeTitle, design: .rounded).weight(.bold))
+                    .foregroundColor(.ccPrimary)
 
                 Text("kg of waste collected")
                     .font(.title3)

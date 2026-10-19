@@ -36,6 +36,11 @@ struct User: Codable, Identifiable {
     // Social Media Links
     var socialLinks: SocialLinks?
 
+    // External payout handles — the app never moves money itself. Tip
+    // recipients open these links in their own banking / PayPal apps.
+    var upiId: String?        // e.g. "username@okhdfcbank"
+    var paypalURL: String?    // e.g. "https://paypal.me/username"
+
     // Level system
     var level: Int
     var levelName: String
@@ -67,6 +72,7 @@ struct User: Codable, Identifiable {
         case totalCO2Saved, longestStreak, currentStreak
         case totalAreasImpacted, videosVerified
         case socialLinks
+        case upiId, paypalURL
         case level, levelName
         case karmaScore, followersCount, followingCount
         case badges, createdAt, lastActive, isAnonymous, verified
@@ -98,6 +104,8 @@ struct User: Codable, Identifiable {
         totalAreasImpacted: 8,
         videosVerified: 18,
         socialLinks: SocialLinks.preview,
+        upiId: "demouser@okhdfcbank",
+        paypalURL: "https://paypal.me/demouser",
         level: 3,
         levelName: "Green Guardian",
         karmaScore: 45,

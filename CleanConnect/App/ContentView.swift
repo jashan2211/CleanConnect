@@ -12,14 +12,12 @@ struct ContentView: View {
     enum Tab: String, CaseIterable {
         case events = "Events"
         case feed = "Feed"
-        case leaderboard = "Rankings"
         case profile = "Profile"
 
         var icon: String {
             switch self {
             case .events: return "calendar.badge.plus"
             case .feed: return "leaf.fill"
-            case .leaderboard: return "trophy.fill"
             case .profile: return "person.circle.fill"
             }
         }
@@ -40,11 +38,11 @@ struct ContentView: View {
 
     private var launchScreen: some View {
         ZStack {
-            Color.green.opacity(0.1).ignoresSafeArea()
+            Color.ccPrimaryTint.ignoresSafeArea()
             VStack(spacing: 16) {
                 Image(systemName: "leaf.circle.fill")
                     .font(.system(size: 80))
-                    .foregroundColor(.green)
+                    .foregroundColor(.ccPrimary)
                 Text("CleanConnect")
                     .font(.title.bold())
                 ProgressView()
@@ -66,19 +64,13 @@ struct ContentView: View {
                 }
                 .tag(Tab.feed)
 
-            LeaderboardTabView()
-                .tabItem {
-                    Label(Tab.leaderboard.rawValue, systemImage: Tab.leaderboard.icon)
-                }
-                .tag(Tab.leaderboard)
-
             ProfileView()
                 .tabItem {
                     Label(Tab.profile.rawValue, systemImage: Tab.profile.icon)
                 }
                 .tag(Tab.profile)
         }
-        .tint(.green)
+        .tint(.ccPrimary)
     }
 }
 

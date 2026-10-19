@@ -92,14 +92,8 @@ struct SignInView: View {
 
             VStack(spacing: 8) {
                 Text("CleanConnect")
-                    .font(.system(size: 32, weight: .bold, design: .rounded))
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: [.primary, .primary.opacity(0.8)],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
+                    .font(.largeTitle.weight(.bold))
+                    .foregroundColor(.primary)
 
                 Text("Join the movement for a cleaner India")
                     .font(.subheadline)
@@ -157,7 +151,7 @@ struct SignInView: View {
                 }
 
                 Text("Sign in with Google")
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.body.weight(.medium))
             }
             .frame(maxWidth: .infinity)
             .frame(height: 54)

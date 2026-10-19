@@ -11,7 +11,6 @@ struct PostCard: View {
     @State private var showVideoPlayer = false
     @State private var showFullMap = false
     @State private var isUpvoted = false
-    @State private var isDownvoted = false
     @State private var voteCount: Int
 
     init(post: Post) {
@@ -20,19 +19,18 @@ struct PostCard: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            // Top bar - Compact header with key stats
+        VStack(alignment: .leading, spacing: AppSpacing.s) {
             topBar
-
-            // Main content area
-            mainContent
-
-            // Engagement bar - Reddit style
-            engagementBar
+            descriptionBlock
+            mediaBlock
+            bottomBar
         }
-        .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 2)
+        .padding(.vertical, AppSpacing.s)
+        .background(Color.ccSurface)
+        .clipShape(RoundedRectangle(cornerRadius: AppCornerRadius.card, style: .continuous))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilitySummary)
+        .accessibilityHint("Double-tap to view post details.")
         .sheet(isPresented: $showTipSheet) {
             TipSheet(post: post)
         }
@@ -46,115 +44,81 @@ struct PostCard: View {
         }
     }
 
-    // MARK: - Top Bar (Compact Header)
+    private var accessibilitySummary: String {
+        let kg = String(format: "%.1f", post.wasteCollectedKg)
+        return "Cleanup by \(post.userName), \(post.createdAt.timeAgo()). " +
+               "\(kg) kilograms collected in \(post.district)."
+    }
+
+    // MARK: - Top Bar
     private var topBar: some View {
-        HStack(spacing: 10) {
-            // User avatar
+        HStack(spacing: AppSpacing.s) {
             AsyncImage(url: URL(string: post.userPhotoURL ?? "")) { image in
                 image.resizable().scaledToFill()
             } placeholder: {
                 Circle()
-                    .fill(Color.green.opacity(0.2))
+                    .fill(Color.ccPrimaryTint)
                     .overlay(
                         Text(String(post.userName.prefix(1)).uppercased())
                             .font(.caption.bold())
-                            .foregroundColor(.green)
+                            .foregroundColor(.ccPrimary)
                     )
             }
             .frame(width: 32, height: 32)
             .clipShape(Circle())
 
-            // User info & location
-            VStack(alignment: .leading, spacing: 2) {
-                HStack(spacing: 4) {
-                    Text(post.userName)
-                        .font(.subheadline.weight(.semibold))
-                    VerificationBadgeView(badge: post.verificationBadge)
-                }
-
-                HStack(spacing: 4) {
-                    Image(systemName: "mappin.circle.fill")
-                        .font(.caption2)
-                        .foregroundColor(.red)
-                    Text("\(post.district)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    Text("•")
-                        .foregroundColor(.secondary)
-                    Text(post.createdAt.timeAgo())
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
+            HStack(spacing: 4) {
+                Text(post.userName)
+                    .font(.headline)
+                    .lineLimit(1)
+                VerificationBadgeView(badge: post.verificationBadge)
             }
 
             Spacer()
 
-            // Impact badge - Eye-catching!
-            impactBadge
+            Text(post.createdAt.timeAgo())
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 10)
+        .padding(.horizontal, AppSpacing.m)
     }
 
-    // MARK: - Impact Badge (Clickbaity stats)
+    // MARK: - Description
+    @ViewBuilder
+    private var descriptionBlock: some View {
+        if !post.description.isEmpty {
+            Text(post.description)
+                .font(.subheadline)
+                .lineLimit(2)
+                .padding(.horizontal, AppSpacing.m)
+        }
+    }
+
+    // MARK: - Impact Badge (floating glass pill)
     private var impactBadge: some View {
-        VStack(spacing: 2) {
-            Text("\(String(format: "%.1f", post.wasteCollectedKg))")
-                .font(.system(size: 18, weight: .black, design: .rounded))
-                .foregroundColor(.white)
-            Text("KG")
-                .font(.system(size: 8, weight: .bold))
-                .foregroundColor(.white.opacity(0.9))
+        HStack(spacing: 4) {
+            Image(systemName: "leaf.fill")
+                .font(.caption2)
+            Text("\(String(format: "%.1f", post.wasteCollectedKg)) kg")
+                .font(.system(.subheadline, design: .rounded).weight(.semibold))
         }
-        .padding(.horizontal, 10)
+        .foregroundStyle(.primary)
+        .padding(.horizontal, AppSpacing.s + 2)
         .padding(.vertical, 6)
-        .background(
-            LinearGradient(
-                colors: impactGradientColors,
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-        )
-        .cornerRadius(8)
+        .background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: AppCornerRadius.chip, style: .continuous))
+        .padding(AppSpacing.s)
     }
 
-    private var impactGradientColors: [Color] {
-        if post.wasteCollectedKg >= 10 {
-            return [.purple, .pink] // Legendary
-        } else if post.wasteCollectedKg >= 5 {
-            return [.orange, .red] // Epic
-        } else if post.wasteCollectedKg >= 2 {
-            return [.green, .teal] // Good
-        } else {
-            return [.blue, .cyan] // Standard
-        }
-    }
-
-    // MARK: - Main Content
-    private var mainContent: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            // Description (if any)
-            if !post.description.isEmpty {
-                Text(post.description)
-                    .font(.subheadline)
-                    .lineLimit(2)
-                    .padding(.horizontal, 12)
-            }
-
-            // Media Section - Before/After or Video
-            if post.hasVideoProof {
-                videoPreview
-            } else if post.beforeImageURL != nil || post.afterImageURL != nil {
-                imageCarousel
-            }
-
-            // Mini Map Preview
-            if post.latitude != nil && post.longitude != nil {
-                miniMapPreview
-            }
-
-            // Quick Stats Row
-            quickStatsRow
+    // MARK: - Media Block (edge-to-edge image + floating impact badge)
+    @ViewBuilder
+    private var mediaBlock: some View {
+        if post.hasVideoProof {
+            videoPreview
+                .overlay(alignment: .topTrailing) { impactBadge }
+        } else if post.beforeImageURL != nil || post.afterImageURL != nil {
+            imageCarousel
+                .overlay(alignment: .topTrailing) { impactBadge }
         }
     }
 
@@ -219,120 +183,49 @@ struct PostCard: View {
         .frame(height: 200)
     }
 
-    // MARK: - Mini Map Preview
-    private var miniMapPreview: some View {
-        Button(action: { showFullMap = true }) {
-            ZStack(alignment: .bottomTrailing) {
-                MapSnapshotView(
-                    latitude: post.latitude ?? 0,
-                    longitude: post.longitude ?? 0
-                )
-                .frame(height: 100)
-                .cornerRadius(0)
-
-                // Tap to expand hint
-                HStack(spacing: 4) {
-                    Image(systemName: "arrow.up.left.and.arrow.down.right")
-                        .font(.caption2)
-                    Text("View Map")
-                        .font(.caption2.bold())
-                }
-                .foregroundColor(.white)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 4)
-                .background(Color.black.opacity(0.7))
-                .cornerRadius(4)
-                .padding(8)
-
-                // Location pin in center
-                VStack {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        Image(systemName: "mappin.circle.fill")
-                            .font(.title)
-                            .foregroundColor(.red)
-                            .shadow(radius: 2)
-                        Spacer()
-                    }
-                    Spacer()
-                }
-            }
+    // MARK: - Bottom Bar (location link + engagement row)
+    private var bottomBar: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.s) {
+            locationRow
+            engagementRow
         }
-        .buttonStyle(.plain)
+        .padding(.horizontal, AppSpacing.m)
     }
 
-    // MARK: - Quick Stats Row
-    private var quickStatsRow: some View {
-        HStack(spacing: 16) {
-            // Duration
-            if let duration = post.durationMinutes {
-                PostStatPill(icon: "clock.fill", value: "\(duration)m", color: .blue)
+    @ViewBuilder
+    private var locationRow: some View {
+        if post.latitude != nil && post.longitude != nil {
+            Button {
+                showFullMap = true
+            } label: {
+                HStack(spacing: 4) {
+                    Image(systemName: "mappin")
+                        .font(.caption2)
+                    Text(post.district)
+                        .font(.subheadline)
+                }
+                .foregroundStyle(.secondary)
+                .contentShape(Rectangle())
             }
-
-            // Points
-            PostStatPill(icon: "star.fill", value: "+\(post.pointsEarned)", color: .yellow)
-
-            // Tips (if any)
-            if post.tipsReceived > 0 {
-                PostStatPill(icon: "indianrupeesign.circle.fill", value: "₹\(post.tipsReceived)", color: .green)
+            .buttonStyle(.plain)
+            .accessibilityLabel("Location: \(post.district). Double-tap to view on map.")
+        } else {
+            HStack(spacing: 4) {
+                Image(systemName: "mappin")
+                    .font(.caption2)
+                Text(post.district)
+                    .font(.subheadline)
             }
+            .foregroundStyle(.secondary)
+        }
+    }
+
+    private var engagementRow: some View {
+        HStack(spacing: AppSpacing.s) {
+            voteCluster
 
             Spacer()
 
-            // Job proof badge
-            if post.postType == .jobProof {
-                HStack(spacing: 4) {
-                    Image(systemName: "briefcase.fill")
-                        .font(.caption2)
-                    Text("Job Done")
-                        .font(.caption2.bold())
-                }
-                .foregroundColor(.green)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 4)
-                .background(Color.green.opacity(0.1))
-                .cornerRadius(6)
-            }
-        }
-        .padding(.horizontal, 12)
-    }
-
-    // MARK: - Engagement Bar (Reddit Style)
-    private var engagementBar: some View {
-        HStack(spacing: 0) {
-            // Upvote/Downvote cluster
-            HStack(spacing: 0) {
-                // Upvote
-                Button(action: upvote) {
-                    Image(systemName: isUpvoted ? "arrow.up.circle.fill" : "arrow.up.circle")
-                        .font(.title3)
-                        .foregroundColor(isUpvoted ? .orange : .secondary)
-                }
-                .padding(.horizontal, 8)
-                .padding(.vertical, 10)
-
-                // Vote count
-                Text("\(voteCount)")
-                    .font(.subheadline.weight(.bold))
-                    .foregroundColor(voteCount > 0 ? .orange : (voteCount < 0 ? .blue : .secondary))
-                    .frame(minWidth: 30)
-
-                // Downvote
-                Button(action: downvote) {
-                    Image(systemName: isDownvoted ? "arrow.down.circle.fill" : "arrow.down.circle")
-                        .font(.title3)
-                        .foregroundColor(isDownvoted ? .blue : .secondary)
-                }
-                .padding(.horizontal, 8)
-                .padding(.vertical, 10)
-            }
-            .background(Color(.systemGray6))
-            .cornerRadius(20)
-
-            Spacer()
-
-            // Comments
             NavigationLink(destination: PostDetailView(post: post)) {
                 HStack(spacing: 4) {
                     Image(systemName: "bubble.left")
@@ -340,56 +233,66 @@ struct PostCard: View {
                     Text("\(post.comments)")
                         .font(.caption.weight(.medium))
                 }
-                .foregroundColor(.secondary)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
+                .frame(minWidth: 44, minHeight: 44)
+                .foregroundStyle(.secondary)
+                .contentShape(Rectangle())
             }
+            .buttonStyle(.plain)
+            .accessibilityLabel("\(post.comments) comments")
 
-            // Share
-            ShareLink(item: "Check out this cleanup on CleanConnect: \(post.userName) collected \(String(format: "%.1f", post.wasteCollectedKg))kg of waste!") {
+            ShareLink(
+                item: "Check out this cleanup on CleanConnect: \(post.userName) collected \(String(format: "%.1f", post.wasteCollectedKg))kg of waste!"
+            ) {
                 Image(systemName: "square.and.arrow.up")
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 8)
+                    .frame(minWidth: 44, minHeight: 44)
+                    .foregroundStyle(.secondary)
+                    .contentShape(Rectangle())
             }
+            .accessibilityLabel("Share post")
 
-            // Tip button - Prominent!
-            Button(action: { showTipSheet = true }) {
-                HStack(spacing: 4) {
-                    Image(systemName: "gift.fill")
-                        .font(.subheadline)
-                    Text("Tip")
-                        .font(.caption.bold())
-                }
-                .foregroundColor(.white)
-                .padding(.horizontal, 14)
-                .padding(.vertical, 8)
-                .background(
-                    LinearGradient(colors: [.orange, .pink], startPoint: .leading, endPoint: .trailing)
-                )
-                .cornerRadius(16)
+            Button {
+                showTipSheet = true
+            } label: {
+                Image(systemName: "indianrupeesign.circle")
+                    .font(.subheadline)
+                    .frame(minWidth: 44, minHeight: 44)
+                    .foregroundStyle(.secondary)
+                    .contentShape(Rectangle())
             }
+            .accessibilityLabel("Send a tip via UPI or PayPal")
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 8)
-        .background(Color(.systemGray6).opacity(0.5))
+    }
+
+    private var voteCluster: some View {
+        Button(action: upvote) {
+            HStack(spacing: 6) {
+                Image(systemName: isUpvoted ? "arrow.up.circle.fill" : "arrow.up.circle")
+                    .font(.subheadline)
+                Text("\(voteCount)")
+                    .font(.subheadline.weight(.semibold))
+                    .monospacedDigit()
+            }
+            .foregroundColor(isUpvoted ? .ccPrimary : .secondary)
+            .padding(.horizontal, AppSpacing.m)
+            .frame(minHeight: 44)
+            .background(isUpvoted ? Color.ccPrimaryTint : Color.ccSurfaceSubtle)
+            .clipShape(RoundedRectangle(cornerRadius: AppCornerRadius.chip, style: .continuous))
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(isUpvoted ? "Remove upvote, \(voteCount) total" : "Upvote, \(voteCount) total")
     }
 
     // MARK: - Actions
     private func upvote() {
         let wasUpvoted = isUpvoted
-        let wasDownvoted = isDownvoted
 
         // Optimistic UI update
         if isUpvoted {
             isUpvoted = false
             voteCount -= 1
         } else {
-            if isDownvoted {
-                isDownvoted = false
-                voteCount += 1
-            }
             isUpvoted = true
             voteCount += 1
         }
@@ -406,68 +309,10 @@ struct PostCard: View {
                 // Revert on error
                 await MainActor.run {
                     isUpvoted = wasUpvoted
-                    isDownvoted = wasDownvoted
                     voteCount = post.communityVotes - post.communityDownvotes
                 }
             }
         }
-    }
-
-    private func downvote() {
-        let wasUpvoted = isUpvoted
-        let wasDownvoted = isDownvoted
-
-        // Optimistic UI update
-        if isDownvoted {
-            isDownvoted = false
-            voteCount += 1
-        } else {
-            if isUpvoted {
-                isUpvoted = false
-                voteCount -= 1
-            }
-            isDownvoted = true
-            voteCount -= 1
-        }
-
-        // Sync with backend
-        Task {
-            do {
-                let voteType = wasDownvoted ? "none" : "down"
-                let result = try await PostService.shared.voteOnPost(postId: post.id, voteType: voteType)
-                await MainActor.run {
-                    voteCount = result.voteScore
-                }
-            } catch {
-                // Revert on error
-                await MainActor.run {
-                    isUpvoted = wasUpvoted
-                    isDownvoted = wasDownvoted
-                    voteCount = post.communityVotes - post.communityDownvotes
-                }
-            }
-        }
-    }
-}
-
-// MARK: - Post Stat Pill Component
-struct PostStatPill: View {
-    let icon: String
-    let value: String
-    let color: Color
-
-    var body: some View {
-        HStack(spacing: 4) {
-            Image(systemName: icon)
-                .font(.caption2)
-                .foregroundColor(color)
-            Text(value)
-                .font(.caption.weight(.semibold))
-        }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 4)
-        .background(color.opacity(0.1))
-        .cornerRadius(10)
     }
 }
 

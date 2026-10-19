@@ -36,13 +36,8 @@ struct OnboardingView: View {
 
     var body: some View {
         ZStack {
-            // Background gradient
-            LinearGradient(
-                colors: [pages[currentPage].color.opacity(0.3), .white],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            Color.ccBackground
+                .ignoresSafeArea()
 
             VStack(spacing: 0) {
                 // Skip button

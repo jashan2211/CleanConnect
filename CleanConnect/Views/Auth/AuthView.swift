@@ -14,17 +14,8 @@ struct AuthView: View {
 
     var body: some View {
         ZStack {
-            // Background gradient - Indian flag colors
-            LinearGradient(
-                colors: [
-                    Color(hex: "FF9933").opacity(0.3), // Saffron
-                    Color.white,
-                    Color(hex: "138808").opacity(0.3)  // Green
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
+            Color.ccBackground
+                .ignoresSafeArea()
 
             VStack(spacing: 32) {
                 Spacer()
@@ -42,7 +33,7 @@ struct AuthView: View {
                         )
 
                     Text("CleanConnect")
-                        .font(.system(size: 36, weight: .bold, design: .rounded))
+                        .font(.largeTitle.weight(.bold))
                         .foregroundColor(.primary)
 
                     Text("Join the movement for a cleaner India")

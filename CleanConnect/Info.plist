@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.0</string>
+	<string>1.1.0</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -33,12 +33,8 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>CleanConnect needs camera access to take before and after photos of your cleanup activities.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>CleanConnect needs your location to show nearby cleanup events and to tag your cleanup posts with location.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>CleanConnect needs photo library access to select images for your cleanup posts.</string>
+	<string>CleanConnect uses your location to show nearby cleanup events and to tag the city or district where you cleaned.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -53,7 +49,7 @@
 	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
-		<string>armv7</string>
+		<string>arm64</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>

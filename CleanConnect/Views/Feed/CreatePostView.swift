@@ -2,7 +2,6 @@
 // Minimal form for creating new cleanup posts - Video link is key!
 
 import SwiftUI
-import PhotosUI
 import CoreLocation
 import MapKit
 
@@ -55,10 +54,8 @@ struct CreatePostView: View {
     @State private var description = ""
     @State private var wasteCollected: Double = 0
     @State private var duration: Int = 0
-    @State private var beforeImage: PhotosPickerItem?
-    @State private var afterImage: PhotosPickerItem?
-    @State private var beforeImageData: Data?
-    @State private var afterImageData: Data?
+    // Photo uploads were removed — cleanups are documented via the
+    // video link only. Post still has nullable image fields for legacy.
 
     // State
     @State private var isSubmitting = false
@@ -324,9 +321,6 @@ struct CreatePostView: View {
                     // Weight & Duration with presets
                     weightAndDurationSection
 
-                    // Photos (optional)
-                    photosSection
-
                     // Location
                     locationSection
                 }
@@ -412,77 +406,6 @@ struct CreatePostView: View {
                 }
             }
         }
-    }
-
-    // MARK: - Photos Section (Optional)
-    private var photosSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Image(systemName: "camera.fill")
-                    .foregroundColor(.purple)
-                Text("Before & After Photos")
-                    .font(.subheadline.weight(.medium))
-                Text("(Optional)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-
-            HStack(spacing: 12) {
-                // Before
-                PhotosPicker(selection: $beforeImage, matching: .images) {
-                    photoPickerContent(imageData: beforeImageData, label: "Before")
-                }
-                .onChange(of: beforeImage) { _, newValue in
-                    loadImage(from: newValue) { data in
-                        beforeImageData = data
-                    }
-                }
-
-                // After
-                PhotosPicker(selection: $afterImage, matching: .images) {
-                    photoPickerContent(imageData: afterImageData, label: "After")
-                }
-                .onChange(of: afterImage) { _, newValue in
-                    loadImage(from: newValue) { data in
-                        afterImageData = data
-                    }
-                }
-            }
-        }
-    }
-
-    private func photoPickerContent(imageData: Data?, label: String) -> some View {
-        Group {
-            if let data = imageData, let uiImage = UIImage(data: data) {
-                ZStack(alignment: .topLeading) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-
-                    Text(label)
-                        .font(.caption2.bold())
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(.ultraThinMaterial)
-                        .cornerRadius(4)
-                        .padding(4)
-                }
-            } else {
-                VStack(spacing: 4) {
-                    Image(systemName: "plus.circle.fill")
-                        .font(.title2)
-                        .foregroundColor(.secondary)
-                    Text(label)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-            }
-        }
-        .frame(maxWidth: .infinity)
-        .frame(height: 100)
-        .background(Color(.systemGray6))
-        .cornerRadius(10)
-        .clipped()
     }
 
     // MARK: - GPS Location Section (Optional - for precise coordinates)
@@ -588,21 +511,7 @@ struct CreatePostView: View {
             )
     }
 
-    // MARK: - Helper Methods
-    private func loadImage(from item: PhotosPickerItem?, completion: @escaping (Data?) -> Void) {
-        guard let item = item else { return }
-        item.loadTransferable(type: Data.self) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let data):
-                    completion(data)
-                case .failure:
-                    completion(nil)
-                }
-            }
-        }
-    }
-
+    // MARK: - Submit
     private func submitPost() {
         guard isFormValid else { return }
 
@@ -618,8 +527,8 @@ struct CreatePostView: View {
                     district: selectedDistrict, // Required field
                     latitude: locationManager.location?.coordinate.latitude,
                     longitude: locationManager.location?.coordinate.longitude,
-                    beforeImageData: beforeImageData,
-                    afterImageData: afterImageData,
+                    beforeImageData: nil,
+                    afterImageData: nil,
                     videoProofURL: videoProofURL.trimmingCharacters(in: .whitespacesAndNewlines)
                 )
                 await MainActor.run {

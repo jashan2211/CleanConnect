@@ -74,25 +74,13 @@ struct GatheringsView: View {
     }
 
     private var emptyState: some View {
-        VStack(spacing: 16) {
-            Spacer()
-            Image(systemName: "calendar.badge.plus")
-                .font(.system(size: 60))
-                .foregroundColor(.green.opacity(0.5))
-            Text("No events found")
-                .font(.headline)
-            Text("Be the first to organize a cleanup drive!")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-            Button("Create Event") {
-                showCreateEvent = true
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(.green)
-            Spacer()
-        }
-        .padding()
+        EmptyStateView(
+            systemImage: "calendar.badge.plus",
+            title: "No events found",
+            message: "Be the first to organize a cleanup drive!",
+            actionTitle: "Create Event",
+            action: { showCreateEvent = true }
+        )
     }
 }
 

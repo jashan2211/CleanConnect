@@ -101,13 +101,24 @@ class UserState: ObservableObject {
         wallet = nil
     }
 
-    func updateProfile(displayName: String?, bio: String?, state: String?, district: String?) async throws {
+    func updateProfile(
+        displayName: String?,
+        bio: String?,
+        state: String?,
+        district: String?,
+        upiId: String? = nil,
+        paypalURL: String? = nil,
+        clearUpiId: Bool = false,
+        clearPaypalURL: Bool = false
+    ) async throws {
         guard var user = currentUser else { return }
 
         if let displayName = displayName { user.displayName = displayName }
         if let bio = bio { user.bio = bio }
         if let state = state { user.state = state }
         if let district = district { user.district = district }
+        if clearUpiId { user.upiId = nil } else if let upiId { user.upiId = upiId }
+        if clearPaypalURL { user.paypalURL = nil } else if let paypalURL { user.paypalURL = paypalURL }
 
         // Save updated user
         try dataManager.save(user, to: "\(user.id).json", in: "users")
