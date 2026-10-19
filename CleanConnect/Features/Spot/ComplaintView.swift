@@ -159,3 +159,16 @@ extension SpotCategory {
         }
     }
 }
+
+/// Loads a spot by id, then shows the complaint composer.
+struct ComplaintRouteView: View {
+    let spotId: String
+    @State private var spot: Spot?
+
+    var body: some View {
+        Group {
+            if let spot { ComplaintView(spot: spot) } else { ProgressView() }
+        }
+        .task { for await value in SpotAPI.spot(spotId) { spot = value } }
+    }
+}

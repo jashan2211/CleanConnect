@@ -5,7 +5,7 @@ struct ReportSpotView: View {
     @Environment(Session.self) private var session
     @Environment(LocationService.self) private var location
     @Environment(\.dismiss) private var dismiss
-    @State private var draft = NewSpot()
+    @State private var draft = AppConfig.isDemo ? DemoData.reportDraft : NewSpot()
     @State private var showPicker = false
     @State private var submitting = false
     @State private var createdId: String?

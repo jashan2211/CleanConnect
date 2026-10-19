@@ -45,6 +45,7 @@ enum AppTab: String, Hashable {
 
 enum Route: Hashable {
     case spot(String)
+    case complaint(String)
     case drive(String)
     case profile(String)
     case leaderboard
@@ -62,6 +63,7 @@ final class Router {
     var createDriveFor: Spot?
     var showCreateDrive = false
     var mapFocus: Spot?
+    var showSupportDemo = false
 
     init() {
         guard AppConfig.isDemo else { return }
@@ -74,6 +76,7 @@ final class Router {
             case ("spot", let id?): .spot(id)
             case ("drive", let id?): .drive(id)
             case ("profile", let id?): .profile(id)
+            case ("complaint", let id?): .complaint(id)
             case ("settings", _): .settings
             default: nil
             }
@@ -82,6 +85,7 @@ final class Router {
         switch defaults.string(forKey: "sheet") {
         case "report": showReport = true
         case "drive": showCreateDrive = true
+        case "support": showSupportDemo = true
         default: break
         }
     }

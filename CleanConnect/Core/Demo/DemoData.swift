@@ -1,5 +1,6 @@
 import Foundation
 import CoreLocation
+import UIKit
 
 /// Sample content for `-demo` launches (App Store screenshots and previews). Never shown otherwise.
 enum DemoData {
@@ -27,41 +28,34 @@ enum DemoData {
         spot("s1", .cleaned, .mixed, .cart, "Ulsoor Lake Road", 12.9810, 77.6200, before: "demo_before_1", after: "demo_after_1",
              reporter: profiles[4], cleaner: me, bags: 9, crew: 4, respect: 128, verified: 14, hoursAgo: 3,
              note: "Overflowing pile next to the bus stop for weeks.", cleanupNote: "4 of us, 9 bags, 90 minutes. Bus stop is spotless now!"),
-        spot("s2", .cleaned, .plastic, .bag, "Bellandur Lake", 12.9352, 77.6686, before: "demo_before_2", after: "demo_after_2",
-             reporter: profiles[1], cleaner: profiles[0], bags: 14, crew: 6, respect: 342, verified: 31, hoursAgo: 20,
-             note: "Plastic bottles all along the lake edge.", cleanupNote: "Morning plog with the HSR crew 💪"),
-        spot("s3", .cleaned, .construction, .truck, "Koramangala 5th Block", 12.9352, 77.6245, before: "demo_before_3", after: "demo_after_3",
-             reporter: profiles[5], cleaner: profiles[2], bags: 22, crew: 9, respect: 211, verified: 19, hoursAgo: 40,
-             note: "Debris dumped on the footpath.", cleanupNote: "Got the ward office to send a tractor for the heavy stuff."),
-        spot("s4", .open, .mixed, .cart, "100 Feet Road, Indiranagar", 12.9784, 77.6408, before: "demo_before_4", after: nil,
-             reporter: me, cleaner: nil, bags: 0, crew: 1, respect: 12, verified: 0, hoursAgo: 5, stillThere: 9,
-             note: "Garbage piling up behind the metro pillar 52."),
-        spot("s5", .claimed, .plastic, .bag, "Domlur Flyover", 12.9609, 77.6387, before: "demo_before_5", after: nil,
-             reporter: profiles[6], cleaner: nil, bags: 0, crew: 1, respect: 6, verified: 0, hoursAgo: 9, stillThere: 4,
-             note: "Plastic and wrappers under the flyover.", claimer: profiles[4]),
-        spot("s6", .open, .drain, .cart, "HAL 2nd Stage", 12.9690, 77.6480, before: "demo_before_6", after: nil,
-             reporter: profiles[7], cleaner: nil, bags: 0, crew: 1, respect: 3, verified: 0, hoursAgo: 26, stillThere: 6,
-             note: "Drain blocked with plastic, water overflowing onto the road."),
-        spot("s7", .open, .walls, .bag, "CMH Road", 12.9786, 77.6390, before: "demo_before_7", after: nil,
-             reporter: profiles[8], cleaner: nil, bags: 0, crew: 1, respect: 2, verified: 0, hoursAgo: 50, stillThere: 2,
-             note: "Paan stains all over the underpass wall. Needs a paint job!"),
-        spot("s8", .open, .burning, .bag, "Old Airport Road", 12.9590, 77.6560, before: "demo_before_8", after: nil,
-             reporter: profiles[5], cleaner: nil, bags: 0, crew: 1, respect: 4, verified: 0, hoursAgo: 70, stillThere: 3,
-             note: "Someone keeps burning garbage here every evening."),
-        spot("s9", .cleaned, .water, .cart, "Ulsoor Lake", 12.9830, 77.6210, before: "demo_before_9", after: "demo_after_9",
-             reporter: profiles[0], cleaner: profiles[3], bags: 11, crew: 5, respect: 97, verified: 8, hoursAgo: 80,
-             note: "Thermocol and plastic floating near the steps.", cleanupNote: "Lake steps clean again 🌊"),
+        spot("s2", .open, .plastic, .cart, "Bellandur Lake", 12.9352, 77.6686, before: "demo_before_2", after: nil,
+             reporter: profiles[1], cleaner: nil, bags: 0, crew: 1, respect: 21, verified: 0, hoursAgo: 6, stillThere: 14,
+             note: "Plastic bottles and thermocol all along the walking path by the lake."),
+        spot("s3", .open, .construction, .truck, "Koramangala 5th Block", 12.9352, 77.6245, before: "demo_before_3", after: nil,
+             reporter: profiles[5], cleaner: nil, bags: 0, crew: 1, respect: 9, verified: 0, hoursAgo: 20, stillThere: 8,
+             note: "Debris dumped on the footpath, people are walking on the road."),
+        spot("s9", .claimed, .water, .cart, "Ulsoor Lake steps", 12.9830, 77.6210, before: "demo_before_9", after: nil,
+             reporter: profiles[0], cleaner: nil, bags: 0, crew: 1, respect: 17, verified: 0, hoursAgo: 30, stillThere: 11,
+             note: "Thermocol and plastic floating near the steps.", claimer: profiles[4]),
+        spot("s4", .cleaned, .mixed, .cart, "100 Feet Road, Indiranagar", 12.9784, 77.6408, before: "", after: nil,
+             reporter: me, cleaner: profiles[0], bags: 6, crew: 3, respect: 64, verified: 7, hoursAgo: 52, note: "Garbage behind metro pillar 52."),
+        spot("s5", .cleaned, .plastic, .bag, "Domlur Flyover", 12.9609, 77.6387, before: "", after: nil,
+             reporter: profiles[6], cleaner: profiles[2], bags: 4, crew: 2, respect: 41, verified: 5, hoursAgo: 75, note: "Plastic under the flyover."),
+        spot("s6", .cleaned, .drain, .cart, "HAL 2nd Stage", 12.9690, 77.6480, before: "", after: nil,
+             reporter: profiles[7], cleaner: profiles[1], bags: 8, crew: 5, respect: 52, verified: 6, hoursAgo: 98, note: "Drain blocked with plastic."),
+        spot("s7", .cleaned, .walls, .bag, "CMH Road", 12.9786, 77.6390, before: "", after: nil,
+             reporter: profiles[8], cleaner: profiles[3], bags: 2, crew: 6, respect: 77, verified: 9, hoursAgo: 120, note: "Paan stains on the underpass wall."),
     ]
 
     static let drives: [Drive] = [
         drive("d1", "Ulsoor Lake Sunday Plog", hoursFromNow: 46, organizer: profiles[0], address: "Ulsoor Lake main gate",
-              lat: 12.9822, lng: 77.6195, attendees: 38, capacity: 60, cover: "demo_cover_1",
+              lat: 12.9822, lng: 77.6195, attendees: 38, capacity: 60, cover: "demo_before_9",
               about: "Join us for 2 hours of plogging around the lake. Gloves and bags provided — just bring water and energy! Kids welcome with parents."),
         drive("d2", "Clean Up 100 Feet Road", hoursFromNow: 120, organizer: me, address: "Indiranagar Metro Station",
-              lat: 12.9784, lng: 77.6408, attendees: 17, capacity: 30, cover: "demo_cover_2",
+              lat: 12.9784, lng: 77.6408, attendees: 17, capacity: 30, cover: "demo_before_1",
               about: "Let's clear the garbage pile behind metro pillar 52 and paint the wall after."),
         drive("d3", "Bellandur Lake Shore Drive", hoursFromNow: 200, organizer: profiles[1], address: "Bellandur Lake, Kariyammana Agrahara",
-              lat: 12.9352, lng: 77.6686, attendees: 52, capacity: 100, cover: "demo_cover_3",
+              lat: 12.9352, lng: 77.6686, attendees: 52, capacity: 100, cover: "demo_before_2",
               about: "Monthly lake shore cleanup with residents' welfare associations. Breakfast after!"),
     ]
 
@@ -72,6 +66,18 @@ enum DemoData {
         Comment(id: "c2", authorId: "p2", authorName: "Fatima Khan", authorPhoto: nil, text: "Walked past this morning — verified, it's spotless.", createdAt: .now.addingTimeInterval(-3600)),
         Comment(id: "c3", authorId: "p5", authorName: "Rohan Mehta", authorPhoto: nil, text: "Count me in for the next one!", createdAt: .now.addingTimeInterval(-1200)),
     ]
+
+    /// Pre-filled report draft for the report-screen screenshot.
+    static var reportDraft: NewSpot {
+        var draft = NewSpot()
+        if let photo = UIImage(named: "demo_before_2") { draft.photos = [photo] }
+        draft.category = .plastic
+        draft.size = .cart
+        draft.note = "Plastic and thermocol along the lake path, been here a week."
+        draft.coordinate = CLLocationCoordinate2D(latitude: 12.9352, longitude: 77.6686)
+        draft.place = Place(locality: "Bellandur Lake", city: "Bengaluru", state: "Karnataka")
+        return draft
+    }
 
     static let indiaStats = ImpactStats(reported: 48_210, cleaned: 31_465, bags: 212_380, drives: 2_940, volunteers: 86_300)
     static let cityStats = ImpactStats(reported: 3_412, cleaned: 2_587, bags: 17_904, drives: 214, volunteers: 6_820)
@@ -96,7 +102,7 @@ enum DemoData {
         let created = Date.now.addingTimeInterval(-hoursAgo * 3600 - 86_400)
         return Spot(id: id, reporterId: reporter.id, reporterName: reporter.name, reporterPhoto: nil, status: status,
                     category: category, size: size, note: note, lat: lat, lng: lng, locality: locality, city: "Bengaluru",
-                    state: "Karnataka", beforePhotos: ["demo:\(before)"], afterPhotos: after.map { ["demo:\($0)"] } ?? [],
+                    state: "Karnataka", beforePhotos: before.isEmpty ? [] : ["demo:\(before)"], afterPhotos: after.map { ["demo:\($0)"] } ?? [],
                     claimedBy: claimer?.id, claimedByName: claimer?.name, claimedAt: claimer == nil ? nil : created,
                     cleanedBy: cleaner?.id, cleanedByName: cleaner?.name, cleanedByPhoto: nil,
                     cleanedAt: cleaner == nil ? nil : Date.now.addingTimeInterval(-hoursAgo * 3600),

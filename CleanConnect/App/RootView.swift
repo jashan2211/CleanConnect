@@ -54,6 +54,9 @@ struct RootView: View {
         .fullScreenCover(isPresented: $router.showReport) {
             ReportSpotView()
         }
+        .sheet(isPresented: $router.showSupportDemo) {
+            SupportSheet(recipient: DemoData.profiles[0], context: .cleanup)
+        }
         .sheet(isPresented: $router.showCreateDrive) {
             CreateDriveView(spot: router.createDriveFor)
         }
@@ -107,6 +110,7 @@ extension View {
         navigationDestination(for: Route.self) { route in
             switch route {
             case .spot(let id): SpotDetailView(spotId: id)
+            case .complaint(let id): ComplaintRouteView(spotId: id)
             case .drive(let id): DriveDetailView(driveId: id)
             case .profile(let id): PublicProfileView(uid: id)
             case .leaderboard: LeaderboardView()
