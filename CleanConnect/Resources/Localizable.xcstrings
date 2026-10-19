@@ -1,0 +1,4984 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%.1f hr": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%.1f घंटे"
+          }
+        }
+      }
+    },
+    "%@ away": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ दूर"
+          }
+        }
+      }
+    },
+    "%@ hasn't added a UPI ID yet. Send some respect instead 🙏": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ने अभी UPI ID नहीं जोड़ी है। बदले में सम्मान भेजें 🙏"
+          }
+        }
+      }
+    },
+    "%@ is getting cleaner": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ साफ़ हो रहा है"
+          }
+        }
+      }
+    },
+    "%@ is on it. You can still help or post the cleanup.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ इस पर काम कर रहे हैं। आप भी मदद कर सकते हैं या सफ़ाई पोस्ट कर सकते हैं।"
+          }
+        }
+      }
+    },
+    "%@ starts at %@. See you at %@!": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$@ बजे शुरू होगा। %3$@ पर मिलते हैं!"
+          }
+        }
+      }
+    },
+    "%lld": {
+      "shouldTranslate": false
+    },
+    "%lld %@": {
+      "shouldTranslate": false
+    },
+    "%lld Swachh Points, %lld day streak": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld स्वच्छ पॉइंट्स, %2$lld दिन की स्ट्रीक"
+          }
+        }
+      }
+    },
+    "%lld bags": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld बैग"
+          }
+        }
+      }
+    },
+    "%lld bags collected": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld बैग इकट्ठा किए"
+          }
+        }
+      }
+    },
+    "%lld confirmed": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld ने पुष्टि की"
+          }
+        }
+      }
+    },
+    "%lld going": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld आ रहे हैं"
+          }
+        }
+      }
+    },
+    "%lld hr": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld घंटे"
+          }
+        }
+      }
+    },
+    "%lld min": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld मिनट"
+          }
+        }
+      }
+    },
+    "%lld of %lld unlocked": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$lld में से %1$lld अनलॉक"
+          }
+        }
+      }
+    },
+    "%lld points all time": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अब तक %lld पॉइंट्स"
+          }
+        }
+      }
+    },
+    "%lld points this week": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस हफ़्ते %lld पॉइंट्स"
+          }
+        }
+      }
+    },
+    "%lld points to %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$@ तक %1$lld पॉइंट्स"
+          }
+        }
+      }
+    },
+    "%lld to %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$@ तक %1$lld"
+          }
+        }
+      }
+    },
+    "%lld+": {
+      "shouldTranslate": false
+    },
+    "%lld/%lld": {
+      "shouldTranslate": false
+    },
+    "(Reported via CleanConnect)": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(CleanConnect के ज़रिए रिपोर्ट किया गया)"
+          }
+        }
+      }
+    },
+    "(you)": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(आप)"
+          }
+        }
+      }
+    },
+    "+%lld": {
+      "shouldTranslate": false
+    },
+    "+%lld Swachh Points": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%lld स्वच्छ पॉइंट्स"
+          }
+        }
+      }
+    },
+    "100 Bags": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "100 बैग"
+          }
+        }
+      }
+    },
+    "100%% goes directly to %@. CleanConnect takes nothing and never sees your payment.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "100%% सीधे %@ को जाता है। CleanConnect कुछ नहीं लेता और आपका भुगतान कभी नहीं देखता।"
+          }
+        }
+      }
+    },
+    "7-Day Streak": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 दिन की स्ट्रीक"
+          }
+        }
+      }
+    },
+    "@%@": {
+      "shouldTranslate": false
+    },
+    "A concerned resident": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक जागरूक निवासी"
+          }
+        }
+      }
+    },
+    "A few bags": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कुछ बैग"
+          }
+        }
+      }
+    },
+    "A photo is attached. Thank you for your support in keeping our city clean.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोटो संलग्न है। हमारे शहर को साफ़ रखने में आपके सहयोग के लिए धन्यवाद।"
+          }
+        }
+      }
+    },
+    "AFTER": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बाद में"
+          }
+        }
+      }
+    },
+    "About": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जानकारी"
+          }
+        }
+      }
+    },
+    "About you": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपके बारे में"
+          }
+        }
+      }
+    },
+    "Account": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "खाता"
+          }
+        }
+      }
+    },
+    "Activity": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गतिविधि"
+          }
+        }
+      }
+    },
+    "Add": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जोड़ें"
+          }
+        }
+      }
+    },
+    "Add a comment…": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "टिप्पणी लिखें…"
+          }
+        }
+      }
+    },
+    "Add a cover photo": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कवर फ़ोटो जोड़ें"
+          }
+        }
+      }
+    },
+    "Add a photo": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोटो जोड़ें"
+          }
+        }
+      }
+    },
+    "Add your UPI ID": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपनी UPI ID जोड़ें"
+          }
+        }
+      }
+    },
+    "Adjust": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बदलें"
+          }
+        }
+      }
+    },
+    "Adjust location": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जगह बदलें"
+          }
+        }
+      }
+    },
+    "After": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बाद में"
+          }
+        }
+      }
+    },
+    "All": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सभी"
+          }
+        }
+      }
+    },
+    "All India": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पूरा भारत"
+          }
+        }
+      }
+    },
+    "All time": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अब तक"
+          }
+        }
+      }
+    },
+    "Allow location to see dirty spots and drives around you, and to pin your reports accurately. We never share your live location.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आसपास की गंदी जगहें और अभियान देखने और अपनी रिपोर्ट सही जगह पिन करने के लिए लोकेशन की अनुमति दें। हम आपकी लाइव लोकेशन कभी साझा नहीं करते।"
+          }
+        }
+      }
+    },
+    "Already cleaned": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "साफ़ कर दिया"
+          }
+        }
+      }
+    },
+    "Amount (optional)": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "राशि (वैकल्पिक)"
+          }
+        }
+      }
+    },
+    "Any amount": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कोई भी राशि"
+          }
+        }
+      }
+    },
+    "Anything else? (optional)": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कुछ और? (वैकल्पिक)"
+          }
+        }
+      }
+    },
+    "Apple sign-in failed. Please try again.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple साइन-इन नहीं हो पाया। कृपया फिर से कोशिश करें।"
+          }
+        }
+      }
+    },
+    "Around here": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आसपास"
+          }
+        }
+      }
+    },
+    "Ask neighbours to tap “Still dirty” on the spot. More confirmations make a stronger case.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पड़ोसियों से कहें कि इस जगह पर “अब भी गंदा” दबाएँ। जितनी ज़्यादा पुष्टि, उतनी मज़बूत शिकायत।"
+          }
+        }
+      }
+    },
+    "Awesome!": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बहुत बढ़िया!"
+          }
+        }
+      }
+    },
+    "BEFORE": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पहले"
+          }
+        }
+      }
+    },
+    "Badges": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बैज"
+          }
+        }
+      }
+    },
+    "Bags of waste collected": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कचरे के बैग इकट्ठा किए"
+          }
+        }
+      }
+    },
+    "Be one of the first cleaners in your city. Report a spot or clean one today.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपने शहर के पहले सफ़ाई वीरों में शामिल हों। आज ही कोई जगह रिपोर्ट करें या साफ़ करें।"
+          }
+        }
+      }
+    },
+    "Be the first to join!": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सबसे पहले जुड़ें!"
+          }
+        }
+      }
+    },
+    "Be the one who gets the mohalla together. It takes a minute to set up.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मोहल्ले को एक साथ लाने वाले बनिए। बनाने में बस एक मिनट लगता है।"
+          }
+        }
+      }
+    },
+    "Before": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पहले"
+          }
+        }
+      }
+    },
+    "Before & after": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पहले और बाद"
+          }
+        }
+      }
+    },
+    "Before and after photos": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पहले और बाद की फ़ोटो"
+          }
+        }
+      }
+    },
+    "Before → After": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पहले → बाद"
+          }
+        }
+      }
+    },
+    "Before → after at %@! Cleaned with CleanConnect. Join in: %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ पर पहले → बाद! CleanConnect के साथ साफ़ किया। आप भी जुड़ें: %2$@"
+          }
+        }
+      }
+    },
+    "Block": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ब्लॉक करें"
+          }
+        }
+      }
+    },
+    "Block %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ को ब्लॉक करें"
+          }
+        }
+      }
+    },
+    "Block organiser": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आयोजक को ब्लॉक करें"
+          }
+        }
+      }
+    },
+    "Blocked drain": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बंद नाली"
+          }
+        }
+      }
+    },
+    "Blocked people": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ब्लॉक किए गए लोग"
+          }
+        }
+      }
+    },
+    "Blocked. You won't see their posts anymore.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ब्लॉक कर दिया। अब आपको उनकी पोस्ट नहीं दिखेंगी।"
+          }
+        }
+      }
+    },
+    "Bring a friend": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "दोस्त को लाएँ"
+          }
+        }
+      }
+    },
+    "Bring along": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "साथ लाएँ"
+          }
+        }
+      }
+    },
+    "Brooms & rakes": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "झाड़ू और रेक"
+          }
+        }
+      }
+    },
+    "By continuing you agree to our [Terms](%@), [Community Guidelines](%@) and [Privacy Policy](%@). There's zero tolerance for abusive content or users.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आगे बढ़कर आप हमारी [शर्तों](%1$@), [सामुदायिक दिशानिर्देशों](%2$@) और [गोपनीयता नीति](%3$@) से सहमत होते हैं। अपमानजनक सामग्री या उपयोगकर्ताओं के लिए कोई जगह नहीं है।"
+          }
+        }
+      }
+    },
+    "Camera": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कैमरा"
+          }
+        }
+      }
+    },
+    "Can you help clean it? Find it on the CleanConnect map.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "क्या आप इसे साफ़ करने में मदद करेंगे? CleanConnect मैप पर देखें।"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रद्द करें"
+          }
+        }
+      }
+    },
+    "Cancel drive": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान रद्द करें"
+          }
+        }
+      }
+    },
+    "Cancel this drive?": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह अभियान रद्द करें?"
+          }
+        }
+      }
+    },
+    "Cap or hat": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "टोपी"
+          }
+        }
+      }
+    },
+    "Cart-load": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ठेला भर"
+          }
+        }
+      }
+    },
+    "Change cover photo": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कवर फ़ोटो बदलें"
+          }
+        }
+      }
+    },
+    "Chip in for gloves, bags and water for this drive.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस अभियान के दस्ताने, बैग और पानी में योगदान दें।"
+          }
+        }
+      }
+    },
+    "Chip in for supplies via UPI": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "UPI से सामान के लिए योगदान दें"
+          }
+        }
+      }
+    },
+    "Choose meeting point": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मिलने की जगह चुनें"
+          }
+        }
+      }
+    },
+    "Choose on map": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मैप पर चुनें"
+          }
+        }
+      }
+    },
+    "City": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शहर"
+          }
+        }
+      }
+    },
+    "Claim a spot, clean it, and post the after photo. Your before/after goes in the feed and earns you Swachh Points.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कोई जगह चुनें, साफ़ करें और बाद की फ़ोटो पोस्ट करें। आपकी पहले/बाद की फ़ोटो फ़ीड में जाती है और आपको स्वच्छ पॉइंट्स मिलते हैं।"
+          }
+        }
+      }
+    },
+    "Claimed": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चुनी गई"
+          }
+        }
+      }
+    },
+    "Claimed! Clean it and post the after photo.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपने चुन ली! साफ़ करें और बाद की फ़ोटो पोस्ट करें।"
+          }
+        }
+      }
+    },
+    "Clean 10 spots": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "10 जगहें साफ़ करें"
+          }
+        }
+      }
+    },
+    "Clean 50 spots": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "50 जगहें साफ़ करें"
+          }
+        }
+      }
+    },
+    "Clean Crusader": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई योद्धा"
+          }
+        }
+      }
+    },
+    "Clean India, together": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मिलकर स्वच्छ भारत"
+          }
+        }
+      }
+    },
+    "Clean Machine": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई मशीन"
+          }
+        }
+      }
+    },
+    "Clean a spot (+5 per bag, up to 20 bags)": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जगह साफ़ करें (+5 प्रति बैग, 20 बैग तक)"
+          }
+        }
+      }
+    },
+    "Clean it. Prove it.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "साफ़ करो। दिखाओ।"
+          }
+        }
+      }
+    },
+    "Clean your first spot": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपनी पहली जगह साफ़ करें"
+          }
+        }
+      }
+    },
+    "Clean-up at %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ में सफ़ाई"
+          }
+        }
+      }
+    },
+    "CleanConnect": {
+      "shouldTranslate": false
+    },
+    "CleanConnect %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CleanConnect %@"
+          }
+        }
+      }
+    },
+    "Cleaned": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "साफ़"
+          }
+        }
+      }
+    },
+    "Cleaned by %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ने साफ़ किया"
+          }
+        }
+      }
+    },
+    "Cleanup drive on CleanConnect. Bring water, a cap and closed shoes.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CleanConnect पर सफ़ाई अभियान। पानी, टोपी और बंद जूते लाएँ।"
+          }
+        }
+      }
+    },
+    "Cleanup drive reminder": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई अभियान रिमाइंडर"
+          }
+        }
+      }
+    },
+    "Cleanup drives": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई अभियान"
+          }
+        }
+      }
+    },
+    "Cleanups": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई"
+          }
+        }
+      }
+    },
+    "Close": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बंद करें"
+          }
+        }
+      }
+    },
+    "Comments": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "टिप्पणियाँ"
+          }
+        }
+      }
+    },
+    "Community guidelines": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सामुदायिक दिशानिर्देश"
+          }
+        }
+      }
+    },
+    "Community member": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "समुदाय सदस्य"
+          }
+        }
+      }
+    },
+    "Complaint": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शिकायत"
+          }
+        }
+      }
+    },
+    "Complaint: garbage needs clearing at %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शिकायत: %@ में कचरा हटाने की ज़रूरत"
+          }
+        }
+      }
+    },
+    "Complete drive": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान पूरा करें"
+          }
+        }
+      }
+    },
+    "Complete your drive (+5 per bag)": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपना अभियान पूरा करें (+5 प्रति बैग)"
+          }
+        }
+      }
+    },
+    "Completed": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पूरा हुआ"
+          }
+        }
+      }
+    },
+    "Construction debris": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मलबा"
+          }
+        }
+      }
+    },
+    "Continue with Google": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Google से जारी रखें"
+          }
+        }
+      }
+    },
+    "Coordination": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "तालमेल"
+          }
+        }
+      }
+    },
+    "Copied": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कॉपी हो गया"
+          }
+        }
+      }
+    },
+    "Copy text": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "टेक्स्ट कॉपी करें"
+          }
+        }
+      }
+    },
+    "Couldn't upload the photo. Check your connection and try again.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोटो अपलोड नहीं हो पाई। इंटरनेट जाँचें और फिर कोशिश करें।"
+          }
+        }
+      }
+    },
+    "Delete": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हटाएँ"
+          }
+        }
+      }
+    },
+    "Delete account": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "खाता हटाएँ"
+          }
+        }
+      }
+    },
+    "Delete report": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रिपोर्ट हटाएँ"
+          }
+        }
+      }
+    },
+    "Delete this report?": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह रिपोर्ट हटाएँ?"
+          }
+        }
+      }
+    },
+    "Delete your account?": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपना खाता हटाएँ?"
+          }
+        }
+      }
+    },
+    "Deleting account…": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "खाता हटाया जा रहा है…"
+          }
+        }
+      }
+    },
+    "Deleting your account permanently removes your profile, reports, comments and drive sign-ups. Cleanups you completed stay on the map without your name.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "खाता हटाने से आपकी प्रोफ़ाइल, रिपोर्ट, टिप्पणियाँ और अभियान पंजीकरण हमेशा के लिए हट जाते हैं। आपकी की गई सफ़ाई बिना आपके नाम के मैप पर रहती है।"
+          }
+        }
+      }
+    },
+    "Directions": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रास्ता"
+          }
+        }
+      }
+    },
+    "Dirty": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गंदा"
+          }
+        }
+      }
+    },
+    "Done": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हो गया"
+          }
+        }
+      }
+    },
+    "Drive Captain": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान कप्तान"
+          }
+        }
+      }
+    },
+    "Drive complete! What a team.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान पूरा! क्या टीम है।"
+          }
+        }
+      }
+    },
+    "Drive is full": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान भर गया"
+          }
+        }
+      }
+    },
+    "Drive not found": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान नहीं मिला"
+          }
+        }
+      }
+    },
+    "Drives": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान"
+          }
+        }
+      }
+    },
+    "Drives you organise or join show up here.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपके आयोजित या जुड़े अभियान यहाँ दिखेंगे।"
+          }
+        }
+      }
+    },
+    "Duration": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अवधि"
+          }
+        }
+      }
+    },
+    "E-waste": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ई-कचरा"
+          }
+        }
+      }
+    },
+    "Earn Swachh Points": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वच्छ पॉइंट्स कमाएँ"
+          }
+        }
+      }
+    },
+    "Earn points": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पॉइंट्स कमाएँ"
+          }
+        }
+      }
+    },
+    "Edit profile": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रोफ़ाइल बदलें"
+          }
+        }
+      }
+    },
+    "Email": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ईमेल"
+          }
+        }
+      }
+    },
+    "Email us": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हमें ईमेल करें"
+          }
+        }
+      }
+    },
+    "Enter a valid https:// link.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सही https:// लिंक डालें।"
+          }
+        }
+      }
+    },
+    "Escalate to the authorities": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अधिकारियों तक पहुँचाएँ"
+          }
+        }
+      }
+    },
+    "Every clean street starts with one photo.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हर साफ़ गली की शुरुआत एक फ़ोटो से होती है।"
+          }
+        }
+      }
+    },
+    "Extras": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अतिरिक्त"
+          }
+        }
+      }
+    },
+    "File it on your city's grievance portal or the official Swachhata app too.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इसे अपने शहर के शिकायत पोर्टल या आधिकारिक स्वच्छता ऐप पर भी दर्ज करें।"
+          }
+        }
+      }
+    },
+    "Find a dirty spot near you and turn it green.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पास की कोई गंदी जगह ढूँढें और उसे हरा कर दें।"
+          }
+        }
+      }
+    },
+    "Find one": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जगह ढूँढें"
+          }
+        }
+      }
+    },
+    "Finding your location…": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपकी लोकेशन ढूँढी जा रही है…"
+          }
+        }
+      }
+    },
+    "Finding you…": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपको ढूँढ रहे हैं…"
+          }
+        }
+      }
+    },
+    "First Cleanup": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पहली सफ़ाई"
+          }
+        }
+      }
+    },
+    "First Report": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पहली रिपोर्ट"
+          }
+        }
+      }
+    },
+    "First-aid kit": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़र्स्ट-एड किट"
+          }
+        }
+      }
+    },
+    "Food & organic waste": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "खाना और जैविक कचरा"
+          }
+        }
+      }
+    },
+    "Free on the\nApp Store": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Store पर\nमुफ़्त"
+          }
+        }
+      }
+    },
+    "Fresh cleanups": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ताज़ा सफ़ाई"
+          }
+        }
+      }
+    },
+    "Fundraiser or website link (optional)": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ंडरेज़र या वेबसाइट लिंक (वैकल्पिक)"
+          }
+        }
+      }
+    },
+    "Garbage bags": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कचरा बैग"
+          }
+        }
+      }
+    },
+    "Garbage burning": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कचरा जलाना"
+          }
+        }
+      }
+    },
+    "Garbage dump": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कूड़े का ढेर"
+          }
+        }
+      }
+    },
+    "Garbage spotted at %@. Can you help clean it? It's on the CleanConnect map: %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ में कचरा दिखा। क्या आप इसे साफ़ करने में मदद करेंगे? यह CleanConnect मैप पर है: %2$@"
+          }
+        }
+      }
+    },
+    "Gloves": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "दस्ताने"
+          }
+        }
+      }
+    },
+    "Go": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चलें"
+          }
+        }
+      }
+    },
+    "Google sign-in failed. Please try again.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Google साइन-इन नहीं हो पाया। कृपया फिर से कोशिश करें।"
+          }
+        }
+      }
+    },
+    "Google sign-in isn't configured.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Google साइन-इन सेट नहीं है।"
+          }
+        }
+      }
+    },
+    "Green Guardian": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हरित रक्षक"
+          }
+        }
+      }
+    },
+    "Harassment or hate": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "उत्पीड़न या नफ़रत"
+          }
+        }
+      }
+    },
+    "Help & legal": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मदद और कानूनी"
+          }
+        }
+      }
+    },
+    "Help & support": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मदद और सहायता"
+          }
+        }
+      }
+    },
+    "Help clean this spot": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस जगह को साफ़ करने में मदद करें"
+          }
+        }
+      }
+    },
+    "Help out 30 days in a row": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लगातार 30 दिन मदद करें"
+          }
+        }
+      }
+    },
+    "Help out 7 days in a row": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लगातार 7 दिन मदद करें"
+          }
+        }
+      }
+    },
+    "Home": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "होम"
+          }
+        }
+      }
+    },
+    "How big?": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कितना बड़ा?"
+          }
+        }
+      }
+    },
+    "How did it go? (optional)": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कैसा रहा? (वैकल्पिक)"
+          }
+        }
+      }
+    },
+    "How it works": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह कैसे काम करता है"
+          }
+        }
+      }
+    },
+    "How to earn Swachh Points": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वच्छ पॉइंट्स कैसे कमाएँ"
+          }
+        }
+      }
+    },
+    "I would like to bring to your attention a cleanliness problem in our area that needs urgent action.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मैं आपका ध्यान हमारे क्षेत्र की एक सफ़ाई समस्या की ओर दिलाना चाहता/चाहती हूँ, जिस पर तुरंत कार्रवाई की ज़रूरत है।"
+          }
+        }
+      }
+    },
+    "I'll brief volunteers on safety and make sure kids are supervised.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मैं स्वयंसेवकों को सुरक्षा के बारे में बताऊँगा/बताऊँगी और बच्चों की निगरानी सुनिश्चित करूँगा/करूँगी।"
+          }
+        }
+      }
+    },
+    "I'll clean this": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मैं इसे साफ़ करूँगा"
+          }
+        }
+      }
+    },
+    "I'm cleaning up my city with CleanConnect. Report garbage, post before/afters and join cleanup drives. Join me!": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मैं CleanConnect के साथ अपना शहर साफ़ कर रहा/रही हूँ। कचरा रिपोर्ट करें, पहले/बाद की फ़ोटो डालें और सफ़ाई अभियानों से जुड़ें। मेरे साथ जुड़िए!"
+          }
+        }
+      }
+    },
+    "Impact": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "असर"
+          }
+        }
+      }
+    },
+    "Inappropriate photo": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अनुचित फ़ोटो"
+          }
+        }
+      }
+    },
+    "India": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भारत"
+          }
+        }
+      }
+    },
+    "India is getting cleaner": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भारत साफ़ हो रहा है"
+          }
+        }
+      }
+    },
+    "Instagram handle (optional)": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instagram हैंडल (वैकल्पिक)"
+          }
+        }
+      }
+    },
+    "Invite friends": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "दोस्तों को बुलाएँ"
+          }
+        }
+      }
+    },
+    "Invite on WhatsApp & more": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WhatsApp वगैरह पर बुलाएँ"
+          }
+        }
+      }
+    },
+    "It may have been cancelled.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शायद यह रद्द हो गया है।"
+          }
+        }
+      }
+    },
+    "It may have been removed.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शायद इसे हटा दिया गया है।"
+          }
+        }
+      }
+    },
+    "It's live on the map. Spots that get shared get cleaned much faster.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह मैप पर लाइव है। जो जगहें शेयर होती हैं, वे बहुत जल्दी साफ़ होती हैं।"
+          }
+        }
+      }
+    },
+    "Join 5 cleanup drives": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5 सफ़ाई अभियानों से जुड़ें"
+          }
+        }
+      }
+    },
+    "Join a cleanup drive": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई अभियान से जुड़ें"
+          }
+        }
+      }
+    },
+    "Join drives": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान से जुड़ें"
+          }
+        }
+      }
+    },
+    "Join the Swachh squad": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वच्छ टीम से जुड़ें"
+          }
+        }
+      }
+    },
+    "Join this drive": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस अभियान से जुड़ें"
+          }
+        }
+      }
+    },
+    "Landmark, e.g. Near main gate": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पहचान चिह्न, जैसे मेन गेट के पास"
+          }
+        }
+      }
+    },
+    "Language, notifications & location": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भाषा, नोटिफ़िकेशन और लोकेशन"
+          }
+        }
+      }
+    },
+    "Leaderboard": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लीडरबोर्ड"
+          }
+        }
+      }
+    },
+    "Leaders": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लीडर्स"
+          }
+        }
+      }
+    },
+    "Leave": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "छोड़ें"
+          }
+        }
+      }
+    },
+    "Let people support you": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लोगों को आपका साथ देने दें"
+          }
+        }
+      }
+    },
+    "Let people thank you for cleanups. 100% goes to you, and we take nothing.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लोगों को सफ़ाई के लिए आपका शुक्रिया अदा करने दें। 100% आपको मिलता है, हम कुछ नहीं लेते।"
+          }
+        }
+      }
+    },
+    "Let's clean up India": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चलो भारत साफ़ करें"
+          }
+        }
+      }
+    },
+    "Levels": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लेवल"
+          }
+        }
+      }
+    },
+    "Library": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गैलरी"
+          }
+        }
+      }
+    },
+    "Linked to the %@ report at %@.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$@ की %1$@ रिपोर्ट से जुड़ा है।"
+          }
+        }
+      }
+    },
+    "Loading drives…": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान लोड हो रहे हैं…"
+          }
+        }
+      }
+    },
+    "Location is off. Pick the spot on the map instead.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लोकेशन बंद है। इसकी जगह मैप पर जगह चुनें।"
+          }
+        }
+      }
+    },
+    "Locked": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लॉक"
+          }
+        }
+      }
+    },
+    "Locked. Keep going!": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभी लॉक है। लगे रहो!"
+          }
+        }
+      }
+    },
+    "Looking around…": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आसपास देख रहे हैं…"
+          }
+        }
+      }
+    },
+    "Made with ❤️ for a cleaner India": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वच्छ भारत के लिए ❤️ से बनाया"
+          }
+        }
+      }
+    },
+    "Map": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मैप"
+          }
+        }
+      }
+    },
+    "Mark as cleaned": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "साफ़ के रूप में चिह्नित करें"
+          }
+        }
+      }
+    },
+    "Mark as completed": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पूरा चिह्नित करें"
+          }
+        }
+      }
+    },
+    "Mask": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मास्क"
+          }
+        }
+      }
+    },
+    "Maybe later": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बाद में"
+          }
+        }
+      }
+    },
+    "Meeting point": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मिलने की जगह"
+          }
+        }
+      }
+    },
+    "More details (optional)": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "और जानकारी (वैकल्पिक)"
+          }
+        }
+      }
+    },
+    "Move the map to place the pin": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पिन लगाने के लिए मैप खिसकाएँ"
+          }
+        }
+      }
+    },
+    "My city": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मेरा शहर"
+          }
+        }
+      }
+    },
+    "My drives": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मेरे अभियान"
+          }
+        }
+      }
+    },
+    "My state": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मेरा राज्य"
+          }
+        }
+      }
+    },
+    "NEEDS CLEANING": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई चाहिए"
+          }
+        }
+      }
+    },
+    "Namaste 🙏": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नमस्ते 🙏"
+          }
+        }
+      }
+    },
+    "Namaste, %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नमस्ते, %@"
+          }
+        }
+      }
+    },
+    "Name it, e.g. Sunday Lake Clean-up": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नाम दें, जैसे रविवार झील सफ़ाई"
+          }
+        }
+      }
+    },
+    "Near me": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मेरे पास"
+          }
+        }
+      }
+    },
+    "Needs cleaning": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई चाहिए"
+          }
+        }
+      }
+    },
+    "Needs cleaning near you": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपके पास सफ़ाई चाहिए"
+          }
+        }
+      }
+    },
+    "New cleanup drive": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नया सफ़ाई अभियान"
+          }
+        }
+      }
+    },
+    "Next": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आगे"
+          }
+        }
+      }
+    },
+    "No cleanups yet": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभी कोई सफ़ाई नहीं"
+          }
+        }
+      }
+    },
+    "No comments yet. Say something encouraging!": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभी कोई टिप्पणी नहीं। कुछ हौसला बढ़ाने वाला लिखें!"
+          }
+        }
+      }
+    },
+    "No drives near you yet": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपके पास अभी कोई अभियान नहीं"
+          }
+        }
+      }
+    },
+    "No drives organised": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कोई अभियान आयोजित नहीं"
+          }
+        }
+      }
+    },
+    "No drives yet": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभी कोई अभियान नहीं"
+          }
+        }
+      }
+    },
+    "No points yet this week. Report or clean a spot to take #1.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस हफ़्ते अभी कोई पॉइंट्स नहीं। #1 बनने के लिए कोई जगह रिपोर्ट या साफ़ करें।"
+          }
+        }
+      }
+    },
+    "No reports yet": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभी कोई रिपोर्ट नहीं"
+          }
+        }
+      }
+    },
+    "No spots here yet. Zoom out or report one.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यहाँ अभी कोई जगह नहीं। ज़ूम आउट करें या एक रिपोर्ट करें।"
+          }
+        }
+      }
+    },
+    "No upcoming drives here": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यहाँ कोई आगामी अभियान नहीं"
+          }
+        }
+      }
+    },
+    "No volunteer limit": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वयंसेवकों की कोई सीमा नहीं"
+          }
+        }
+      }
+    },
+    "Not now": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभी नहीं"
+          }
+        }
+      }
+    },
+    "Nothing here yet.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभी यहाँ कुछ नहीं।"
+          }
+        }
+      }
+    },
+    "Nothing reported nearby yet": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आसपास अभी कुछ रिपोर्ट नहीं हुआ"
+          }
+        }
+      }
+    },
+    "Now invite people. Drives shared on WhatsApp get many more volunteers.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अब लोगों को बुलाएँ। WhatsApp पर शेयर किए गए अभियानों में कहीं ज़्यादा स्वयंसेवक आते हैं।"
+          }
+        }
+      }
+    },
+    "Offensive or abusive": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपत्तिजनक या अपमानजनक"
+          }
+        }
+      }
+    },
+    "Open %@'s support link": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ का सपोर्ट लिंक खोलें"
+          }
+        }
+      }
+    },
+    "Open WhatsApp group": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WhatsApp ग्रुप खोलें"
+          }
+        }
+      }
+    },
+    "Or type an amount in ₹": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "या ₹ में राशि लिखें"
+          }
+        }
+      }
+    },
+    "Organise a cleanup drive": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई अभियान आयोजित करें"
+          }
+        }
+      }
+    },
+    "Organise a drive": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान आयोजित करें"
+          }
+        }
+      }
+    },
+    "Organised by %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आयोजक: %@"
+          }
+        }
+      }
+    },
+    "Organiser": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आयोजक"
+          }
+        }
+      }
+    },
+    "Other UPI app": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "दूसरा UPI ऐप"
+          }
+        }
+      }
+    },
+    "Our team reviews every report within 24 hours and removes content that breaks the community guidelines. Content reported by several people is hidden automatically.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हमारी टीम हर रिपोर्ट 24 घंटे के अंदर देखती है और दिशानिर्देश तोड़ने वाली सामग्री हटा देती है। कई लोगों द्वारा रिपोर्ट की गई सामग्री अपने आप छिप जाती है।"
+          }
+        }
+      }
+    },
+    "Paan stains & walls": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पान के दाग़ और दीवारें"
+          }
+        }
+      }
+    },
+    "Pay with %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ से भुगतान करें"
+          }
+        }
+      }
+    },
+    "Pay with any UPI app": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "किसी भी UPI ऐप से भुगतान करें"
+          }
+        }
+      }
+    },
+    "Payments happen in your UPI app, directly between you and %@. It's completely optional and doesn't unlock anything in CleanConnect. Only send money to people you trust.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भुगतान आपके UPI ऐप में सीधे आपके और %@ के बीच होता है। यह पूरी तरह वैकल्पिक है और इससे CleanConnect में कुछ अनलॉक नहीं होता। सिर्फ़ भरोसेमंद लोगों को ही पैसे भेजें।"
+          }
+        }
+      }
+    },
+    "People who helped": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मदद करने वाले लोग"
+          }
+        }
+      }
+    },
+    "Period": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अवधि"
+          }
+        }
+      }
+    },
+    "Photos from the drive": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान की फ़ोटो"
+          }
+        }
+      }
+    },
+    "Pick a meeting point on the map.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मैप पर मिलने की जगह चुनें।"
+          }
+        }
+      }
+    },
+    "Pick a spot, set a time, invite your WhatsApp groups. +%lld pts": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जगह चुनें, समय तय करें, WhatsApp ग्रुप्स को बुलाएँ। +%lld पॉइंट्स"
+          }
+        }
+      }
+    },
+    "Pick the spot on the map.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मैप पर जगह चुनें।"
+          }
+        }
+      }
+    },
+    "Pinned location": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पिन की गई जगह"
+          }
+        }
+      }
+    },
+    "Pinned on map": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मैप पर पिन किया"
+          }
+        }
+      }
+    },
+    "Plan a drive": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान बनाएँ"
+          }
+        }
+      }
+    },
+    "Plastic litter": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्लास्टिक कचरा"
+          }
+        }
+      }
+    },
+    "Please sign in first.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कृपया पहले साइन इन करें।"
+          }
+        }
+      }
+    },
+    "Post": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पोस्ट करें"
+          }
+        }
+      }
+    },
+    "Post cleanup  ·  +%lld pts": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई पोस्ट करें  ·  +%lld पॉइंट्स"
+          }
+        }
+      }
+    },
+    "Post report  ·  +%lld pts": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रिपोर्ट पोस्ट करें  ·  +%lld पॉइंट्स"
+          }
+        }
+      }
+    },
+    "Preferences": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पसंद"
+          }
+        }
+      }
+    },
+    "Privacy policy": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गोपनीयता नीति"
+          }
+        }
+      }
+    },
+    "Profile not found": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रोफ़ाइल नहीं मिली"
+          }
+        }
+      }
+    },
+    "Profile saved": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रोफ़ाइल सेव हो गई"
+          }
+        }
+      }
+    },
+    "Provided by organiser": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आयोजक देंगे"
+          }
+        }
+      }
+    },
+    "Publish": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रकाशित करें"
+          }
+        }
+      }
+    },
+    "QR": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR"
+          }
+        }
+      }
+    },
+    "Questions & updates": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सवाल और अपडेट"
+          }
+        }
+      }
+    },
+    "Rally your mohalla.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मोहल्ले को जोड़ो।"
+          }
+        }
+      }
+    },
+    "Rally your neighbours for a cleanup.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई के लिए पड़ोसियों को इकट्ठा करें।"
+          }
+        }
+      }
+    },
+    "Rate CleanConnect": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CleanConnect को रेट करें"
+          }
+        }
+      }
+    },
+    "Remove 100 bags of waste": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "100 बैग कचरा हटाएँ"
+          }
+        }
+      }
+    },
+    "Remove photo": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोटो हटाएँ"
+          }
+        }
+      }
+    },
+    "Report": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रिपोर्ट"
+          }
+        }
+      }
+    },
+    "Report 10 dirty spots": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "10 गंदी जगहें रिपोर्ट करें"
+          }
+        }
+      }
+    },
+    "Report a dirty spot": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गंदी जगह रिपोर्ट करें"
+          }
+        }
+      }
+    },
+    "Report a spot": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जगह रिपोर्ट करें"
+          }
+        }
+      }
+    },
+    "Report comment": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "टिप्पणी रिपोर्ट करें"
+          }
+        }
+      }
+    },
+    "Report content": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सामग्री रिपोर्ट करें"
+          }
+        }
+      }
+    },
+    "Report drive": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान रिपोर्ट करें"
+          }
+        }
+      }
+    },
+    "Report or clean a spot to get on the board.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बोर्ड पर आने के लिए कोई जगह रिपोर्ट या साफ़ करें।"
+          }
+        }
+      }
+    },
+    "Report profile": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रोफ़ाइल रिपोर्ट करें"
+          }
+        }
+      }
+    },
+    "Report spots": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जगहें रिपोर्ट करें"
+          }
+        }
+      }
+    },
+    "Report your first dirty spot": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपनी पहली गंदी जगह रिपोर्ट करें"
+          }
+        }
+      }
+    },
+    "Reported by %@ · %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ने रिपोर्ट किया · %2$@"
+          }
+        }
+      }
+    },
+    "Reported! Thank you 🙏": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रिपोर्ट हो गया! धन्यवाद 🙏"
+          }
+        }
+      }
+    },
+    "Reporter's note": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रिपोर्ट करने वाले का नोट"
+          }
+        }
+      }
+    },
+    "Reports": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रिपोर्ट"
+          }
+        }
+      }
+    },
+    "Respect": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सम्मान"
+          }
+        }
+      }
+    },
+    "Respect, %lld": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सम्मान, %lld"
+          }
+        }
+      }
+    },
+    "Respected Sir/Madam,": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आदरणीय महोदय/महोदया,"
+          }
+        }
+      }
+    },
+    "Results: %lld bags collected": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नतीजा: %lld बैग इकट्ठा किए"
+          }
+        }
+      }
+    },
+    "River, lake or beach": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नदी, झील या समुद्र तट"
+          }
+        }
+      }
+    },
+    "Safai Starter": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई स्टार्टर"
+          }
+        }
+      }
+    },
+    "Safety first: go with others, wear gloves and closed shoes, keep kids supervised, stay away from traffic, and never handle needles or medical waste.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सुरक्षा पहले: दूसरों के साथ जाएँ, दस्ताने और बंद जूते पहनें, बच्चों पर नज़र रखें, ट्रैफ़िक से दूर रहें और सुई या मेडिकल कचरा कभी न छुएँ।"
+          }
+        }
+      }
+    },
+    "Save": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सेव करें"
+          }
+        }
+      }
+    },
+    "Say something about the cleanup (optional)": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई के बारे में कुछ लिखें (वैकल्पिक)"
+          }
+        }
+      }
+    },
+    "Say thanks for cleaning up. Even ₹21 buys gloves and garbage bags for the next cleanup.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई के लिए शुक्रिया कहें। ₹21 से भी अगली सफ़ाई के लिए दस्ताने और कचरा बैग आ जाते हैं।"
+          }
+        }
+      }
+    },
+    "Scan with any UPI app": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "किसी भी UPI ऐप से स्कैन करें"
+          }
+        }
+      }
+    },
+    "See a garbage dump, a blocked drain or a littered park? Report it in 10 seconds with a photo. It goes on the live map for your whole city.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कूड़े का ढेर, बंद नाली या गंदा पार्क दिखा? फ़ोटो के साथ 10 सेकंड में रिपोर्ट करें। यह पूरे शहर के लाइव मैप पर दिखेगा।"
+          }
+        }
+      }
+    },
+    "Select": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चुनें"
+          }
+        }
+      }
+    },
+    "Send": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेजें"
+          }
+        }
+      }
+    },
+    "Send comment": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "टिप्पणी भेजें"
+          }
+        }
+      }
+    },
+    "Send with photo": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोटो के साथ भेजें"
+          }
+        }
+      }
+    },
+    "Set the location first.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पहले जगह तय करें।"
+          }
+        }
+      }
+    },
+    "Set up your profile": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपनी प्रोफ़ाइल बनाएँ"
+          }
+        }
+      }
+    },
+    "Settings": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सेटिंग्स"
+          }
+        }
+      }
+    },
+    "Share before & after": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पहले और बाद शेयर करें"
+          }
+        }
+      }
+    },
+    "Share on WhatsApp & more": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WhatsApp वगैरह पर शेयर करें"
+          }
+        }
+      }
+    },
+    "Shares someone's private information": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "किसी की निजी जानकारी शेयर करता है"
+          }
+        }
+      }
+    },
+    "Sharp Eye": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "तेज़ नज़र"
+          }
+        }
+      }
+    },
+    "Short bio (optional)": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "छोटा परिचय (वैकल्पिक)"
+          }
+        }
+      }
+    },
+    "Show": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "दिखाएँ"
+          }
+        }
+      }
+    },
+    "Show it sparkling ✨": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चमकती हुई दिखाएँ ✨"
+          }
+        }
+      }
+    },
+    "Show on map": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मैप पर दिखाएँ"
+          }
+        }
+      }
+    },
+    "Show the mess clearly. Please don't photograph people's faces.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गंदगी साफ़ दिखाएँ। कृपया लोगों के चेहरों की फ़ोटो न लें।"
+          }
+        }
+      }
+    },
+    "Sign in": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "साइन इन करें"
+          }
+        }
+      }
+    },
+    "Sign in to claim and clean this spot.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस जगह को चुनने और साफ़ करने के लिए साइन इन करें।"
+          }
+        }
+      }
+    },
+    "Sign in to comment": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "टिप्पणी के लिए साइन इन करें"
+          }
+        }
+      }
+    },
+    "Sign in to join the conversation.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बातचीत में जुड़ने के लिए साइन इन करें।"
+          }
+        }
+      }
+    },
+    "Sign in to join this cleanup drive.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस सफ़ाई अभियान से जुड़ने के लिए साइन इन करें।"
+          }
+        }
+      }
+    },
+    "Sign in to organise a cleanup drive.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई अभियान आयोजित करने के लिए साइन इन करें।"
+          }
+        }
+      }
+    },
+    "Sign in to post a cleanup.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई पोस्ट करने के लिए साइन इन करें।"
+          }
+        }
+      }
+    },
+    "Sign in to react and earn points.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रतिक्रिया देने और पॉइंट्स कमाने के लिए साइन इन करें।"
+          }
+        }
+      }
+    },
+    "Sign in to report a dirty spot and earn Swachh Points.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गंदी जगह रिपोर्ट करने और स्वच्छ पॉइंट्स कमाने के लिए साइन इन करें।"
+          }
+        }
+      }
+    },
+    "Sign in to report a dirty spot.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गंदी जगह रिपोर्ट करने के लिए साइन इन करें।"
+          }
+        }
+      }
+    },
+    "Sign in to start your Swachh profile.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपनी स्वच्छ प्रोफ़ाइल शुरू करने के लिए साइन इन करें।"
+          }
+        }
+      }
+    },
+    "Sign in to track your cleanups, earn points and badges, keep a streak and climb your city's leaderboard.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपनी सफ़ाई ट्रैक करने, पॉइंट्स और बैज कमाने, स्ट्रीक बनाए रखने और शहर के लीडरबोर्ड पर चढ़ने के लिए साइन इन करें।"
+          }
+        }
+      }
+    },
+    "Sign out": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "साइन आउट"
+          }
+        }
+      }
+    },
+    "Sign out?": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "साइन आउट करें?"
+          }
+        }
+      }
+    },
+    "Signed in": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "साइन इन है"
+          }
+        }
+      }
+    },
+    "Skip": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "छोड़ें"
+          }
+        }
+      }
+    },
+    "Slide to see the difference": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़र्क़ देखने के लिए स्लाइड करें"
+          }
+        }
+      }
+    },
+    "Snacks": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नाश्ता"
+          }
+        }
+      }
+    },
+    "Someone": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कोई"
+          }
+        }
+      }
+    },
+    "Someone's on it": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कोई इस पर काम कर रहा है"
+          }
+        }
+      }
+    },
+    "Something else": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कुछ और"
+          }
+        }
+      }
+    },
+    "Spam or fake report": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्पैम या झूठी रिपोर्ट"
+          }
+        }
+      }
+    },
+    "Spot cleaned! You're a Swachh hero.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जगह साफ़! आप स्वच्छता के हीरो हैं।"
+          }
+        }
+      }
+    },
+    "Spot it. Snap it.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "देखो। फ़ोटो खींचो।"
+          }
+        }
+      }
+    },
+    "Spot not found": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जगह नहीं मिली"
+          }
+        }
+      }
+    },
+    "Spots in this area": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस इलाक़े की जगहें"
+          }
+        }
+      }
+    },
+    "Spotted garbage on your street? Be the first to report it.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपकी गली में कचरा दिखा? सबसे पहले रिपोर्ट करें।"
+          }
+        }
+      }
+    },
+    "Spotted garbage? Snap it and put it on the map.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कचरा दिखा? फ़ोटो लें और मैप पर डालें।"
+          }
+        }
+      }
+    },
+    "Spread the word": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सबको बताएँ"
+          }
+        }
+      }
+    },
+    "Start": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शुरू करें"
+          }
+        }
+      }
+    },
+    "Start a cleanup drive, invite friends on WhatsApp and climb the city leaderboard together. Bharat gets cleaner one spot at a time.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई अभियान शुरू करें, WhatsApp पर दोस्तों को बुलाएँ और मिलकर शहर के लीडरबोर्ड पर चढ़ें। एक-एक जगह से भारत साफ़ होता है।"
+          }
+        }
+      }
+    },
+    "Start one. Friends join on WhatsApp in a tap.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक शुरू करें। दोस्त WhatsApp से एक टैप में जुड़ जाते हैं।"
+          }
+        }
+      }
+    },
+    "Starts": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शुरू"
+          }
+        }
+      }
+    },
+    "State": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "राज्य"
+          }
+        }
+      }
+    },
+    "Stay safe: wear gloves, don't touch sharp objects or medical waste with bare hands, and avoid traffic.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सुरक्षित रहें: दस्ताने पहनें, नुकीली चीज़ें या मेडिकल कचरा नंगे हाथों से न छुएँ, और ट्रैफ़िक से बचें।"
+          }
+        }
+      }
+    },
+    "Still dirty": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अब भी गंदा"
+          }
+        }
+      }
+    },
+    "Still setting up your profile — try again in a moment.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपकी प्रोफ़ाइल अभी बन रही है — थोड़ी देर में फिर कोशिश करें।"
+          }
+        }
+      }
+    },
+    "Sturdy shoes": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मज़बूत जूते"
+          }
+        }
+      }
+    },
+    "Subject: %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "विषय: %@"
+          }
+        }
+      }
+    },
+    "Sunscreen": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सनस्क्रीन"
+          }
+        }
+      }
+    },
+    "Supplies: %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सामान: %@"
+          }
+        }
+      }
+    },
+    "Support %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ का साथ दें"
+          }
+        }
+      }
+    },
+    "Support %@ via UPI": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "UPI से %@ का साथ दें"
+          }
+        }
+      }
+    },
+    "Swachh Champion": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वच्छ चैंपियन"
+          }
+        }
+      }
+    },
+    "Swachh Hero": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वच्छ हीरो"
+          }
+        }
+      }
+    },
+    "Swachh Legend": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वच्छ लीजेंड"
+          }
+        }
+      }
+    },
+    "Swachh Points": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वच्छ पॉइंट्स"
+          }
+        }
+      }
+    },
+    "Swachh Sathi": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वच्छ साथी"
+          }
+        }
+      }
+    },
+    "Swachh Superstar": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वच्छ सुपरस्टार"
+          }
+        }
+      }
+    },
+    "Swachh Warrior": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वच्छ योद्धा"
+          }
+        }
+      }
+    },
+    "Tag your municipal corporation's official account on X with the photo.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोटो के साथ X पर अपने नगर निगम के आधिकारिक अकाउंट को टैग करें।"
+          }
+        }
+      }
+    },
+    "Take the after photo from the same angle as the before photo. It makes the slider look amazing.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बाद की फ़ोटो उसी कोण से लें जिससे पहले की ली थी। इससे स्लाइडर शानदार दिखता है।"
+          }
+        }
+      }
+    },
+    "Takes 10 seconds. Your photo goes on the city map so someone can clean it.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सिर्फ़ 10 सेकंड। आपकी फ़ोटो शहर के मैप पर जाती है ताकि कोई इसे साफ़ कर सके।"
+          }
+        }
+      }
+    },
+    "Tap one to claim it": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चुनने के लिए टैप करें"
+          }
+        }
+      }
+    },
+    "Team Player": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "टीम प्लेयर"
+          }
+        }
+      }
+    },
+    "Tell us more": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "और बताएँ"
+          }
+        }
+      }
+    },
+    "Tell us your name and city so you show up on your city's leaderboard.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपना नाम और शहर बताएँ ताकि आप अपने शहर के लीडरबोर्ड पर दिखें।"
+          }
+        }
+      }
+    },
+    "Terms of use": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "उपयोग की शर्तें"
+          }
+        }
+      }
+    },
+    "Thanks for cleaning": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई के लिए धन्यवाद"
+          }
+        }
+      }
+    },
+    "Thanks for verifying! +%lld pts": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पुष्टि के लिए धन्यवाद! +%lld पॉइंट्स"
+          }
+        }
+      }
+    },
+    "Thanks. We'll review it within 24 hours.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "धन्यवाद। हम 24 घंटे के अंदर इसकी जाँच करेंगे।"
+          }
+        }
+      }
+    },
+    "That doesn't look like a UPI ID (e.g. name@okaxis).": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह UPI ID जैसा नहीं लगता (जैसे name@okaxis)।"
+          }
+        }
+      }
+    },
+    "That doesn't look like a valid UPI ID.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह सही UPI ID नहीं लगती।"
+          }
+        }
+      }
+    },
+    "The drive": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान"
+          }
+        }
+      }
+    },
+    "The first before/after in India could be yours.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भारत की पहली पहले/बाद की फ़ोटो आपकी हो सकती है।"
+          }
+        }
+      }
+    },
+    "The linked spot will also be marked as cleaned with these photos.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जुड़ी हुई जगह भी इन फ़ोटो के साथ साफ़ चिह्नित हो जाएगी।"
+          }
+        }
+      }
+    },
+    "The podium is empty": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पोडियम ख़ाली है"
+          }
+        }
+      }
+    },
+    "The spot we're cleaning": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जिस जगह की सफ़ाई होगी"
+          }
+        }
+      }
+    },
+    "This account may have been deleted.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शायद यह खाता हटा दिया गया है।"
+          }
+        }
+      }
+    },
+    "This can't be undone. Your points, badges, reports and comments will be removed.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इसे वापस नहीं किया जा सकता। आपके पॉइंट्स, बैज, रिपोर्ट और टिप्पणियाँ हट जाएँगी।"
+          }
+        }
+      }
+    },
+    "This is a health hazard for residents and spoils our neighbourhood. I request you to kindly get it cleared at the earliest and arrange regular collection so it doesn't pile up again.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह निवासियों के स्वास्थ्य के लिए ख़तरा है और हमारे मोहल्ले को ख़राब करता है। कृपया इसे जल्द से जल्द साफ़ करवाएँ और नियमित कचरा उठाने की व्यवस्था करें ताकि यह फिर जमा न हो।"
+          }
+        }
+      }
+    },
+    "This spot at %@ needs cleaning. Can you help? %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ की इस जगह को सफ़ाई चाहिए। क्या आप मदद करेंगे? %2$@"
+          }
+        }
+      }
+    },
+    "This week": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस हफ़्ते"
+          }
+        }
+      }
+    },
+    "Tips that get results": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "असरदार सुझाव"
+          }
+        }
+      }
+    },
+    "To,\nThe Commissioner / Ward Officer,\nMunicipal Corporation": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सेवा में,\nआयुक्त / वार्ड अधिकारी,\nनगर निगम"
+          }
+        }
+      }
+    },
+    "Tomorrow: %@. Keep gloves, water and a cap ready!": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कल: %@। दस्ताने, पानी और टोपी तैयार रखें!"
+          }
+        }
+      }
+    },
+    "Top cleaners this week": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस हफ़्ते के टॉप सफ़ाई वीर"
+          }
+        }
+      }
+    },
+    "Top level reached. Legend!": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सबसे ऊँचा लेवल। लीजेंड!"
+          }
+        }
+      }
+    },
+    "Truck-load": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ट्रक भर"
+          }
+        }
+      }
+    },
+    "Truth Keeper": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सच का रखवाला"
+          }
+        }
+      }
+    },
+    "Turn on location": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लोकेशन चालू करें"
+          }
+        }
+      }
+    },
+    "UPI ID, e.g. name@okaxis": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "UPI ID, जैसे name@okaxis"
+          }
+        }
+      }
+    },
+    "Unblock": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अनब्लॉक करें"
+          }
+        }
+      }
+    },
+    "Unclaim": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "छोड़ दें"
+          }
+        }
+      }
+    },
+    "Unlocked": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अनलॉक"
+          }
+        }
+      }
+    },
+    "Unlocked ✨": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अनलॉक ✨"
+          }
+        }
+      }
+    },
+    "Unnamed place": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बिना नाम की जगह"
+          }
+        }
+      }
+    },
+    "Unstoppable": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अजेय"
+          }
+        }
+      }
+    },
+    "Up to %lld volunteers": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld स्वयंसेवकों तक"
+          }
+        }
+      }
+    },
+    "Upcoming cleanup drives": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आगामी सफ़ाई अभियान"
+          }
+        }
+      }
+    },
+    "Uploading…": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपलोड हो रहा है…"
+          }
+        }
+      }
+    },
+    "Use my current location": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मेरी मौजूदा लोकेशन इस्तेमाल करें"
+          }
+        }
+      }
+    },
+    "Use this location": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह जगह चुनें"
+          }
+        }
+      }
+    },
+    "Used for city and state leaderboards.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शहर और राज्य लीडरबोर्ड के लिए।"
+          }
+        }
+      }
+    },
+    "Verify 10 cleanups": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "10 सफ़ाई की पुष्टि करें"
+          }
+        }
+      }
+    },
+    "Verify clean": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "साफ़ है, पुष्टि करें"
+          }
+        }
+      }
+    },
+    "Verify someone's cleanup": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "किसी की सफ़ाई की पुष्टि करें"
+          }
+        }
+      }
+    },
+    "Volunteer": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वयंसेवक"
+          }
+        }
+      }
+    },
+    "Volunteers can chip in for gloves and bags directly through their UPI app. 100% goes to you, and CleanConnect never handles the money.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वयंसेवक अपने UPI ऐप से सीधे दस्ताने और बैग के लिए योगदान दे सकते हैं। 100% आपको मिलता है, CleanConnect पैसों को कभी नहीं छूता।"
+          }
+        }
+      }
+    },
+    "Volunteers who joined will see it as cancelled.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जुड़े हुए स्वयंसेवकों को यह रद्द दिखेगा।"
+          }
+        }
+      }
+    },
+    "Water bottle": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पानी की बोतल"
+          }
+        }
+      }
+    },
+    "We'll remind you the day before.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हम एक दिन पहले याद दिलाएँगे।"
+          }
+        }
+      }
+    },
+    "We've drafted a polite complaint. Edit it, then send it to your municipal corporation, ward office or local MLA.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हमने एक विनम्र शिकायत तैयार की है। इसे बदलें, फिर अपने नगर निगम, वार्ड ऑफ़िस या स्थानीय विधायक को भेजें।"
+          }
+        }
+      }
+    },
+    "Weekly boards reset every Monday (IST). Help out on consecutive days to build your streak 🔥": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "साप्ताहिक बोर्ड हर सोमवार (IST) रीसेट होते हैं। स्ट्रीक बनाने के लिए लगातार दिनों तक मदद करें 🔥"
+          }
+        }
+      }
+    },
+    "Welcome to the squad! 🎉": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "टीम में स्वागत है! 🎉"
+          }
+        }
+      }
+    },
+    "What is it?": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह क्या है?"
+          }
+        }
+      }
+    },
+    "What's near you?": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपके पास क्या है?"
+          }
+        }
+      }
+    },
+    "What's the plan? Meeting point details, who it's for…": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्लान क्या है? मिलने की जगह, किसके लिए है…"
+          }
+        }
+      }
+    },
+    "What's wrong?": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "क्या ग़लत है?"
+          }
+        }
+      }
+    },
+    "WhatsApp group invite link (optional)": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WhatsApp ग्रुप इनवाइट लिंक (वैकल्पिक)"
+          }
+        }
+      }
+    },
+    "When": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कब"
+          }
+        }
+      }
+    },
+    "Where": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कहाँ"
+          }
+        }
+      }
+    },
+    "Where is it?": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह कहाँ है?"
+          }
+        }
+      }
+    },
+    "Where is the spot?": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जगह कहाँ है?"
+          }
+        }
+      }
+    },
+    "Who's going": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कौन आ रहा है"
+          }
+        }
+      }
+    },
+    "Write to the municipality": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नगर निगम को लिखें"
+          }
+        }
+      }
+    },
+    "You": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आप"
+          }
+        }
+      }
+    },
+    "You claimed this spot. Post the after photo when it's clean.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपने यह जगह चुनी है। साफ़ होने पर बाद की फ़ोटो पोस्ट करें।"
+          }
+        }
+      }
+    },
+    "You haven't blocked anyone.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपने किसी को ब्लॉक नहीं किया है।"
+          }
+        }
+      }
+    },
+    "You'll provide": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आप देंगे"
+          }
+        }
+      }
+    },
+    "You're #%lld": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आप #%lld पर हैं"
+          }
+        }
+      }
+    },
+    "You're going!": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आप आ रहे हैं!"
+          }
+        }
+      }
+    },
+    "You're in! See you there.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आप जुड़ गए! वहीं मिलते हैं।"
+          }
+        }
+      }
+    },
+    "You're not on this board yet": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आप अभी इस बोर्ड पर नहीं हैं"
+          }
+        }
+      }
+    },
+    "You're organising this drive. Share the invite to get more people.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आप यह अभियान आयोजित कर रहे हैं। ज़्यादा लोगों के लिए इनवाइट शेयर करें।"
+          }
+        }
+      }
+    },
+    "Your Swachh profile": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपकी स्वच्छ प्रोफ़ाइल"
+          }
+        }
+      }
+    },
+    "Your UPI ID for supplies (optional)": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सामान के लिए आपकी UPI ID (वैकल्पिक)"
+          }
+        }
+      }
+    },
+    "Your UPI ID is shown on your profile so people can thank you for cleanups through their own UPI app. 100% goes to you. CleanConnect never handles money or takes a cut. Leave blank to hide.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपकी UPI ID आपकी प्रोफ़ाइल पर दिखती है ताकि लोग अपने UPI ऐप से सफ़ाई के लिए आपको धन्यवाद दे सकें। 100% आपको मिलता है। CleanConnect कभी पैसे नहीं छूता और न कमीशन लेता है। छिपाने के लिए ख़ाली छोड़ें।"
+          }
+        }
+      }
+    },
+    "Your account has been deleted.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपका खाता हटा दिया गया है।"
+          }
+        }
+      }
+    },
+    "Your city": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपका शहर"
+          }
+        }
+      }
+    },
+    "Your drive is live!": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपका अभियान लाइव है!"
+          }
+        }
+      }
+    },
+    "Your name": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपका नाम"
+          }
+        }
+      }
+    },
+    "Your report gets cleaned": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपकी रिपोर्ट की गई जगह साफ़ हो"
+          }
+        }
+      }
+    },
+    "Yours sincerely,": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भवदीय,"
+          }
+        }
+      }
+    },
+    "bags": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बैग"
+          }
+        }
+      }
+    },
+    "bags removed": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बैग हटाए"
+          }
+        }
+      }
+    },
+    "cleaners": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई वीर"
+          }
+        }
+      }
+    },
+    "cleanups": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई"
+          }
+        }
+      }
+    },
+    "day streak": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "दिन की स्ट्रीक"
+          }
+        }
+      }
+    },
+    "drives joined": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान जुड़े"
+          }
+        }
+      }
+    },
+    "drives led": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभियान चलाए"
+          }
+        }
+      }
+    },
+    "e.g. Behind the bus stop, been here for 2 weeks": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जैसे बस स्टॉप के पीछे, 2 हफ़्ते से पड़ा है"
+          }
+        }
+      }
+    },
+    "just now": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभी-अभी"
+          }
+        }
+      }
+    },
+    "my area": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मेरा इलाक़ा"
+          }
+        }
+      }
+    },
+    "our locality": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हमारा इलाक़ा"
+          }
+        }
+      }
+    },
+    "people": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लोग"
+          }
+        }
+      }
+    },
+    "person": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "व्यक्ति"
+          }
+        }
+      }
+    },
+    "points": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पॉइंट्स"
+          }
+        }
+      }
+    },
+    "reports": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रिपोर्ट"
+          }
+        }
+      }
+    },
+    "spots cleaned": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जगहें साफ़"
+          }
+        }
+      }
+    },
+    "the cleaner": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ाई करने वाले"
+          }
+        }
+      }
+    },
+    "this week": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस हफ़्ते"
+          }
+        }
+      }
+    },
+    "verified": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पुष्टि"
+          }
+        }
+      }
+    },
+    "·": {
+      "shouldTranslate": false
+    },
+    "· %@": {
+      "shouldTranslate": false
+    },
+    "“%@”": {
+      "shouldTranslate": false
+    },
+    "• %lld residents have confirmed it is still there.": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "• %lld निवासियों ने पुष्टि की है कि यह अब भी वहीं है।"
+          }
+        }
+      }
+    },
+    "• Location: %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "• स्थान: %@"
+          }
+        }
+      }
+    },
+    "• Map: %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "• मैप: %@"
+          }
+        }
+      }
+    },
+    "• Problem: %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "• समस्या: %@"
+          }
+        }
+      }
+    },
+    "• Reported on: %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "• रिपोर्ट की तारीख़: %@"
+          }
+        }
+      }
+    },
+    "₹%lld": {
+      "shouldTranslate": false
+    },
+    "🔥": {
+      "shouldTranslate": false
+    },
+    "🙏": {
+      "shouldTranslate": false
+    },
+    "🥇": {
+      "shouldTranslate": false
+    },
+    "🥈": {
+      "shouldTranslate": false
+    },
+    "🥉": {
+      "shouldTranslate": false
+    },
+    "🧹 Join my cleanup drive: %@\n📅 %@\n📍 %@\n🗺️ %@\n\nRSVP on CleanConnect: %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🧹 मेरे सफ़ाई अभियान से जुड़ें: %1$@\n📅 %2$@\n📍 %3$@\n🗺️ %4$@\n\nCleanConnect पर जुड़ें: %5$@"
+          }
+        }
+      }
+    },
+    "🧹 Join our cleanup drive: %@\n📅 %@\n📍 %@\n🗺️ %@\n\nRSVP on CleanConnect: %@": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🧹 हमारे सफ़ाई अभियान से जुड़ें: %1$@\n📅 %2$@\n📍 %3$@\n🗺️ %4$@\n\nCleanConnect पर जुड़ें: %5$@"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

@@ -1,6 +1,171 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // =====================================================================
+    // CleanConnect 2.0
+    // Counters, points, streaks and stats are written only by Cloud Functions
+    // (functions-v2). Clients write content and reactions; rules keep them honest.
+    // =====================================================================
+
+    function signedIn() { return request.auth != null; }
+    function isUser(uid) { return signedIn() && request.auth.uid == uid; }
+    function changedOnly(keys) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(keys);
+    }
+    function isStr(v, min, max) { return v is string && v.size() >= min && v.size() <= max; }
+    function optStr(data, key, max) { return !(key in data) || isStr(data[key], 0, max); }
+    function photoList(v, max) { return v is list && v.size() >= 1 && v.size() <= max; }
+
+    // Public profiles. Counters are server-managed.
+    match /profiles/{uid} {
+      allow read: if true;
+      allow create: if isUser(uid)
+        && request.resource.data.keys().hasOnly(['name', 'bio', 'photoURL', 'city', 'state', 'cityKey', 'createdAt', 'updatedAt'])
+        && isStr(request.resource.data.name, 1, 40);
+      allow update: if isUser(uid)
+        && changedOnly(['name', 'bio', 'photoURL', 'city', 'state', 'cityKey', 'upiId', 'supportURL', 'instagram', 'updatedAt'])
+        && isStr(request.resource.data.name, 1, 40)
+        && optStr(request.resource.data, 'bio', 160)
+        && optStr(request.resource.data, 'upiId', 120)
+        && optStr(request.resource.data, 'supportURL', 300)
+        && optStr(request.resource.data, 'instagram', 30);
+      allow delete: if false;
+    }
+
+    // Private per-user data (block list, terms acceptance).
+    match /userPrivate/{uid} {
+      allow read, write: if isUser(uid);
+    }
+
+    match /spots/{spotId} {
+      allow read: if true;
+
+      allow create: if signedIn()
+        && request.resource.data.reporterId == request.auth.uid
+        && request.resource.data.status == 'open'
+        && request.resource.data.keys().hasOnly(['reporterId', 'reporterName', 'reporterPhoto', 'status', 'category', 'size',
+             'note', 'lat', 'lng', 'geohash', 'gh3', 'gh4', 'locality', 'city', 'state', 'cityKey', 'beforePhotos',
+             'createdAt', 'updatedAt'])
+        && request.resource.data.lat is number && request.resource.data.lng is number
+        && photoList(request.resource.data.beforePhotos, 4)
+        && isStr(request.resource.data.note, 0, 280);
+
+      allow update: if signedIn() && (
+        // Reporter tweaks details while it's still open.
+        (resource.data.reporterId == request.auth.uid && resource.data.status == 'open'
+          && changedOnly(['note', 'category', 'size', 'updatedAt']))
+        // Claim an open spot.
+        || (resource.data.status == 'open' && request.resource.data.status == 'claimed'
+          && request.resource.data.claimedBy == request.auth.uid
+          && changedOnly(['status', 'claimedBy', 'claimedByName', 'claimedAt', 'updatedAt']))
+        // Release your own claim.
+        || (resource.data.status == 'claimed' && resource.data.claimedBy == request.auth.uid
+          && request.resource.data.status == 'open'
+          && changedOnly(['status', 'claimedBy', 'claimedByName', 'claimedAt', 'updatedAt']))
+        // Post the cleanup.
+        || (resource.data.status in ['open', 'claimed'] && request.resource.data.status == 'cleaned'
+          && request.resource.data.cleanedBy == request.auth.uid
+          && photoList(request.resource.data.afterPhotos, 4)
+          && request.resource.data.bags is int && request.resource.data.bags >= 0 && request.resource.data.bags <= 100
+          && request.resource.data.crew is int && request.resource.data.crew >= 1 && request.resource.data.crew <= 500
+          && changedOnly(['status', 'cleanedBy', 'cleanedByName', 'cleanedByPhoto', 'cleanedAt', 'afterPhotos', 'bags',
+               'crew', 'cleanupNote', 'driveId', 'updatedAt']))
+      );
+
+      allow delete: if signedIn() && resource.data.reporterId == request.auth.uid && resource.data.status == 'open';
+
+      match /comments/{commentId} {
+        allow read: if true;
+        allow create: if signedIn()
+          && request.resource.data.authorId == request.auth.uid
+          && request.resource.data.keys().hasOnly(['authorId', 'authorName', 'authorPhoto', 'text', 'createdAt'])
+          && isStr(request.resource.data.text, 1, 500);
+        allow delete: if signedIn() && resource.data.authorId == request.auth.uid;
+      }
+
+      // One doc per user per reaction type: {uid}_{type}.
+      match /reactions/{reactionId} {
+        allow read: if signedIn() && reactionId.matches(request.auth.uid + '_[a-zA-Z]+');
+        allow create: if signedIn()
+          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.type in ['respect', 'stillThere', 'verified']
+          && reactionId == request.auth.uid + '_' + request.resource.data.type
+          && request.resource.data.keys().hasOnly(['uid', 'type', 'createdAt'])
+          && (request.resource.data.type != 'verified'
+              || (get(/databases/$(database)/documents/spots/$(spotId)).data.status == 'cleaned'
+                  && get(/databases/$(database)/documents/spots/$(spotId)).data.cleanedBy != request.auth.uid))
+          && (request.resource.data.type != 'stillThere'
+              || get(/databases/$(database)/documents/spots/$(spotId)).data.status != 'cleaned');
+        allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+      }
+    }
+
+    match /drives/{driveId} {
+      allow read: if true;
+
+      allow create: if signedIn()
+        && request.resource.data.organizerId == request.auth.uid
+        && request.resource.data.status == 'upcoming'
+        && request.resource.data.keys().hasOnly(['organizerId', 'organizerName', 'organizerPhoto', 'title', 'about', 'startsAt',
+             'durationMinutes', 'lat', 'lng', 'geohash', 'gh3', 'gh4', 'address', 'city', 'state', 'cityKey', 'spotId',
+             'coverURL', 'bring', 'providing', 'capacity', 'upiId', 'whatsappLink', 'status', 'createdAt', 'updatedAt'])
+        && isStr(request.resource.data.title, 3, 80)
+        && isStr(request.resource.data.about, 0, 1000)
+        && request.resource.data.startsAt is timestamp
+        && request.resource.data.lat is number && request.resource.data.lng is number;
+
+      allow update: if signedIn() && resource.data.organizerId == request.auth.uid
+        && request.resource.data.organizerId == resource.data.organizerId
+        && changedOnly(['title', 'about', 'startsAt', 'durationMinutes', 'address', 'coverURL', 'bring', 'providing',
+             'capacity', 'upiId', 'whatsappLink', 'status', 'resultBags', 'resultPhotos', 'resultNote', 'completedAt', 'updatedAt'])
+        && request.resource.data.status in ['upcoming', 'done', 'cancelled'];
+
+      allow delete: if signedIn() && resource.data.organizerId == request.auth.uid;
+
+      match /attendees/{uid} {
+        allow read: if true;
+        allow create: if isUser(uid)
+          && request.resource.data.uid == uid
+          && request.resource.data.keys().hasOnly(['uid', 'name', 'photoURL', 'joinedAt'])
+          && get(/databases/$(database)/documents/drives/$(driveId)).data.status == 'upcoming';
+        allow delete: if isUser(uid)
+          || (signedIn() && get(/databases/$(database)/documents/drives/$(driveId)).data.organizerId == request.auth.uid);
+      }
+
+      match /comments/{commentId} {
+        allow read: if true;
+        allow create: if signedIn()
+          && request.resource.data.authorId == request.auth.uid
+          && request.resource.data.keys().hasOnly(['authorId', 'authorName', 'authorPhoto', 'text', 'createdAt'])
+          && isStr(request.resource.data.text, 1, 500);
+        allow delete: if signedIn() && resource.data.authorId == request.auth.uid;
+      }
+    }
+
+    // Moderation queue: write-only for users, reviewed in the console.
+    match /flags/{flagId} {
+      allow create: if signedIn()
+        && request.resource.data.reporterId == request.auth.uid
+        && request.resource.data.keys().hasOnly(['reporterId', 'targetPath', 'targetType', 'reason', 'createdAt'])
+        && isStr(request.resource.data.targetPath, 3, 300)
+        && isStr(request.resource.data.reason, 1, 300);
+      allow read, update, delete: if false;
+    }
+
+    match /stats/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /cityStats/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // =====================================================================
+    // Legacy 1.x collections (kept so older app versions keep working)
+    // =====================================================================
+
     // Users - can read any user, create/update their own
     match /users/{userId} {
       allow read: if request.auth != null;

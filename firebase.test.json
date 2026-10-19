@@ -1,0 +1,25 @@
+{
+  "functions": [
+    {
+      "source": "functions-v2",
+      "codebase": "v2",
+      "runtime": "nodejs22"
+    }
+  ],
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "emulators": {
+    "firestore": {
+      "port": 8085
+    },
+    "functions": {
+      "port": 5005
+    },
+    "ui": {
+      "enabled": false
+    },
+    "singleProjectMode": false
+  }
+}

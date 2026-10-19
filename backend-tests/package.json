@@ -1,0 +1,13 @@
+{
+  "name": "cleanconnect-backend-tests",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "test": "cd .. && firebase emulators:exec --config firebase.test.json --only firestore,functions --project demo-cleanconnect 'node --test --test-concurrency=1 backend-tests/rules.test.js backend-tests/functions.test.js'"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^4.0.1",
+    "firebase": "^11.10.0",
+    "firebase-admin": "^13.4.0"
+  }
+}

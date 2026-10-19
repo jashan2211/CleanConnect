@@ -1,0 +1,18 @@
+{
+  "name": "cleanconnect-functions-v2",
+  "description": "CleanConnect 2.0: points, counters, stats, moderation and account deletion",
+  "version": "2.0.0",
+  "private": true,
+  "main": "index.js",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "deploy": "firebase deploy --only functions:v2",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.4.0",
+    "firebase-functions": "^6.4.0"
+  }
+}

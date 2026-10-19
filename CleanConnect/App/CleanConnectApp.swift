@@ -1,61 +1,102 @@
-// CleanConnectApp.swift
-// CleanConnect - Gamified Social Platform for Environmental Cleanup
-// Main app entry point for iOS - 2026 Best Practices
-
 import SwiftUI
-import UIKit
 import FirebaseCore
+import FirebaseFirestore
 import GoogleSignIn
 
-// MARK: - App Delegate for Firebase Setup
-class AppDelegate: NSObject, UIApplicationDelegate {
+final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        FirebaseApp.configure()
+        if FirebaseApp.app() == nil { FirebaseApp.configure() }
+        let settings = FirestoreSettings()
+        settings.cacheSettings = PersistentCacheSettings(sizeBytes: NSNumber(value: 100 * 1024 * 1024))
+        Firestore.firestore().settings = settings
         return true
     }
 
-    // Handle Google Sign-In URL callback
-    func application(_ app: UIApplication,
-                     open url: URL,
-                     options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance.handle(url)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        GIDSignIn.sharedInstance.handle(url)
     }
 }
 
 @main
 struct CleanConnectApp: App {
-    // Register app delegate for Firebase setup
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
-    @StateObject private var authManager = AuthManager.shared
-    @StateObject private var userState = UserState.shared
-    @StateObject private var authService = AuthenticationService.shared
-
-    init() {
-        setupAppearance()
-    }
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
+    @State private var session = Session()
+    @State private var location = LocationService()
+    @State private var router = Router()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(authManager)
-                .environmentObject(userState)
-                .environmentObject(authService)
+            RootView()
+                .environment(session)
+                .environment(location)
+                .environment(router)
+                .tint(.ccGreen)
+                .onOpenURL { url in
+                    _ = GIDSignIn.sharedInstance.handle(url)
+                }
+        }
+    }
+}
+
+enum AppTab: String, Hashable {
+    case home, map, drives, leaders, profile
+}
+
+enum Route: Hashable {
+    case spot(String)
+    case drive(String)
+    case profile(String)
+    case leaderboard
+    case settings
+    case blocked
+}
+
+/// App-wide navigation state: selected tab and the global creation sheets.
+@Observable
+@MainActor
+final class Router {
+    var tab: AppTab = .home
+    var paths: [AppTab: [Route]] = [:]
+    var showReport = false
+    var createDriveFor: Spot?
+    var showCreateDrive = false
+    var mapFocus: Spot?
+
+    init() {
+        guard AppConfig.isDemo else { return }
+        // Screenshot automation: -tab profile -push spot:s1 -sheet report
+        let defaults = UserDefaults.standard
+        if let raw = defaults.string(forKey: "tab"), let tab = AppTab(rawValue: raw) { self.tab = tab }
+        if let push = defaults.string(forKey: "push") {
+            let parts = push.split(separator: ":").map(String.init)
+            let route: Route? = switch (parts.first, parts.count > 1 ? parts[1] : nil) {
+            case ("spot", let id?): .spot(id)
+            case ("drive", let id?): .drive(id)
+            case ("profile", let id?): .profile(id)
+            case ("settings", _): .settings
+            default: nil
+            }
+            if let route { paths[tab] = [route] }
+        }
+        switch defaults.string(forKey: "sheet") {
+        case "report": showReport = true
+        case "drive": showCreateDrive = true
+        default: break
         }
     }
 
-    private func setupAppearance() {
-        // Configure navigation bar appearance
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    func path(_ tab: AppTab) -> Binding<[Route]> {
+        Binding(get: { self.paths[tab] ?? [] }, set: { self.paths[tab] = $0 })
+    }
 
-        // Configure tab bar appearance
-        let tabAppearance = UITabBarAppearance()
-        tabAppearance.configureWithOpaqueBackground()
-        UITabBar.appearance().standardAppearance = tabAppearance
-        UITabBar.appearance().scrollEdgeAppearance = tabAppearance
+    func startDrive(at spot: Spot?) {
+        createDriveFor = spot
+        showCreateDrive = true
+    }
+
+    func showOnMap(_ spot: Spot) {
+        mapFocus = spot
+        tab = .map
     }
 }

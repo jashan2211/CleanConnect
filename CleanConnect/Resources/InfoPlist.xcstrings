@@ -1,0 +1,42 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "CFBundleDisplayName": {
+      "shouldTranslate": false
+    },
+    "CFBundleName": {
+      "shouldTranslate": false
+    },
+    "NSCameraUsageDescription": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CleanConnect कैमरा इस्तेमाल करता है ताकि आप गंदी जगह की फ़ोटो ले सकें या सफ़ाई के बाद उसे दिखा सकें।"
+          }
+        }
+      }
+    },
+    "NSLocationWhenInUseUsageDescription": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CleanConnect आपकी लोकेशन से रिपोर्ट की गई जगह पिन करता है और आपके पास की गंदी जगहें और सफ़ाई अभियान दिखाता है।"
+          }
+        }
+      }
+    },
+    "NSPhotoLibraryAddUsageDescription": {
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपके कहने पर CleanConnect पहले/बाद के सफ़ाई कार्ड आपकी फ़ोटो में सेव करता है।"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
