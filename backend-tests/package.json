@@ -3,7 +3,7 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "test": "cd .. && firebase emulators:exec --config firebase.test.json --only firestore,functions --project demo-cleanconnect 'node --test --test-concurrency=1 backend-tests/rules.test.js backend-tests/functions.test.js'"
+    "test": "cd .. && firebase emulators:exec --config firebase.test.json --only auth,firestore,functions --project demo-cleanconnect 'node --test --test-concurrency=1 backend-tests/rules.test.js backend-tests/functions.test.js backend-tests/delete.test.js'"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^4.0.1",

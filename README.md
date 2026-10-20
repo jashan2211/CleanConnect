@@ -49,7 +49,7 @@ xcodebuild -project CleanConnect.xcodeproj -scheme CleanConnect -destination 'pl
 Backend tests (needs Java: `brew install openjdk@21`):
 
 ```bash
-cd backend-tests && npm install && cd .. && PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH" npx firebase-tools emulators:exec --config firebase.test.json --only firestore,functions --project demo-cleanconnect 'NODE_PATH=backend-tests/node_modules node --test --test-concurrency=1 backend-tests/rules.test.js backend-tests/functions.test.js'
+cd backend-tests && npm install && cd .. && PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH" npx firebase-tools emulators:exec --config firebase.test.json --only auth,firestore,functions --project demo-cleanconnect 'NODE_PATH=backend-tests/node_modules node --test --test-concurrency=1 backend-tests/rules.test.js backend-tests/functions.test.js backend-tests/delete.test.js'
 ```
 
 Deploy backend (project `cleanconnect-b7c67`):
