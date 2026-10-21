@@ -1,6 +1,8 @@
 import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
+import FirebaseAuth
+import FirebaseFunctions
 import GoogleSignIn
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
@@ -9,6 +11,13 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         if FirebaseApp.app() == nil { FirebaseApp.configure() }
         let settings = FirestoreSettings()
         settings.cacheSettings = PersistentCacheSettings(sizeBytes: NSNumber(value: 100 * 1024 * 1024))
+        if AppConfig.useEmulator {
+            settings.host = "127.0.0.1:8095"
+            settings.isSSLEnabled = false
+            settings.cacheSettings = MemoryCacheSettings()
+            Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9199)
+            Functions.functions(region: AppConfig.functionsRegion).useEmulator(withHost: "127.0.0.1", port: 5005)
+        }
         Firestore.firestore().settings = settings
         return true
     }

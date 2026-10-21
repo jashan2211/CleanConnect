@@ -50,6 +50,8 @@ final class Session {
     private var privateListener: ListenerRegistration?
     private var currentNonce: String?
     private var started = false
+    private var ensureTask: Task<Bool, Error>?
+    private var ensuringUID: String?
     weak var location: LocationService?
 
     var isSignedIn: Bool { uid != nil }
@@ -71,6 +73,11 @@ final class Session {
         authHandle = Auth.auth().addStateDidChangeListener { [weak self] _, user in
             Task { @MainActor in self?.userChanged(user) }
         }
+        #if DEBUG
+        if AppConfig.useEmulator, ProcessInfo.processInfo.arguments.contains("-anonSignIn"), Auth.auth().currentUser == nil {
+            Task { _ = try? await Auth.auth().signInAnonymously() }
+        }
+        #endif
     }
 
     private func userChanged(_ user: FirebaseAuth.User?) {
@@ -83,7 +90,19 @@ final class Session {
             phase = .ready
             return
         }
+        if ensuringUID != user.uid {
+            ensureTask = nil
+            ensuringUID = nil
+        }
         uid = user.uid
+        // People already signed in (for example from 1.x, whose sign-in survives the update and
+        // even a reinstall via the Keychain) never pass through finishSignIn, so make sure their
+        // 2.0 profile exists. The short delay lets an in-progress sign-in pass its name first.
+        Task { [weak self] in
+            try? await Task.sleep(for: .seconds(1.5))
+            guard let self, self.uid == user.uid else { return }
+            _ = try? await self.ensureProfile(for: user, name: nil)
+        }
         profileTask = Task { [weak self] in
             for await profile in ProfileAPI.profile(user.uid) {
                 guard let self else { return }
@@ -108,7 +127,15 @@ final class Session {
     @discardableResult
     func gate(_ reason: LocalizedStringKey) -> Bool {
         if isSignedIn, profile != nil { return true }
-        if isSignedIn { toast = Toast(message: String(localized: "Still setting up your profile — try again in a moment."), icon: "hourglass"); return false }
+        if isSignedIn {
+            toast = Toast(message: String(localized: "Still setting up your profile — try again in a moment."), icon: "hourglass")
+            if let user = Auth.auth().currentUser {
+                Task {
+                    do { try await ensureProfile(for: user, name: nil) } catch { show(error: error) }
+                }
+            }
+            return false
+        }
         Haptics.soft()
         authPrompt = AuthPrompt(reason: reason)
         return false
@@ -171,11 +198,38 @@ final class Session {
     }
 
     private func finishSignIn(user: FirebaseAuth.User, name: String?) async throws {
-        let created = try await ProfileAPI.createIfNeeded(uid: user.uid, name: name, photoURL: user.photoURL?.absoluteString,
-                                                        place: location?.place)
+        try await ensureProfile(for: user, name: name)
         authPrompt = nil
-        if created { needsProfileSetup = true }
         Haptics.success()
+    }
+
+    /// Creates the 2.0 profile if it's missing. Concurrent callers share one attempt; a failure can be retried.
+    @discardableResult
+    private func ensureProfile(for user: FirebaseAuth.User, name: String?) async throws -> Bool {
+        if let ensureTask, ensuringUID == user.uid { return try await ensureTask.value }
+        ensuringUID = user.uid
+        let place = location?.place
+        let task = Task<Bool, Error> {
+            var displayName = name?.trimmed.isEmpty == false ? name : user.displayName
+            var photo = user.photoURL?.absoluteString
+            if displayName?.trimmed.isEmpty ?? true || photo == nil {
+                // 1.x accounts: carry over the old display name and photo.
+                if let legacy = try? await DB.store.collection("users").document(user.uid).getDocument().data() {
+                    if displayName?.trimmed.isEmpty ?? true { displayName = legacy["displayName"] as? String }
+                    if photo == nil, let old = legacy["photoURL"] as? String, old.hasPrefix("https://") { photo = old }
+                }
+            }
+            return try await ProfileAPI.createIfNeeded(uid: user.uid, name: displayName, photoURL: photo, place: place)
+        }
+        ensureTask = task
+        do {
+            let created = try await task.value
+            if created { needsProfileSetup = true }
+            return created
+        } catch {
+            if ensuringUID == user.uid { ensureTask = nil }
+            throw error
+        }
     }
 
     // MARK: Sign out / delete

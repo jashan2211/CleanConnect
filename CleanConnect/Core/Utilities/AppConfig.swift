@@ -15,6 +15,13 @@ enum AppConfig {
     /// Launch with `-demo` to run on bundled sample data (used for App Store screenshots).
     static let isDemo = ProcessInfo.processInfo.arguments.contains("-demo")
 
+    /// Debug builds only: launch with `-useEmulator` to talk to the local Firebase emulators.
+    #if DEBUG
+    static let useEmulator = ProcessInfo.processInfo.arguments.contains("-useEmulator")
+    #else
+    static let useEmulator = false
+    #endif
+
     static var version: String {
         let v = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "2.0"
         let b = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
